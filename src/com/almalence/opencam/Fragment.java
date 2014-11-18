@@ -40,6 +40,7 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -49,13 +50,12 @@ import android.widget.Toast;
  ***/
 
 @TargetApi(11)
-public class Fragment extends PreferenceFragment implements OnSharedPreferenceChangeListener
-{
-	public static PreferenceFragment	thiz;
+public class Fragment extends PreferenceFragment implements
+		OnSharedPreferenceChangeListener {
+	public static PreferenceFragment thiz;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		thiz = this;
@@ -66,40 +66,39 @@ public class Fragment extends PreferenceFragment implements OnSharedPreferenceCh
 
 		if (null == getPreferenceScreen())
 			return;
-		for (int i = 0; i < getPreferenceScreen().getPreferenceCount(); i++)
-		{
+		for (int i = 0; i < getPreferenceScreen().getPreferenceCount(); i++) {
 			initSummary(getPreferenceScreen().getPreference(i));
 		}
 
 		Preference aboutPref = (Preference) findPreference("about");
 		if (aboutPref != null)
-			aboutPref.setOnPreferenceClickListener(new OnPreferenceClickListener()
-			{
-				public boolean onPreferenceClick(Preference preference)
-				{
-					Toast.makeText(MainScreen.getInstance(),
-							MainScreen.getAppResources().getString(R.string.Pref_About), Toast.LENGTH_LONG)
-							.show();
+			aboutPref
+					.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+						public boolean onPreferenceClick(Preference preference) {
+							Toast.makeText(
+									MainScreen.getInstance(),
+									MainScreen.getAppResources().getString(
+											R.string.Pref_About),
+									Toast.LENGTH_LONG).show();
 
-					return true;
-				}
-			});
+							return true;
+						}
+					});
 
 		CheckBoxPreference helpPref = (CheckBoxPreference) findPreference("showHelpPrefCommon");
 		if (helpPref != null)
-			helpPref.setOnPreferenceClickListener(new OnPreferenceClickListener()
-			{
-				public boolean onPreferenceClick(Preference preference)
-				{
-					if (((CheckBoxPreference) preference).isChecked())
-					{
-						SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainScreen
-								.getMainContext());
+			helpPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+				public boolean onPreferenceClick(Preference preference) {
+					if (((CheckBoxPreference) preference).isChecked()) {
+						SharedPreferences prefs = PreferenceManager
+								.getDefaultSharedPreferences(MainScreen
+										.getMainContext());
 						Editor prefsEditor = prefs.edit();
 						prefsEditor.putBoolean("droShowHelp", true);
 						prefsEditor.putBoolean("sequenceRemovalShowHelp", true);
 						prefsEditor.putBoolean("panoramaShowHelp", true);
-						prefsEditor.putBoolean("groupshotRemovalShowHelp", true);
+						prefsEditor
+								.putBoolean("groupshotRemovalShowHelp", true);
 						prefsEditor.putBoolean("objectRemovalShowHelp", true);
 						prefsEditor.putBoolean("bestShotShowHelp", true);
 						prefsEditor.commit();
@@ -109,101 +108,104 @@ public class Fragment extends PreferenceFragment implements OnSharedPreferenceCh
 				}
 			});
 
-		EditTextPreference prefix = (EditTextPreference) this.findPreference(getResources().getString(
-				R.string.Preference_SavePathPrefixValue));
-		EditTextPreference postfix = (EditTextPreference) this.findPreference(getResources().getString(
-				R.string.Preference_SavePathPostfixValue));
+		EditTextPreference prefix = (EditTextPreference) this
+				.findPreference(getResources().getString(
+						R.string.Preference_SavePathPrefixValue));
+		EditTextPreference postfix = (EditTextPreference) this
+				.findPreference(getResources().getString(
+						R.string.Preference_SavePathPostfixValue));
 		initExportName(null, null);
 
-		if (prefix != null)
-		{
-			prefix.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
-			{
+		if (prefix != null) {
+			prefix.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 				@Override
-				public boolean onPreferenceChange(Preference preference, Object newValue)
-				{
+				public boolean onPreferenceChange(Preference preference,
+						Object newValue) {
 					initExportName(preference, newValue);
 					return true;
 				}
 			});
 		}
 
-		if (postfix != null)
-		{
-			postfix.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
-			{
+		if (postfix != null) {
+			postfix.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 				@Override
-				public boolean onPreferenceChange(Preference preference, Object newValue)
-				{
+				public boolean onPreferenceChange(Preference preference,
+						Object newValue) {
 					initExportName(preference, newValue);
 					return true;
 				}
 			});
 		}
 
-		ListPreference saveToPreference = (ListPreference) this.findPreference(getResources().getString(
-				R.string.Preference_SaveToValue));
+		ListPreference saveToPreference = (ListPreference) this
+				.findPreference(getResources().getString(
+						R.string.Preference_SaveToValue));
 		if (saveToPreference != null)
-			saveToPreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
-			{
-				@Override
-				public boolean onPreferenceChange(Preference preference, Object newValue)
-				{
-					int v = -1;
+			saveToPreference
+					.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+						@Override
+						public boolean onPreferenceChange(
+								Preference preference, Object newValue) {
+							int v = -1;
 
-					int v_old = 0;
+							int v_old = 0;
 
-					try
-					{
-						v = Integer.parseInt(newValue.toString());
-						v_old = Integer.parseInt(((ListPreference) preference).getValue());
-					} catch (NumberFormatException e)
-					{
+							try {
+								v = Integer.parseInt(newValue.toString());
+								v_old = Integer
+										.parseInt(((ListPreference) preference)
+												.getValue());
+							} catch (NumberFormatException e) {
 
-					}
+							}
 
-					if ((v == 2 || v == 1) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-					{
-						Toast.makeText(
-								MainScreen.getInstance(),
-								MainScreen.getAppResources()
-										.getString(R.string.pref_advanced_saving_saveToPref_CantSaveToSD),
-								Toast.LENGTH_LONG).show();
-					}
+							if ((v == 2 || v == 1)
+									&& Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+								Toast.makeText(
+										MainScreen.getInstance(),
+										MainScreen
+												.getAppResources()
+												.getString(
+														R.string.pref_advanced_saving_saveToPref_CantSaveToSD),
+										Toast.LENGTH_LONG).show();
+							}
 
-					if ((v == 2 || v == 1) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-					{
-						Toast.makeText(
-								MainScreen.getInstance(),
-								MainScreen.getAppResources()
-										.getString(R.string.pref_advanced_saving_saveToPref_CantSaveToSD),
-								Toast.LENGTH_LONG).show();
-					}
+							if ((v == 2 || v == 1)
+									&& Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+								Toast.makeText(
+										MainScreen.getInstance(),
+										MainScreen
+												.getAppResources()
+												.getString(
+														R.string.pref_advanced_saving_saveToPref_CantSaveToSD),
+										Toast.LENGTH_LONG).show();
+							}
 
-					if (v == 2)
-					{
-						Intent intent = new Intent(Preferences.thiz, FolderPicker.class);
+							if (v == 2) {
+								Intent intent = new Intent(Preferences.thiz,
+										FolderPicker.class);
 
-						intent.putExtra(MainScreen.sSavePathPref, v_old);
+								intent.putExtra(MainScreen.sSavePathPref, v_old);
 
-						Preferences.thiz.startActivity(intent);
-					}
+								Preferences.thiz.startActivity(intent);
+							}
 
-					return true;
-				}
-			});
+							return true;
+						}
+					});
 
-		PreferenceCategory cat = (PreferenceCategory) this.findPreference("Pref_VFCommon_Preference_Category");
-		if (cat != null)
-		{
-			CheckBoxPreference cp = (CheckBoxPreference) cat.findPreference("maxScreenBrightnessPref");
-			if (cp != null)
-			{
-				cp.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
-				{
-					public boolean onPreferenceChange(Preference preference, Object newValue)
-					{
-						boolean value = Boolean.parseBoolean(newValue.toString());
+		PreferenceCategory cat = (PreferenceCategory) this
+				.findPreference("Pref_VFCommon_Preference_Category");
+		if (cat != null) {
+			CheckBoxPreference cp = (CheckBoxPreference) cat
+					.findPreference("maxScreenBrightnessPref");
+			if (cp != null) {
+				cp.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+					public boolean onPreferenceChange(Preference preference,
+							Object newValue) {
+						boolean value = Boolean.parseBoolean(newValue
+								.toString());
 						setScreenBrightness(value);
 						return true;
 					}
@@ -211,18 +213,23 @@ public class Fragment extends PreferenceFragment implements OnSharedPreferenceCh
 			}
 		}
 
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
-		boolean MaxScreenBrightnessPreference = prefs.getBoolean("maxScreenBrightnessPref", false);
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(this.getActivity());
+		boolean MaxScreenBrightnessPreference = prefs.getBoolean(
+				"maxScreenBrightnessPref", false);
 		setScreenBrightness(MaxScreenBrightnessPreference);
 	}
 
-	public static void setScreenBrightness(boolean setMax)
-	{
-		try
-		{
+	public static void setScreenBrightness(boolean setMax) {
+		try {
 			Window window = thiz.getActivity().getWindow();
 
 			WindowManager.LayoutParams layoutpars = window.getAttributes();
+
+			if (MainScreen.mHeightSOSEnabled != 0) {
+				layoutpars.height = MainScreen.mHeightSOSEnabled;
+				layoutpars.gravity = Gravity.TOP;
+			}
 
 			// Set the brightness of this window
 			if (setMax)
@@ -232,129 +239,114 @@ public class Fragment extends PreferenceFragment implements OnSharedPreferenceCh
 
 			// Apply attribute changes to this window
 			window.setAttributes(layoutpars);
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 
 		}
 	}
 
-	public static void closePrefs()
-	{
+	public static void closePrefs() {
 		thiz.getFragmentManager().popBackStack();
 	}
 
 	@Override
-	public void onResume()
-	{
+	public void onResume() {
 		super.onResume();
 		if (null == getPreferenceScreen())
 			return;
 		// Set up a listener whenever a key changes
-		getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+		getPreferenceScreen().getSharedPreferences()
+				.registerOnSharedPreferenceChangeListener(this);
 	}
 
 	@Override
-	public void onPause()
-	{
+	public void onPause() {
 		super.onPause();
 		if (null == getPreferenceScreen())
 			return;
 		// Unregister the listener whenever a key changes
-		getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+		getPreferenceScreen().getSharedPreferences()
+				.unregisterOnSharedPreferenceChangeListener(this);
 	}
 
-	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key)
-	{
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
+			String key) {
 		updatePrefSummary(findPreference(key));
 	}
 
-	private void initSummary(Preference p)
-	{
-		if (p instanceof PreferenceCategory)
-		{
+	private void initSummary(Preference p) {
+		if (p instanceof PreferenceCategory) {
 			PreferenceCategory pCat = (PreferenceCategory) p;
-			for (int i = 0; i < pCat.getPreferenceCount(); i++)
-			{
+			for (int i = 0; i < pCat.getPreferenceCount(); i++) {
 				initSummary(pCat.getPreference(i));
 			}
-		} else
-		{
+		} else {
 			updatePrefSummary(p);
 		}
 	}
 
-	private void initExportName(Preference preference, Object newValue)
-	{
-		EditTextPreference prefix = (EditTextPreference) this.findPreference(getResources().getString(
-				R.string.Preference_SavePathPrefixValue));
+	private void initExportName(Preference preference, Object newValue) {
+		EditTextPreference prefix = (EditTextPreference) this
+				.findPreference(getResources().getString(
+						R.string.Preference_SavePathPrefixValue));
 		String prefixValue = "";
-		if (prefix != null)
-		{
-			if (preference != null && prefix.getKey().equals(preference.getKey()))
-			{
+		if (prefix != null) {
+			if (preference != null
+					&& prefix.getKey().equals(preference.getKey())) {
 				prefixValue = newValue.toString();
-			} else
-			{
+			} else {
 				prefixValue = prefix.getText();
 			}
 
-			if (!prefixValue.equals(""))
-			{
+			if (!prefixValue.equals("")) {
 				prefixValue = prefixValue + "_";
 			}
 		}
 
-		EditTextPreference postfix = (EditTextPreference) this.findPreference(getResources().getString(
-				R.string.Preference_SavePathPostfixValue));
+		EditTextPreference postfix = (EditTextPreference) this
+				.findPreference(getResources().getString(
+						R.string.Preference_SavePathPostfixValue));
 		String postfixValue = "";
-		if (postfix != null)
-		{
-			if (preference != null && postfix.getKey().equals(preference.getKey()))
-			{
+		if (postfix != null) {
+			if (preference != null
+					&& postfix.getKey().equals(preference.getKey())) {
 				postfixValue = newValue.toString();
-			} else
-			{
+			} else {
 				postfixValue = postfix.getText();
 			}
 
-			if (!postfixValue.equals(""))
-			{
+			if (!postfixValue.equals("")) {
 				postfixValue = "_" + postfixValue;
 			}
 		}
 
-		ListPreference exportNameList = (ListPreference) this.findPreference(getResources().getString(
-				R.string.Preference_ExportNameValue));
-		if (exportNameList != null)
-		{
-			String[] names = MainScreen.getAppResources().getStringArray(R.array.exportNameArray);
+		ListPreference exportNameList = (ListPreference) this
+				.findPreference(getResources().getString(
+						R.string.Preference_ExportNameValue));
+		if (exportNameList != null) {
+			String[] names = MainScreen.getAppResources().getStringArray(
+					R.array.exportNameArray);
 			CharSequence[] newNames = new CharSequence[names.length];
 			int i = 0;
-			for (String name : names)
-			{
+			for (String name : names) {
 				newNames[i] = prefixValue + name + postfixValue;
 				i++;
 			}
 			exportNameList.setEntries(newNames);
-			exportNameList.setSummary(exportNameList.getEntries()[Integer.parseInt(exportNameList.getValue()) - 1]);
+			exportNameList.setSummary(exportNameList.getEntries()[Integer
+					.parseInt(exportNameList.getValue()) - 1]);
 		}
 	}
 
-	private void updatePrefSummary(Preference p)
-	{
-		if (p instanceof ListPreference)
-		{
+	private void updatePrefSummary(Preference p) {
+		if (p instanceof ListPreference) {
 			ListPreference listPref = (ListPreference) p;
 			p.setSummary(listPref.getEntry());
 		}
-		if (p instanceof EditTextPreference)
-		{
+		if (p instanceof EditTextPreference) {
 			EditTextPreference editTextPref = (EditTextPreference) p;
-			if (p.getKey().equalsIgnoreCase("editKey"))
-			{
+			if (p.getKey().equalsIgnoreCase("editKey")) {
 				p.setSummary("*****");
-			} else
-			{
+			} else {
 				p.setSummary(editTextPref.getText());
 			}
 		}

@@ -466,7 +466,12 @@ public class AlmalenceStore
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainScreen.getMainContext());
 		boolean bOnSale = prefs.getBoolean("bOnSale", false);
 		final RotateImageView unlock = ((RotateImageView) guiView.findViewById(R.id.Unlock));
-		unlock.setImageResource(bOnSale ? R.drawable.unlock_sale : R.drawable.unlock);
+		
+		if (bOnSale != false) {
+			   unlock.setImageResource(R.drawable.unlock_sale);
+			  }
+		
+//		unlock.setImageResource(bOnSale ? R.drawable.unlock_sale : R.drawable.unlock);
 		unlock.setAlpha(1.0f);
 		unlock.setVisibility(View.VISIBLE);
 
@@ -479,9 +484,9 @@ public class AlmalenceStore
 			@Override
 			public void onAnimationEnd(Animation animation)
 			{
-				unlock.clearAnimation();
-				unlock.setImageResource(R.drawable.unlock_gray);
-				unlock.setAlpha(0.4f);
+//				unlock.clearAnimation();
+//				unlock.setImageResource(R.drawable.unlock_gray);
+//				unlock.setAlpha(0.4f);
 			}
 
 			@Override
@@ -503,9 +508,9 @@ public class AlmalenceStore
 		final RotateImageView unlock = ((RotateImageView) guiView.findViewById(R.id.Unlock));
 		if (unlock.getVisibility() == View.VISIBLE)
 			return;
-		unlock.setImageResource(R.drawable.unlock_gray);
-		unlock.setAlpha(0.4f);
-		unlock.setVisibility(View.VISIBLE);
+//		unlock.setImageResource(R.drawable.unlock_gray);
+//		unlock.setAlpha(0.4f);
+//		unlock.setVisibility(View.VISIBLE);
 	}
 
 	public void HideUnlockControl()

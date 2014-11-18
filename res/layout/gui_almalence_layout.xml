@@ -374,7 +374,6 @@
 	<com.almalence.ui.RotateImageView 
 	    android:id="@+id/Unlock"
 		android:background="@android:color/transparent"
-		android:src="@drawable/unlock"					
 		android:layout_height="40dip"
 		android:layout_width="40dip"
 		android:layout_marginTop="130dip"

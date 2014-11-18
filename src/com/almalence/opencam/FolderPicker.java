@@ -35,6 +35,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.InputType;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +48,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 @SuppressWarnings("deprecation")
@@ -102,6 +104,18 @@ public class FolderPicker extends Activity implements OnItemClickListener, OnCli
 		this.setContentView(R.layout.folderpicker);
 
 		this.findOutBestRoot();
+		
+		if (MainScreen.mHeightSOSEnabled != 0) {
+			   DisplayMetrics displaymetrics = new DisplayMetrics();
+			   getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+			   int height = displaymetrics.heightPixels;
+
+			   RelativeLayout mainLayout = (RelativeLayout) findViewById(R.id.mainLayout1);
+
+			   mainLayout.getLayoutParams().height = height
+			     - MainScreen.mHeightSOSEnabled;
+			   mainLayout.invalidate();
+			  }
 
 		if (savedInstanceState != null)
 		{

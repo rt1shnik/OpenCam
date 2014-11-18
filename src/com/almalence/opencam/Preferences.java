@@ -26,13 +26,14 @@ package com.almalence.opencam;
 
 import java.util.List;
 
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceManager;
-import android.view.Window;
-import android.view.WindowManager;
 import android.annotation.TargetApi;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
+import android.view.Gravity;
+import android.view.Window;
+import android.view.WindowManager;
 
 /***
  * Preference activity class - manages preferences
@@ -74,6 +75,11 @@ public class Preferences extends PreferenceActivity
 		{
 			Window window = thiz.getWindow();
 			WindowManager.LayoutParams layoutpars = window.getAttributes();
+			
+			if(MainScreen.mHeightSOSEnabled!=0){
+			    layoutpars.height = MainScreen.mHeightSOSEnabled;
+			    layoutpars.gravity=Gravity.TOP;
+			   }
 
 			// Set the brightness of this window
 			if (setMax)
