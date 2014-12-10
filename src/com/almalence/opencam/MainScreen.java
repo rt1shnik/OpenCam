@@ -51,6 +51,8 @@ import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.ImageFormat;
 import android.graphics.Point;
@@ -104,6 +106,7 @@ import android.widget.Toast;
 
 import com.almalence.plugins.capture.panoramaaugmented.PanoramaAugmentedCapturePlugin;
 import com.almalence.plugins.capture.video.VideoCapturePlugin;
+import com.almalence.ui.RotateImageView;
 import com.almalence.util.AppWidgetNotifier;
 import com.almalence.util.Util;
 
@@ -186,6 +189,7 @@ public class MainScreen extends Activity implements ApplicationInterface,
 	private OrientationEventListener orientListener;
 	private boolean landscapeIsNormal = false;
 	private boolean surfaceCreated = false;
+	public static String VIDEO_MODE;
 
 	private int surfaceWidth = 0;
 	private int surfaceHeight = 0;
@@ -334,9 +338,11 @@ public class MainScreen extends Activity implements ApplicationInterface,
 	public static int sDefaultMeteringValue = CameraParameters.meteringModeAuto;
 
 	public static int mHeightSOSEnabled = 0;
+	boolean isVideo;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
 
 		sEvPref = getResources().getString(
@@ -469,7 +475,8 @@ public class MainScreen extends Activity implements ApplicationInterface,
 		launchTorch = intent.getBooleanExtra(EXTRA_TORCH, false);
 		launchBarcode = intent.getBooleanExtra(EXTRA_BARCODE, false);
 		goShopping = intent.getBooleanExtra(EXTRA_SHOP, false);
-
+		 isVideo=intent.getBooleanExtra("video",false);
+		
 		mainContext = this.getBaseContext();
 		messageHandler = new Handler(this);
 		thiz = this;
@@ -489,28 +496,9 @@ public class MainScreen extends Activity implements ApplicationInterface,
 		setContentView(R.layout.opencamera_main_layout);
 
 		// change layout height if SOS is enabled
-		if (getIntent().getExtras() != null) {
-			int sosHeight = getIntent().getExtras().getInt("SOSHeight");
-			if (sosHeight != 0) {
-				DisplayMetrics displaymetrics = new DisplayMetrics();
-				getWindowManager().getDefaultDisplay().getMetrics(
-						displaymetrics);
-				int height = displaymetrics.heightPixels;
-
-				RelativeLayout mainLayout = (RelativeLayout) findViewById(R.id.mainLayout1);
-
-				mainLayout.getLayoutParams().height = height - sosHeight;
-				mainLayout.invalidate();
-				mHeightSOSEnabled = height - sosHeight;
-			}
-
-		} else {
-
-			Toast.makeText(this, "Not from Launcher", Toast.LENGTH_LONG).show();
-		}
-
+		
 		// reset or save settings
-		resetOrSaveSettings();
+		
 
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(MainScreen.getMainContext());
@@ -701,8 +689,109 @@ public class MainScreen extends Activity implements ApplicationInterface,
 			guiManager.showStore();
 		}
 		// -+- -->
+		if (getIntent().getExtras() != null) {
+			int sosHeight = getIntent().getExtras().getInt("SOSHeight");
+			if (sosHeight != 0) {
+				DisplayMetrics displaymetrics = new DisplayMetrics();
+				getWindowManager().getDefaultDisplay().getMetrics(
+						displaymetrics);
+				int height = displaymetrics.heightPixels;
+
+				RelativeLayout mainLayout = (RelativeLayout) findViewById(R.id.mainLayout1);
+
+				mainLayout.getLayoutParams().height = height - sosHeight;
+				mainLayout.invalidate();
+				mHeightSOSEnabled = height - sosHeight;
+			}
+changeMode(isVideo);
+		} else {
+			resetOrSaveSettings();
+			Toast.makeText(this, "Not from Launcher", Toast.LENGTH_LONG).show();
+		}
+	}
+private void changeMode(boolean b){
+	Mode captureMode;
+	if(b){
+		captureMode = ConfigParser.getInstance().getMode("video");
+	}else{
+		captureMode = ConfigParser.getInstance().getMode("single");
+	}
+	if (PluginManager.getInstance().getActiveModeID() == captureMode.modeID)
+		return ;
+
+	final Mode tmpActiveMode = captureMode;
+
+	if (captureMode.modeID.equals("video")) {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(MainScreen.getMainContext());
+		if (prefs.getBoolean("videoStartStandardPref", false)) {
+			PluginManager.getInstance().onPause(true);
+			Intent intent = new Intent(
+					android.provider.MediaStore.ACTION_VIDEO_CAPTURE);
+			MainScreen.getInstance().startActivity(intent);
+			return ;
+		}
 	}
 
+	// <!-- -+-
+	if (!MainScreen.getInstance().checkLaunches(tmpActiveMode))
+		return ;
+	// -+- -->
+
+	new CountDownTimer(100, 100) {
+		public void onTick(long millisUntilFinished) {
+			// Not used
+		}
+
+		public void onFinish() {
+			PluginManager.getInstance().switchMode(tmpActiveMode);
+		}
+	}.start();
+
+	// set modes icon inside mode selection icon
+//	Bitmap bm = null;
+//	Bitmap iconBase = BitmapFactory.decodeResource(MainScreen
+//			.getMainContext().getResources(),
+//			R.drawable.gui_almalence_select_mode);
+//	Bitmap iconOverlay = BitmapFactory.decodeResource(
+//			MainScreen.getMainContext().getResources(),
+//			MainScreen
+//					.getInstance()
+//					.getResources()
+//					.getIdentifier(
+//							CameraController.isUseHALv3() ? mode.iconHAL
+//									: mode.icon, "drawable",
+//							MainScreen.getInstance().getPackageName()));
+//	iconOverlay = Bitmap.createScaledBitmap(iconOverlay,
+//			(int) (iconBase.getWidth() / 1.8),
+//			(int) (iconBase.getWidth() / 1.8), false);
+//
+//	bm = mergeImage(iconBase, iconOverlay);
+//	bm = Bitmap.createScaledBitmap(bm, (int) (MainScreen.getMainContext()
+//			.getResources().getDimension(R.dimen.mainButtonHeightSelect)),
+//			(int) (MainScreen.getMainContext().getResources()
+//					.getDimension(R.dimen.mainButtonHeightSelect)), false);
+//	((RotateImageView) guiView.findViewById(R.id.buttonSelectMode))
+//			.setImageBitmap(bm);
+
+	int rid = MainScreen.getAppResources().getIdentifier(
+			tmpActiveMode.howtoText, "string",
+			MainScreen.getInstance().getPackageName());
+	String howto = "";
+	if (rid != 0)
+		howto = MainScreen.getAppResources().getString(rid);
+	// show toast on mode changed
+//	showToast(
+//			v,
+//			Toast.LENGTH_SHORT,
+//			Gravity.CENTER,
+//			((TextView) v.findViewById(R.id.modeText)).getText()
+//					+ " "
+//					+ MainScreen.getAppResources().getString(
+//							R.string.almalence_gui_selected)
+//					+ (tmpActiveMode.howtoText.isEmpty() ? "" : "\n")
+//					+ howto, false, true);
+}
 	/*
 	 * Get/Set method for private variables
 	 */
