@@ -1265,6 +1265,9 @@ private void changeMode(boolean b){
 
 	@Override
 	protected void onStop() {
+		Intent intent = new Intent("com.louka.launcher.sosbutton.show");
+        MainScreen.getInstance().sendBroadcast(intent);
+		
 		super.onStop();
 		mApplicationStarted = false;
 		orientationMain = 0;
