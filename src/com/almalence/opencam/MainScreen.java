@@ -58,6 +58,7 @@ import android.graphics.ImageFormat;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
+import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
 import android.hardware.Camera.Area;
 import android.media.AudioManager;
@@ -338,7 +339,8 @@ public class MainScreen extends Activity implements ApplicationInterface,
 	public static int sDefaultMeteringValue = CameraParameters.meteringModeAuto;
 
 	public static int mHeightSOSEnabled = 0;
-	boolean isVideo;
+	private boolean isVideo;
+	private boolean isFront;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -475,7 +477,7 @@ public class MainScreen extends Activity implements ApplicationInterface,
 		launchTorch = intent.getBooleanExtra(EXTRA_TORCH, false);
 		launchBarcode = intent.getBooleanExtra(EXTRA_BARCODE, false);
 		goShopping = intent.getBooleanExtra(EXTRA_SHOP, false);
-		 isVideo=intent.getBooleanExtra("video",false);
+		isVideo = intent.getBooleanExtra("video",false);
 		
 		mainContext = this.getBaseContext();
 		messageHandler = new Handler(this);
@@ -691,6 +693,8 @@ public class MainScreen extends Activity implements ApplicationInterface,
 		// -+- -->
 		if (getIntent().getExtras() != null) {
 			int sosHeight = getIntent().getExtras().getInt("SOSHeight");
+			
+			isFront = intent.getBooleanExtra("front",false);
 			if (sosHeight != 0) {
 				DisplayMetrics displaymetrics = new DisplayMetrics();
 				getWindowManager().getDefaultDisplay().getMetrics(
@@ -703,12 +707,63 @@ public class MainScreen extends Activity implements ApplicationInterface,
 				mainLayout.invalidate();
 				mHeightSOSEnabled = height - sosHeight;
 			}
-changeMode(isVideo);
+			changeMode(isVideo);
 		} else {
 			resetOrSaveSettings();
 			Toast.makeText(this, "Not from Launcher", Toast.LENGTH_LONG).show();
 		}
+		if(isFront){
+		bringFront();
+		}
 	}
+private void bringFront() {
+
+	if (PluginManager.getInstance().getProcessingCounter() != 0)
+		return;
+	SharedPreferences prefs = PreferenceManager
+			.getDefaultSharedPreferences(MainScreen.getMainContext());
+	boolean isFrontCamera = prefs.getBoolean(
+			MainScreen.getMainContext().getResources()
+					.getString(R.string.Preference_UseFrontCameraValue),
+			false);
+	if(!isFrontCamera){
+	prefs.edit()
+			.putBoolean(
+					MainScreen
+							.getMainContext()
+							.getResources()
+							.getString(
+									R.string.Preference_UseFrontCameraValue),
+					true).commit();
+    return;
+	}
+	return;
+	}
+
+private void undoFront() {
+
+	if (PluginManager.getInstance().getProcessingCounter() != 0)
+		return;
+	SharedPreferences prefs = PreferenceManager
+			.getDefaultSharedPreferences(MainScreen.getMainContext());
+	boolean isFrontCamera = prefs.getBoolean(
+			MainScreen.getMainContext().getResources()
+					.getString(R.string.Preference_UseFrontCameraValue),
+			false);
+	if(isFrontCamera){
+	prefs.edit()
+			.putBoolean(
+					MainScreen
+							.getMainContext()
+							.getResources()
+							.getString(
+									R.string.Preference_UseFrontCameraValue),
+					false).commit();
+    return;
+	}
+	return;
+	}
+
 private void changeMode(boolean b){
 	Mode captureMode;
 	if(b){
@@ -716,8 +771,6 @@ private void changeMode(boolean b){
 	}else{
 		captureMode = ConfigParser.getInstance().getMode("single");
 	}
-	if (PluginManager.getInstance().getActiveModeID() == captureMode.modeID)
-		return ;
 
 	final Mode tmpActiveMode = captureMode;
 
@@ -731,7 +784,7 @@ private void changeMode(boolean b){
 			MainScreen.getInstance().startActivity(intent);
 			return ;
 		}
-	}
+	} 
 
 	// <!-- -+-
 	if (!MainScreen.getInstance().checkLaunches(tmpActiveMode))
@@ -1273,8 +1326,10 @@ private void changeMode(boolean b){
 		PluginManager.getInstance().onStop();
 		MainScreen.getCameraController().onStop();
 
-		if (CameraController.isUseHALv3())
+		if (CameraController.isUseHALv3()){
 			stopImageReaders();
+		}
+		undoFront();
 	}
 
 	@TargetApi(21)
@@ -1514,6 +1569,7 @@ private void changeMode(boolean b){
 			shutterPlayer.release();
 			shutterPlayer = null;
 		}
+			undoFront();
 	}
 
 	public void pauseMain() {
@@ -1530,6 +1586,9 @@ private void changeMode(boolean b){
 
 	public void resumeMain() {
 		onResume();
+		if(isFront){
+		bringFront();
+		}
 	}
 
 	@Override
