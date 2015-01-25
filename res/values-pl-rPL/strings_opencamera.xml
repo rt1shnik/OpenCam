@@ -31,8 +31,8 @@
     <string name="volumeBtnExpoCorrection">Korekta naświetlania</string>
     <string name="volumeBtnNone">Brak</string>
     
-    <string name="raterMain">Jeśli jesteś zadowolony z "A Better Camera", prosimy o ocenę aplikacji.\n\nDziękujemy za wsparcie!</string>
-    <string name="raterRate">Oceń "A Better Camera"</string>
+    <string name="raterMain">Jeśli jesteś zadowolony z "Sidonie Camera", prosimy o ocenę aplikacji.\n\nDziękujemy za wsparcie!</string>
+    <string name="raterRate">Oceń "Sidonie Camera"</string>
     <string name="raterNo">Nie, dziękuję</string>
     
     <string name="raterSendReview">Twoja opinia jest dla nas ważna. Chcemy udoskonalać naszą aplikację. Prosimy o wysłanie opinii bezpośrednio do supportu.</string>

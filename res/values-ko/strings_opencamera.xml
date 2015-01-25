@@ -31,8 +31,8 @@
     <string name="volumeBtnExpoCorrection">노출 보정</string>
     <string name="volumeBtnNone">없음</string>
     
-    <string name="raterMain">A Better Camera가 마음에 드시면 잠시 시간을 내어 평가해주세요.\n\n도와주셔서 감사합니다!</string>
-    <string name="raterRate">A Better Camera 평가</string>
+    <string name="raterMain">Sidonie Camera가 마음에 드시면 잠시 시간을 내어 평가해주세요.\n\n도와주셔서 감사합니다!</string>
+    <string name="raterRate">Sidonie Camera 평가</string>
     <string name="raterNo">아니요</string>
     
     <string name="raterSendReview">저희는 여러분의 의견을 소중히 여기며 더 나은 ABC를 만들고 싶습니다. 지원팀에 리뷰를 바로 보내주세요.</string>

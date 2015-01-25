@@ -51,8 +51,8 @@
     <string name="volumeBtnExpoCorrection">Коррекция экспозиции</string>
     <string name="volumeBtnNone">Ничего</string>
 
-    <string name="raterMain">Нравится A Better Camera? Оцените приложение, пожалуйста!\n\nСпасибо за поддержку!</string>
-    <string name="raterRate">Оценить A Better Camera</string>
+    <string name="raterMain">Нравится Sidonie Camera? Оцените приложение, пожалуйста!\n\nСпасибо за поддержку!</string>
+    <string name="raterRate">Оценить Sidonie Camera</string>
     <string name="raterNo">Нет, спасибо</string>
     
     <string name="raterSendReview"> Нам важно ваше мнение и мы хотим улучшить приложение. Отправьте ваше мнение напрямую в поддержку.</string>

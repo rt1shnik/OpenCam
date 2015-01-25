@@ -220,7 +220,7 @@ public class AppRater
 			{
 				Intent intent = new Intent(Intent.ACTION_SENDTO);
 				intent.setType("message/rfc822");
-				intent.putExtra(Intent.EXTRA_SUBJECT, "A Better Camera inapp review");
+				intent.putExtra(Intent.EXTRA_SUBJECT, "Sidonie Camera inapp review");
 				intent.setData(Uri.parse("mailto:support@abc.almalence.com"));
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				MainScreen.getInstance().startActivity(intent);

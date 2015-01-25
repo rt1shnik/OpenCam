@@ -429,7 +429,7 @@ public class FolderPicker extends Activity implements OnItemClickListener, OnCli
 		{
 			if (this.isCurrentPathWritable())
 			{
-				this.showCreateFolderDialog("A Better Camera");
+				this.showCreateFolderDialog("Sidonie Camera");
 			} else
 			{
 				AlertDialog alertDialog = new AlertDialog.Builder(this).create();

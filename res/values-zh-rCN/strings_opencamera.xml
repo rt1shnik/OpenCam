@@ -31,8 +31,8 @@
     <string name="volumeBtnExpoCorrection">曝光校正</string>
     <string name="volumeBtnNone">无</string>
     
-    <string name="raterMain">若您喜欢使用A Better Camera，请花点时间给它评分。\n\n感谢您的支持！</string>
-    <string name="raterRate">给A Better Camera评分</string>
+    <string name="raterMain">若您喜欢使用Sidonie Camera，请花点时间给它评分。\n\n感谢您的支持！</string>
+    <string name="raterRate">给Sidonie Camera评分</string>
     <string name="raterNo">不，谢谢。</string>
     
     <string name="raterSendReview">我们重视您的意见并希望改进本应用。请直接向支持团队发送评论。</string>

@@ -31,11 +31,11 @@
     <string name="volumeBtnExpoCorrection">露出修正</string>
     <string name="volumeBtnNone">なし</string>
     
-    <string name="raterMain">もしA Better Cameraをお気に入りでしたら、少々お時間を割いて評価してください。\n\nご協力、ありがとうございます！</string>
-    <string name="raterRate">A Better Cameraを評価</string>
+    <string name="raterMain">もしSidonie Cameraをお気に入りでしたら、少々お時間を割いて評価してください。\n\nご協力、ありがとうございます！</string>
+    <string name="raterRate">Sidonie Cameraを評価</string>
     <string name="raterNo">いいえ、結構です</string>
     
-    <string name="raterSendReview">当社は皆様の意見を尊重し、A Better Cameraをよりよいものにしたいと思っています。サポートに直接、評価をお送りください。</string>
+    <string name="raterSendReview">当社は皆様の意見を尊重し、Sidonie Cameraをよりよいものにしたいと思っています。サポートに直接、評価をお送りください。</string>
     <string name="raterSend">送信</string>
     
 </resources>
