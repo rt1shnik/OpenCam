@@ -31,11 +31,11 @@
     <string name="volumeBtnExpoCorrection">Belichtungskorrektur</string>
     <string name="volumeBtnNone">Keine</string>
     
-    <string name="raterMain">Wenn Ihnen A Better Camera gefällt, geben Sie bitte eine Bewertung ab.\n\nBesten Dank für Ihre Unterstützung!</string>
-    <string name="raterRate">A Better Camera bewerten</string>
+    <string name="raterMain">Wenn Ihnen Sidonie Camera gefällt, geben Sie bitte eine Bewertung ab.\n\nBesten Dank für Ihre Unterstützung!</string>
+    <string name="raterRate">Sidonie Camera bewerten</string>
     <string name="raterNo">Nein danke</string>
     
-    <string name="raterSendReview">Wir interessieren uns für Ihre Meinung und würden A Better Camera gern weiter optimieren. Schicken Sie Ihr Feedback direkt an unser Supportteam.</string>
+    <string name="raterSendReview">Wir interessieren uns für Ihre Meinung und würden Sidonie Camera gern weiter optimieren. Schicken Sie Ihr Feedback direkt an unser Supportteam.</string>
     <string name="raterSend">Abschicken</string>
     
 </resources>

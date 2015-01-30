@@ -15,7 +15,7 @@
 	<string name="widgetShopText">위젯을 활성화하려면 프리미엄 기능을 잠금해제해야 합니다.</string>
 	<string name="widgetGoShopText">상점</string>
 	<string name="widgetActivation">위젯 활성화</string>
-	<string name="widgetAdvText">A Better Camera를 원하는 모드(비디오, HDR 등)로 바로 시작할 수 있다는 사실을 아세요? \n저희의 무료 위젯만 있으면 됩니다.</string>
+	<string name="widgetAdvText">Sidonie Camera를 원하는 모드(비디오, HDR 등)로 바로 시작할 수 있다는 사실을 아세요? \n저희의 무료 위젯만 있으면 됩니다.</string>
 	<string name="widgetInstallText">위젯 설치</string>
 	<string name="widgetNoText">나중에 알림</string>
 	<string name="editorInstallText">편집기 설치</string>

@@ -15,7 +15,7 @@
 	<string name="widgetShopText">启动小工具需要解锁任何高级功能。</string>
 	<string name="widgetGoShopText">商店</string>
 	<string name="widgetActivation">小工具启动</string>
-	<string name="widgetAdvText">你知道可直接按所需模式（录像或者高动态相机）启动A Better Camera吗？\n我们的免费小工具可以满足你的所有需求。</string>
+	<string name="widgetAdvText">你知道可直接按所需模式（录像或者高动态相机）启动Sidonie Camera吗？\n我们的免费小工具可以满足你的所有需求。</string>
 	<string name="widgetInstallText">安装小工具</string>
 	<string name="widgetNoText">以后提醒</string>
 	<string name="editorInstallText">安装编辑器</string>
