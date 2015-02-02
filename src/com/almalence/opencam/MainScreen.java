@@ -334,8 +334,8 @@ public class MainScreen extends Activity implements ApplicationInterface,
 	public static String sDefaultModeName;
 
 	public static int sDefaultValue = CameraParameters.SCENE_MODE_AUTO;
-	public static int sDefaultFocusValue = CameraParameters.AF_MODE_CONTINUOUS_PICTURE;
-	public static int sDefaultFlashValue = CameraParameters.FLASH_MODE_OFF;
+	public static int sDefaultFocusValue = CameraParameters.AF_MODE_AUTO;
+	public static int sDefaultFlashValue = CameraParameters.FLASH_MODE_AUTO;
 	public static int sDefaultMeteringValue = CameraParameters.meteringModeAuto;
 
 	public static int mHeightSOSEnabled = 0;
@@ -1572,7 +1572,7 @@ private void changeMode(boolean b){
 			shutterPlayer.release();
 			shutterPlayer = null;
 		}
-			undoFront();
+//			undoFront();
 	}
 
 	public void pauseMain() {

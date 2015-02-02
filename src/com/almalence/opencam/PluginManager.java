@@ -326,9 +326,9 @@ public class PluginManager implements PluginManagerInterface
 		pluginList.put(gyroVFPlugin.getID(), gyroVFPlugin);
 		listVF.add(gyroVFPlugin);
 
-		ZoomVFPlugin zoomVFPlugin = new ZoomVFPlugin();
-		pluginList.put(zoomVFPlugin.getID(), zoomVFPlugin);
-		listVF.add(zoomVFPlugin);
+//		ZoomVFPlugin zoomVFPlugin = new ZoomVFPlugin();
+//		pluginList.put(zoomVFPlugin.getID(), zoomVFPlugin);
+//		listVF.add(zoomVFPlugin);
 
 		GridVFPlugin gridVFPlugin = new GridVFPlugin();
 		pluginList.put(gridVFPlugin.getID(), gridVFPlugin);

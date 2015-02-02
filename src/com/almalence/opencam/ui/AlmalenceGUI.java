@@ -768,9 +768,9 @@ public class AlmalenceGUI extends GUI implements
 
 				AlmalenceGUI.mDeviceOrientation = Util.roundOrientation(
 						orientation, AlmalenceGUI.mDeviceOrientation);
-
 				((RotateImageView) topMenuButtons.get(MODE_EV))
 						.setOrientation(AlmalenceGUI.mDeviceOrientation);
+				
 				((RotateImageView) topMenuButtons.get(MODE_SCENE))
 						.setOrientation(AlmalenceGUI.mDeviceOrientation);
 				((RotateImageView) topMenuButtons.get(MODE_WB))
@@ -963,7 +963,7 @@ public class AlmalenceGUI extends GUI implements
 		if (!isFirstLaunch)
 			guiView.findViewById(R.id.hintLayout).setVisibility(View.GONE);
 		else
-			guiView.findViewById(R.id.hintLayout).setVisibility(View.VISIBLE);
+//			guiView.findViewById(R.id.hintLayout).setVisibility(View.VISIBLE);
 
 		// <!-- -+-
 		manageUnlockControl();
@@ -993,7 +993,6 @@ public class AlmalenceGUI extends GUI implements
 		// Get application preferences object
 		preferences = PreferenceManager.getDefaultSharedPreferences(MainScreen
 				.getMainContext());
-
 		guiView.findViewById(R.id.evButton).setOnTouchListener(
 				MainScreen.getInstance());
 		guiView.findViewById(R.id.sceneButton).setOnTouchListener(
@@ -1240,7 +1239,7 @@ public class AlmalenceGUI extends GUI implements
 		topPanel.bringToFront();
 		blockingLayout.bringToFront();
 		postProcessingLayout.bringToFront();
-		hintLayout.bringToFront();
+//		hintLayout.bringToFront();
 
 		View help = guiView.findViewById(R.id.mode_help);
 		help.bringToFront();
@@ -1314,7 +1313,6 @@ public class AlmalenceGUI extends GUI implements
 	 */
 	public void createPluginTopMenuButtons() {
 		topMenuPluginButtons.clear();
-
 		createPluginTopMenuButtons(PluginManager.getInstance()
 				.getActivePlugins(PluginType.ViewFinder));
 		createPluginTopMenuButtons(PluginManager.getInstance()
@@ -1509,7 +1507,7 @@ public class AlmalenceGUI extends GUI implements
 			}
 
 			RotateImageView but = (RotateImageView) topMenuButtons.get(MODE_EV);
-			but.setImageResource(ICON_EV);
+			but.setImageResource(R.drawable.header_back_button_new_color);
 		} else
 			mEVSupported = false;
 
@@ -1622,7 +1620,7 @@ public class AlmalenceGUI extends GUI implements
 
 			if (!activeFocusNames.isEmpty()) {
 				mFocusModeSupported = true;
-				defaultQuickControl3 = String.valueOf(MODE_FOCUS);
+				defaultQuickControl3 = String.valueOf(MODE_SCENE);
 
 				if (CameraController.isModeAvailable(supported_focus,
 						CameraParameters.AF_MODE_AUTO)
@@ -2459,10 +2457,12 @@ public class AlmalenceGUI extends GUI implements
 				createSettingCameraOnClick(settingView);
 			break;
 		case EV:
-			if (isQuickControl)
+			if (isQuickControl){
 				createQuickControlEVOnClick(settingView);
-			else
+			}
+			else{
 				createSettingEVOnClick(settingView);
+			}
 			break;
 		case MORE:
 			if (isQuickControl)
@@ -3767,19 +3767,19 @@ public class AlmalenceGUI extends GUI implements
 	}
 
 	public boolean onLongClick(View v) {
-		if (quickControlsChangeVisible)
-			return true;
-
-		if (modeSelectorVisible)
-			return true;
-
-		if (shutterButton != v) {
-			changeCurrentQuickControl(v);
-
-			initQuickControlsMenu(v);
-			showQuickControlsSettings();
-			guiView.findViewById(R.id.topPanel).setVisibility(View.GONE);
-		}
+//		if (quickControlsChangeVisible)
+//			return true;
+//
+//		if (modeSelectorVisible)
+//			return true;
+//
+//		if (shutterButton != v) {
+//			changeCurrentQuickControl(v);
+//
+//			initQuickControlsMenu(v);
+//			showQuickControlsSettings();
+//			guiView.findViewById(R.id.topPanel).setVisibility(View.GONE);
+//		}
 		return true;
 	}
 
@@ -3900,31 +3900,32 @@ public class AlmalenceGUI extends GUI implements
 		// TOP MENU BUTTONS - Scene mode, white balance, focus mode, flash mode,
 		// settings
 		case R.id.evButton: {
-			if (changeQuickControlIfVisible(button))
-				break;
-
-			if (!isEVEnabled) {
-				showToast(
-						null,
-						Toast.LENGTH_SHORT,
-						Gravity.CENTER,
-						MainScreen.getAppResources().getString(
-								R.string.settings_not_available), true, false);
-				break;
-			}
-
-			LinearLayout layout = (LinearLayout) guiView
-					.findViewById(R.id.evLayout);
-			if (layout.getVisibility() == View.GONE) {
-				unselectPrimaryTopMenuButtons(MODE_EV);
-				hideSecondaryMenus();
-				showParams(MODE_EV);
-				quickControlsVisible = true;
-			} else {
-				quickControlsVisible = false;
-				unselectPrimaryTopMenuButtons(-1);
-				hideSecondaryMenus();
-			}
+			MainScreen.getInstance().finish();
+//			if (changeQuickControlIfVisible(button))
+//				break;
+//
+//			if (!isEVEnabled) {
+//				showToast(
+//						null,
+//						Toast.LENGTH_SHORT,
+//						Gravity.CENTER,
+//						MainScreen.getAppResources().getString(
+//								R.string.settings_not_available), true, false);
+//				break;
+//			}
+//
+//			LinearLayout layout = (LinearLayout) guiView
+//					.findViewById(R.id.evLayout);
+//			if (layout.getVisibility() == View.GONE) {
+//				unselectPrimaryTopMenuButtons(MODE_EV);
+//				hideSecondaryMenus();
+//				showParams(MODE_EV);
+//				quickControlsVisible = true;
+//			} else {
+//				quickControlsVisible = false;
+//				unselectPrimaryTopMenuButtons(-1);
+//				hideSecondaryMenus();
+//			}
 		}
 			break;
 		case R.id.sceneButton: {

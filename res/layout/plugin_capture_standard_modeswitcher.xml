@@ -16,7 +16,8 @@
         app:switchTextAppearance="@style/TextAppearance"
         app:thumb="@drawable/switch_inner_holo_dark_dro"
         app:track="@drawable/switch_track_holo_dark"
-        android:id="@+id/switch_dromode"/>
+        android:id="@+id/switch_dromode"
+        android:visibility="gone"/>
 <!--  -+- -->	
 <!-- +++
 <com.almalence.ui.Switch.Switch

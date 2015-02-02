@@ -468,12 +468,12 @@ public class AlmalenceStore
 		final RotateImageView unlock = ((RotateImageView) guiView.findViewById(R.id.Unlock));
 		
 		if (bOnSale != false) {
-			   unlock.setImageResource(R.drawable.unlock_sale);
+//			   unlock.setImageResource(R.drawable.unlock_sale);
 			  }
 		
 //		unlock.setImageResource(bOnSale ? R.drawable.unlock_sale : R.drawable.unlock);
-		unlock.setAlpha(1.0f);
-		unlock.setVisibility(View.VISIBLE);
+//		unlock.setAlpha(1.0f);
+//		unlock.setVisibility(View.VISIBLE);
 
 		Animation invisible_alpha = new AlphaAnimation(1, 0.4f);
 		invisible_alpha.setDuration(7000);
@@ -500,14 +500,14 @@ public class AlmalenceStore
 			}
 		});
 
-		unlock.startAnimation(invisible_alpha);
+//		unlock.startAnimation(invisible_alpha);
 	}
 
 	public void ShowGrayUnlockControl()
 	{
-		final RotateImageView unlock = ((RotateImageView) guiView.findViewById(R.id.Unlock));
-		if (unlock.getVisibility() == View.VISIBLE)
-			return;
+//		final RotateImageView unlock = ((RotateImageView) guiView.findViewById(R.id.Unlock));
+//		if (unlock.getVisibility() == View.VISIBLE)
+//			return;
 //		unlock.setImageResource(R.drawable.unlock_gray);
 //		unlock.setAlpha(0.4f);
 //		unlock.setVisibility(View.VISIBLE);

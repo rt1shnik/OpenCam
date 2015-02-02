@@ -65,9 +65,9 @@ import com.almalence.ui.VerticalSeekBar;
 
 public class ZoomVFPlugin extends PluginViewfinder
 {
-	private VerticalSeekBar		zoomBar					= null;
+//	private VerticalSeekBar		zoomBar					= null;
 	private int					zoomCurrent				= 0;
-	private View				zoomPanelView			= null;
+//	private View				zoomPanelView			= null;
 	private LinearLayout		zoomPanel				= null;
 
 	private int					mainLayoutHeight		= 0;
@@ -114,86 +114,86 @@ public class ZoomVFPlugin extends PluginViewfinder
 		panelOpened = false;
 
 		LayoutInflater inflator = MainScreen.getInstance().getLayoutInflater();
-		zoomPanelView = inflator.inflate(R.layout.plugin_vf_zoom_layout, null, false);
-		this.zoomPanel = (LinearLayout) zoomPanelView.findViewById(R.id.zoomLayout);
-		this.zoomPanel.setOnTouchListener(new OnTouchListener()
-		{
-			@Override
-			public boolean onTouch(View v, MotionEvent event)
-			{
-				return false;
-			}
-		});
+//		zoomPanelView = inflator.inflate(R.layout.plugin_vf_zoom_layout, null, false);
+//		this.zoomPanel = (LinearLayout) zoomPanelView.findViewById(R.id.zoomLayout);
+//		this.zoomPanel.setOnTouchListener(new OnTouchListener()
+//		{
+//			@Override
+//			public boolean onTouch(View v, MotionEvent event)
+//			{
+//				return false;
+//			}
+//		});
 
-		this.zoomBar = (VerticalSeekBar) zoomPanelView.findViewById(R.id.zoomSeekBar);
-		this.zoomBar.setOnTouchListener(new OnTouchListener()
-		{
-			@Override
-			public boolean onTouch(View v, MotionEvent event)
-			{
-				if (mZoomDisabled)
-				{
-					if (panelOpened)
-						zoomHandler.sendEmptyMessageDelayed(CLOSE_ZOOM_PANEL, CLOSE_ZOOM_PANEL_DELAY);
-					return true;
-				}
-
-				switch (event.getAction() & MotionEvent.ACTION_MASK)
-				{
-				case MotionEvent.ACTION_DOWN:
-					{
-						if (!panelOpened)
-						{
-							openZoomPanel();
-							zoomHandler.removeMessages(CLOSE_ZOOM_PANEL);
-							return true;
-						}
-						if (panelClosing)
-						{
-							panelToBeOpen = true;
-							return true;
-						}
-					}
-					break;
-				case MotionEvent.ACTION_UP:
-					{
-						if (panelOpened || panelOpening)
-							zoomHandler.sendEmptyMessageDelayed(CLOSE_ZOOM_PANEL, CLOSE_ZOOM_PANEL_DELAY);
-					}
-					break;
-				case MotionEvent.ACTION_MOVE:
-					return false;
-				default:
-					break;
-				}
-
-				return false;
-			}
-		});
-		this.zoomBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener()
-		{
-
-			@Override
-			public void onStopTrackingTouch(SeekBar seekBar)
-			{
-			}
-
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar)
-			{
-				zoomHandler.removeMessages(CLOSE_ZOOM_PANEL);
-			}
-
-			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
-			{
-				if (fromUser)
-				{
-					zoomHandler.removeMessages(CLOSE_ZOOM_PANEL);
-					zoomModify(progress - zoomCurrent);
-				}
-			}
-		});
+//		this.zoomBar = (VerticalSeekBar) zoomPanelView.findViewById(R.id.zoomSeekBar);
+//		this.zoomBar.setOnTouchListener(new OnTouchListener()
+//		{
+//			@Override
+//			public boolean onTouch(View v, MotionEvent event)
+//			{
+//				if (mZoomDisabled)
+//				{
+//					if (panelOpened)
+//						zoomHandler.sendEmptyMessageDelayed(CLOSE_ZOOM_PANEL, CLOSE_ZOOM_PANEL_DELAY);
+//					return true;
+//				}
+//
+//				switch (event.getAction() & MotionEvent.ACTION_MASK)
+//				{
+//				case MotionEvent.ACTION_DOWN:
+//					{
+//						if (!panelOpened)
+//						{
+//							openZoomPanel();
+//							zoomHandler.removeMessages(CLOSE_ZOOM_PANEL);
+//							return true;
+//						}
+//						if (panelClosing)
+//						{
+//							panelToBeOpen = true;
+//							return true;
+//						}
+//					}
+//					break;
+//				case MotionEvent.ACTION_UP:
+//					{
+//						if (panelOpened || panelOpening)
+//							zoomHandler.sendEmptyMessageDelayed(CLOSE_ZOOM_PANEL, CLOSE_ZOOM_PANEL_DELAY);
+//					}
+//					break;
+//				case MotionEvent.ACTION_MOVE:
+//					return false;
+//				default:
+//					break;
+//				}
+//
+//				return false;
+//			}
+//		});
+//		this.zoomBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener()
+//		{
+//
+//			@Override
+//			public void onStopTrackingTouch(SeekBar seekBar)
+//			{
+//			}
+//
+//			@Override
+//			public void onStartTrackingTouch(SeekBar seekBar)
+//			{
+//				zoomHandler.removeMessages(CLOSE_ZOOM_PANEL);
+//			}
+//
+//			@Override
+//			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
+//			{
+//				if (fromUser)
+//				{
+//					zoomHandler.removeMessages(CLOSE_ZOOM_PANEL);
+//					zoomModify(progress - zoomCurrent);
+//				}
+//			}
+//		});
 	}
 
 	@Override
@@ -251,12 +251,12 @@ public class ZoomVFPlugin extends PluginViewfinder
 		{
 //			zoomPanel.setVisibility(View.GONE);
 //			zoomPanelView.setVisibility(View.GONE);
-			zoomBar.setVisibility(View.GONE);
+//			zoomBar.setVisibility(View.GONE);
 		} else
 		{
 //			zoomPanel.setVisibility(View.VISIBLE);
 //			zoomPanelView.setVisibility(View.VISIBLE);
-			zoomBar.setVisibility(View.VISIBLE);
+//			zoomBar.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -267,8 +267,8 @@ public class ZoomVFPlugin extends PluginViewfinder
 
 		if (CameraController.isZoomSupported())
 		{
-			zoomBar.setMax(CameraController.getMaxZoom());
-			zoomBar.setProgressAndThumb(0);
+//			zoomBar.setMax(CameraController.getMaxZoom());
+//			zoomBar.setProgressAndThumb(0);
 			zoomPanel.setVisibility(View.VISIBLE);
 		} else
 			zoomPanel.setVisibility(View.GONE);
@@ -292,7 +292,7 @@ public class ZoomVFPlugin extends PluginViewfinder
 
 				CameraController.setZoom(zoomCurrent);
 
-				zoomBar.setProgressAndThumb(zoomCurrent);
+//				zoomBar.setProgressAndThumb(zoomCurrent);
 			} catch (Exception e)
 			{
 				e.printStackTrace();

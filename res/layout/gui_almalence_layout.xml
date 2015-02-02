@@ -78,7 +78,8 @@
             android:layout_weight="1"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/paramsLayoutHeight"
-			android:gravity="center">
+			android:gravity="center"
+			android:visibility="gone">
 				<LinearLayout android:layout_height="@dimen/paramsLayoutHeight"			    
 		 	 	    android:layout_width="match_parent"
 		 	 	    android:orientation="vertical"
@@ -151,7 +152,8 @@
 	 	 	    android:layout_width="match_parent"
 	 	 	    android:orientation="vertical"
 	 	 	    android:gravity="center"	    			 	 	    
-				android:layout_weight="1">
+				android:layout_weight="1"
+				android:visibility="gone">
 		 	 	<com.almalence.ui.RotateImageView
 					android:id="@+id/buttonSelectMode"
 					android:src="@drawable/button_selectmode"
@@ -742,7 +744,8 @@
 	    <RelativeLayout android:id="@+id/hint_top"
             android:layout_weight="1"
 			android:layout_width="match_parent"
-			android:layout_height="@dimen/mainButtonHeight">
+			android:layout_height="@dimen/mainButtonHeight"
+			android:visibility="gone">
             <ImageView
 				android:id="@+id/arrowdown"
 				android:src="@drawable/gui_almalence_hint_arrowpull"
@@ -804,7 +807,7 @@
 			android:layout_height="@dimen/mainButtonHeight"
 			android:layout_gravity="center_vertical|center_horizontal"
 			android:layout_margin="20dp"
-			>
+			android:visibility="gone">
             <ImageView
 				android:id="@+id/arrowToLeft"
 				android:src="@drawable/gui_almalence_hint_arrowtoleft"
@@ -843,7 +846,7 @@
             android:layout_weight="1"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/mainButtonHeight"
-			>
+			android:visibility="gone">
             
             <ImageView
 				android:id="@+id/arrowDown"
