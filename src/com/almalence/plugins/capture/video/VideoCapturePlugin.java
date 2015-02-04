@@ -146,7 +146,7 @@ public class VideoCapturePlugin extends PluginCapture
 	private RotateImageView						timeLapseButton;
 	private RotateImageView						pauseVideoButton;
 	private RotateImageView						stopVideoButton;
-	private RotateImageView						takePictureButton;
+//	private RotateImageView						takePictureButton;
 
 	private boolean								showRecording					= false;
 	private boolean								pauseBlink						= true;
@@ -288,14 +288,14 @@ public class VideoCapturePlugin extends PluginCapture
 					}
 					if (VideoCapturePlugin.this.modeDRO())
 					{
-						takePictureButton.setVisibility(View.GONE);
+//						takePictureButton.setVisibility(View.GONE);
 						timeLapseButton.setVisibility(View.GONE);
 						MainScreen.getInstance().showOpenGLLayer(2);
 						MainScreen.getInstance().glSetRenderingMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 					} else
 					{
 						if (displayTakePicture)
-							takePictureButton.setVisibility(View.VISIBLE);
+//							takePictureButton.setVisibility(View.VISIBLE);
 						timeLapseButton.setVisibility(View.VISIBLE);
 
 						droEngine.onPause();
@@ -494,7 +494,7 @@ public class VideoCapturePlugin extends PluginCapture
 					snapshotSupported = true;
 			}
 		}
-		takePictureButton = (RotateImageView) buttonsLayout.findViewById(R.id.buttonCaptureImage);
+//		takePictureButton = (RotateImageView) buttonsLayout.findViewById(R.id.buttonCaptureImage);
 
 		timeLapseButton.setOnClickListener(new OnClickListener()
 		{
@@ -525,16 +525,16 @@ public class VideoCapturePlugin extends PluginCapture
 
 		if (snapshotSupported)
 		{
-			takePictureButton.setOnClickListener(new OnClickListener()
-			{
-
-				@Override
-				public void onClick(View v)
-				{
-					takePicture();
-				}
-
-			});
+//			takePictureButton.setOnClickListener(new OnClickListener()
+//			{
+//
+//				@Override
+//				public void onClick(View v)
+//				{
+//					takePicture();
+//				}
+//
+//			});
 		}
 
 		for (int j = 0; j < specialView.size(); j++)
@@ -566,13 +566,13 @@ public class VideoCapturePlugin extends PluginCapture
 
 		if (snapshotSupported)
 		{
-			takePictureButton.setOrientation(MainScreen.getGUIManager().getLayoutOrientation());
-			takePictureButton.invalidate();
+//			takePictureButton.setOrientation(MainScreen.getGUIManager().getLayoutOrientation());
+//			takePictureButton.invalidate();
 			// takePictureButton.requestLayout();
 			displayTakePicture = true;
 		} else
 		{
-			takePictureButton.setVisibility(View.GONE);
+//			takePictureButton.setVisibility(View.GONE);
 			displayTakePicture = false;
 		}
 
@@ -582,7 +582,7 @@ public class VideoCapturePlugin extends PluginCapture
 
 		if (this.modeDRO())
 		{
-			takePictureButton.setVisibility(View.GONE);
+//			takePictureButton.setVisibility(View.GONE);
 			timeLapseButton.setVisibility(View.GONE);
 		}
 
@@ -755,12 +755,12 @@ public class VideoCapturePlugin extends PluginCapture
 		}
 		if (snapshotSupported)
 		{
-			if (takePictureButton != null)
-			{
-				takePictureButton.setOrientation(MainScreen.getGUIManager().getLayoutOrientation());
+//			if (takePictureButton != null)
+//			{
+//				takePictureButton.setOrientation(MainScreen.getGUIManager().getLayoutOrientation());
 				// takePictureButton.invalidate();
 				// takePictureButton.requestLayout();
-			}
+//			}
 		}
 		if (timeLapseButton != null)
 		{

@@ -242,13 +242,13 @@ public class Panel extends LinearLayout
 		mHandle = findViewById(R.id.panelHandle);
 		if (mHandle == null)
 			throw new RuntimeException("Your Panel must have a View whose id attribute is 'R.id.panelHandle'");
-		mHandle.setOnTouchListener(touchListener);
+//		mHandle.setOnTouchListener(touchListener);
 
 		mContent = findViewById(R.id.panelContent);
 		if (mContent == null)
 			throw new RuntimeException("Your Panel must have a View whose id attribute is 'R.id.panelContent'");
 
-		mContent.setOnTouchListener(touchListener);
+//		mContent.setOnTouchListener(touchListener);
 
 		SetOnTouchListener((ViewGroup) mContent, touchListener);
 

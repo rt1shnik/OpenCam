@@ -53,7 +53,7 @@
 					android:paddingBottom="0dp"
 					android:paddingTop="0dp"
 			   		android:layout_gravity="right"		   				   		
-			   		android:onClick="onButtonClick">
+			   		android:visibility="gone">
 			 	</com.almalence.ui.RotateImageView>
 			 </LinearLayout>
 </LinearLayout>

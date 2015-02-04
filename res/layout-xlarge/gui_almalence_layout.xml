@@ -637,7 +637,7 @@
 		my:downSpace="@dimen/paramsLayoutHeight"
 		my:linearFlying="true"
 		my:openedHandle="@drawable/gui_almalence_handle_up"
-		my:closedHandle="@drawable/gui_almalence_handle_down"		
+		my:closedHandle="@drawable/gui_almalence_handle_down2"		
 		>
 		<ImageButton
 			android:id="@id/panelHandle"

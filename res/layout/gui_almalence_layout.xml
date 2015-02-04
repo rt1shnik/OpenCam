@@ -370,7 +370,7 @@
 					    android:adjustViewBounds="true"
 					    android:padding="6dp"
 					    android:stretchMode="columnWidth"
-					    android:gravity="center"/>					
+					    android:gravity="center"/>
 	</RelativeLayout>
 	 
 	<com.almalence.ui.RotateImageView 
@@ -660,7 +660,13 @@
 					    android:visibility="gone"
 					/>
 	</RelativeLayout>
-
+	<!--
+<LinearLayout 
+    android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:clickable="false"
+	android:background="@drawable/gui_almalence_handle_down"/>
+	-->
 <!-- -+-  -->
 	<com.almalence.ui.Panel
 	    xmlns:my="http://schemas.android.com/apk/res/com.almalence.opencam"
@@ -671,10 +677,10 @@
 		my:position="top"
 		my:animationDuration="30"
 		my:downSpace="@dimen/paramsLayoutHeight"
-		my:linearFlying="true"
+		my:linearFlying="false"
 		my:openedHandle="@drawable/gui_almalence_handle_up"
-		my:closedHandle="@drawable/gui_almalence_handle_down"		
-		>
+		my:closedHandle="@drawable/gui_almalence_handle_down2"	
+		android:clickable="false">
 		<ImageButton
 			android:id="@id/panelHandle"
 			android:layout_width="match_parent"
@@ -682,8 +688,7 @@
 			android:background="@drawable/blacktransparentlayerpulldownmenu" 
 			android:layout_gravity="center"
 			android:layout_marginTop="@dimen/paramsLayoutHeight"
-			android:paddingBottom="5dip"
-			/>
+			android:paddingBottom="5dip"/>
 				
 		<LinearLayout
 			android:id="@id/panelContent"

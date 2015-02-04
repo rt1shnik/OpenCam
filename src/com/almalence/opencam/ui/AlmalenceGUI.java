@@ -880,7 +880,7 @@ public class AlmalenceGUI extends GUI implements
 		if (modeSelectorVisible)
 			hideModeList();
 		if (settingsControlsVisible)
-			((Panel) guiView.findViewById(R.id.topPanel)).setOpen(false, true);
+//			((Panel) guiView.findViewById(R.id.topPanel)).setOpen(false, true);
 
 		// <!-- -+-
 		if (((RelativeLayout) guiView.findViewById(R.id.viewPagerLayoutMain))
@@ -1132,8 +1132,8 @@ public class AlmalenceGUI extends GUI implements
 			paramMode.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
 					settingsModeClicked(mode, system_name);
-					guiView.findViewById(R.id.topPanel).setVisibility(
-							View.VISIBLE);
+//					guiView.findViewById(R.id.topPanel).setVisibility(
+//							View.VISIBLE);
 					quickControlsVisible = false;
 				}
 			});
@@ -1219,7 +1219,7 @@ public class AlmalenceGUI extends GUI implements
 		final View blockingLayout = guiView.findViewById(R.id.blockingLayout);
 		final View postProcessingLayout = guiView
 				.findViewById(R.id.postprocessingLayout);
-		final View topPanel = guiView.findViewById(R.id.topPanel);
+//		final View topPanel = guiView.findViewById(R.id.topPanel);
 		final View mainButtons = guiView.findViewById(R.id.mainButtons);
 		final View qcLayout = guiView.findViewById(R.id.qcLayout);
 		final View buttonsLayout = guiView.findViewById(R.id.buttonsLayout);
@@ -1236,7 +1236,7 @@ public class AlmalenceGUI extends GUI implements
 		mainButtons.bringToFront();
 		qcLayout.bringToFront();
 		buttonsLayout.bringToFront();
-		topPanel.bringToFront();
+//		topPanel.bringToFront();
 		blockingLayout.bringToFront();
 		postProcessingLayout.bringToFront();
 //		hintLayout.bringToFront();
@@ -1620,7 +1620,7 @@ public class AlmalenceGUI extends GUI implements
 
 			if (!activeFocusNames.isEmpty()) {
 				mFocusModeSupported = true;
-				defaultQuickControl3 = String.valueOf(MODE_SCENE);
+				defaultQuickControl3 = String.valueOf(MODE_CAM);
 
 				if (CameraController.isModeAvailable(supported_focus,
 						CameraParameters.AF_MODE_AUTO)
@@ -1685,8 +1685,8 @@ public class AlmalenceGUI extends GUI implements
 							hideSecondaryMenus();
 							unselectPrimaryTopMenuButtons(-1);
 
-							guiView.findViewById(R.id.topPanel).setVisibility(
-									View.VISIBLE);
+//							guiView.findViewById(R.id.topPanel).setVisibility(
+//									View.VISIBLE);
 							quickControlsVisible = false;
 						}
 					});
@@ -2020,19 +2020,19 @@ public class AlmalenceGUI extends GUI implements
 				PluginManager.getInstance().sendMessage(
 						PluginManager.MSG_BROADCAST,
 						PluginManager.MSG_CONTROL_UNLOCKED);
-				((Panel) guiView.findViewById(R.id.topPanel)).setOpen(false,
-						false);
+//				((Panel) guiView.findViewById(R.id.topPanel)).setOpen(false,
+//						false);
 			}
 		};
 
-		guiView.findViewById(R.id.topPanel).bringToFront();
+//		guiView.findViewById(R.id.topPanel).bringToFront();
 		guiView.findViewById(R.id.blockingLayout).bringToFront();
 		guiView.findViewById(R.id.postprocessingLayout).bringToFront();
 		if (modeSelectorVisible) {
 			guiView.findViewById(R.id.modeLayout).bringToFront();
 		}
-		((Panel) guiView.findViewById(R.id.topPanel))
-				.setOnPanelListener(pListener);
+//		((Panel) guiView.findViewById(R.id.topPanel))
+//				.setOnPanelListener(pListener);
 	}
 
 	private boolean isCameraParameterSupported(String param) {
@@ -2256,9 +2256,9 @@ public class AlmalenceGUI extends GUI implements
 				rotateViews(modeViews, startDegree, endDegree, duration);
 
 			if (!settingsViews.isEmpty()) {
-				int delay = ((Panel) guiView.findViewById(R.id.topPanel))
-						.isOpen() ? duration : 0;
-				rotateViews(settingsViews, startDegree, endDegree, delay);
+//				int delay = ((Panel) guiView.findViewById(R.id.topPanel))
+//						.isOpen() ? duration : 0;
+//				rotateViews(settingsViews, startDegree, endDegree, delay);
 			}
 
 			if (!quickControlChangeres.isEmpty()
@@ -2884,7 +2884,7 @@ public class AlmalenceGUI extends GUI implements
 		PluginManager.getInstance().sendMessage(PluginManager.MSG_BROADCAST,
 				PluginManager.MSG_CONTROL_UNLOCKED);
 
-		guiView.findViewById(R.id.topPanel).setVisibility(View.VISIBLE);
+//		guiView.findViewById(R.id.topPanel).setVisibility(View.VISIBLE);
 	}
 
 	/***************************************************************************************
@@ -3007,8 +3007,8 @@ public class AlmalenceGUI extends GUI implements
 					return;
 				if (supported_scene.length > 0) {
 					if (iScreenType == 0)
-						((Panel) guiView.findViewById(R.id.topPanel)).setOpen(
-								false, false);
+//						((Panel) guiView.findViewById(R.id.topPanel)).setOpen(
+//								false, false);
 
 					if (guiView.findViewById(R.id.scenemodeLayout)
 							.getVisibility() != View.VISIBLE) {
@@ -3040,8 +3040,8 @@ public class AlmalenceGUI extends GUI implements
 					return;
 				if (supported_wb.length > 0) {
 					if (iScreenType == 0)
-						((Panel) guiView.findViewById(R.id.topPanel)).setOpen(
-								false, false);
+//						((Panel) guiView.findViewById(R.id.topPanel)).setOpen(
+//								false, false);
 
 					if (guiView.findViewById(R.id.wbLayout).getVisibility() != View.VISIBLE) {
 						hideSecondaryMenus();
@@ -3074,8 +3074,8 @@ public class AlmalenceGUI extends GUI implements
 					return;
 				if (supported_focus.length > 0) {
 					if (iScreenType == 0)
-						((Panel) guiView.findViewById(R.id.topPanel)).setOpen(
-								false, false);
+//						((Panel) guiView.findViewById(R.id.topPanel)).setOpen(
+//								false, false);
 
 					if (guiView.findViewById(R.id.focusmodeLayout)
 							.getVisibility() != View.VISIBLE) {
@@ -3107,8 +3107,8 @@ public class AlmalenceGUI extends GUI implements
 					return;
 				if (supported_flash.length > 0) {
 					if (iScreenType == 0)
-						((Panel) guiView.findViewById(R.id.topPanel)).setOpen(
-								false, false);
+//						((Panel) guiView.findViewById(R.id.topPanel)).setOpen(
+//								false, false);
 
 					if (guiView.findViewById(R.id.flashmodeLayout)
 							.getVisibility() != View.VISIBLE) {
@@ -3138,8 +3138,8 @@ public class AlmalenceGUI extends GUI implements
 				if ((supported_iso != null && supported_iso.length > 0)
 						|| CameraController.isISOSupported()) {
 					if (iScreenType == 0)
-						((Panel) guiView.findViewById(R.id.topPanel)).setOpen(
-								false, false);
+//						((Panel) guiView.findViewById(R.id.topPanel)).setOpen(
+//								false, false);
 
 					if (guiView.findViewById(R.id.isoLayout).getVisibility() != View.VISIBLE) {
 						hideSecondaryMenus();
@@ -3168,8 +3168,8 @@ public class AlmalenceGUI extends GUI implements
 						.getMaxNumMeteringAreas();
 				if (iMeteringAreasSupported > 0) {
 					if (iScreenType == 0)
-						((Panel) guiView.findViewById(R.id.topPanel)).setOpen(
-								false, false);
+//						((Panel) guiView.findViewById(R.id.topPanel)).setOpen(
+//								false, false);
 
 					if (guiView.findViewById(R.id.meteringLayout)
 							.getVisibility() != View.VISIBLE) {
@@ -3214,8 +3214,8 @@ public class AlmalenceGUI extends GUI implements
 					return;
 				}
 				if (iScreenType == 0)
-					((Panel) guiView.findViewById(R.id.topPanel)).setOpen(
-							false, false);
+//					((Panel) guiView.findViewById(R.id.topPanel)).setOpen(
+//							false, false);
 
 				if (guiView.findViewById(R.id.evLayout).getVisibility() != View.VISIBLE) {
 					hideSecondaryMenus();
@@ -3233,8 +3233,8 @@ public class AlmalenceGUI extends GUI implements
 				Intent settingsActivity = new Intent(MainScreen
 						.getMainContext(), Preferences.class);
 				MainScreen.getInstance().startActivity(settingsActivity);
-				((Panel) guiView.findViewById(R.id.topPanel)).setOpen(false,
-						false);
+//				((Panel) guiView.findViewById(R.id.topPanel)).setOpen(false,
+//						false);
 			}
 		});
 	}
@@ -3557,8 +3557,8 @@ public class AlmalenceGUI extends GUI implements
 												: lrinvisible);
 			guiView.findViewById(R.id.paramsLayout).setVisibility(
 					zonesVisibility[0]);
-			((Panel) guiView.findViewById(R.id.topPanel)).reorder(
-					zonesVisibility[0] == View.GONE, true);
+//			((Panel) guiView.findViewById(R.id.topPanel)).reorder(
+//					zonesVisibility[0] == View.GONE, true);
 		}
 
 		if (guiView.findViewById(R.id.pluginsLayout).getVisibility() != zonesVisibility[1]) {
@@ -3842,14 +3842,14 @@ public class AlmalenceGUI extends GUI implements
 						&& (button != quickControl3)
 						&& (button != quickControl4)) {
 					closeQuickControlsSettings();
-					guiView.findViewById(R.id.topPanel).setVisibility(
-							View.VISIBLE);
+//					guiView.findViewById(R.id.topPanel).setVisibility(
+//							View.VISIBLE);
 					return;
 				}
 			}
 			if (settingsControlsVisible) {
-				((Panel) guiView.findViewById(R.id.topPanel)).setOpen(false,
-						true);
+//				((Panel) guiView.findViewById(R.id.topPanel)).setOpen(false,
+//						true);
 				return;
 			}
 			if (modeSelectorVisible) {
@@ -3882,7 +3882,7 @@ public class AlmalenceGUI extends GUI implements
 			if (quickControlsVisible) {
 				hideSecondaryMenus();
 				unselectPrimaryTopMenuButtons(-1);
-				guiView.findViewById(R.id.topPanel).setVisibility(View.VISIBLE);
+//				guiView.findViewById(R.id.topPanel).setVisibility(View.VISIBLE);
 				quickControlsVisible = false;
 				break;
 			}
@@ -5546,68 +5546,68 @@ public class AlmalenceGUI extends GUI implements
 	public boolean onTouch(View view, MotionEvent event) {
 		// hide hint screen
 		if (guiView.findViewById(R.id.hintLayout).getVisibility() == View.VISIBLE) {
-			if (event.getAction() == MotionEvent.ACTION_UP)
-				guiView.findViewById(R.id.hintLayout).setVisibility(
-						View.INVISIBLE);
-			return true;
+//			if (event.getAction() == MotionEvent.ACTION_UP)
+//				guiView.findViewById(R.id.hintLayout).setVisibility(
+//						View.INVISIBLE);
+//			return true;
 		}
 
 		if (guiView.findViewById(R.id.mode_help).getVisibility() == View.VISIBLE) {
-			guiView.findViewById(R.id.mode_help).setVisibility(View.INVISIBLE);
-			return true;
+//			guiView.findViewById(R.id.mode_help).setVisibility(View.INVISIBLE);
+//			return true;
 		}
 
 		if (view == (LinearLayout) guiView.findViewById(R.id.evLayout)
 				|| (lockControls && !PluginManager.getInstance()
-						.getActiveModeID().equals("video")))
-			return true;
-
+						.getActiveModeID().equals("video"))){
+//			return true;
+		}
 		// to possibly slide-out top panel
 		if (view == MainScreen.getPreviewSurfaceView()
 				|| view == (View) MainScreen.getInstance().findViewById(
-						R.id.mainLayout1))
-			((Panel) guiView.findViewById(R.id.topPanel)).touchListener
-					.onTouch(view, event);
-
+						R.id.mainLayout1)){
+//			((Panel) guiView.findViewById(R.id.topPanel)).touchListener
+//					.onTouch(view, event);
+		}
 		else if (view.getParent() == (View) MainScreen.getInstance()
 				.findViewById(R.id.paramsLayout) && !quickControlsChangeVisible) {
 
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
-				downEvent = MotionEvent.obtain(event);
-				prevEvent = MotionEvent.obtain(event);
-				scrolling = false;
+//				downEvent = MotionEvent.obtain(event);
+//				prevEvent = MotionEvent.obtain(event);
+//				scrolling = false;
+//
+//				topMenuButtonPressed(findTopMenuButtonIndex(view));
 
-				topMenuButtonPressed(findTopMenuButtonIndex(view));
-
-				return false;
+//				return false;
 			} else if (event.getAction() == MotionEvent.ACTION_UP) {
-				topMenuButtonPressed(-1);
-				if (scrolling)
-					((Panel) guiView.findViewById(R.id.topPanel)).touchListener
-							.onTouch(view, event);
-				scrolling = false;
-				if (prevEvent == null || downEvent == null)
-					return false;
-				if (prevEvent.getAction() == MotionEvent.ACTION_DOWN)
-					return false;
-				if (prevEvent.getAction() == MotionEvent.ACTION_MOVE) {
-					if ((event.getY() - downEvent.getY()) < 50)
-						return false;
-				}
+//				topMenuButtonPressed(-1);
+//				if (scrolling)
+//					((Panel) guiView.findViewById(R.id.topPanel)).touchListener
+//							.onTouch(view, event);
+//				scrolling = false;
+//				if (prevEvent == null || downEvent == null)
+//					return false;
+//				if (prevEvent.getAction() == MotionEvent.ACTION_DOWN)
+//					return false;
+//				if (prevEvent.getAction() == MotionEvent.ACTION_MOVE) {
+//					if ((event.getY() - downEvent.getY()) < 50)
+//						return false;
+//				}
 			} else if (event.getAction() == MotionEvent.ACTION_MOVE
 					&& !scrolling) {
-				if (downEvent == null)
-					return false;
-				if ((event.getY() - downEvent.getY()) < 50)
-					return false;
-				else {
-					scrolling = true;
-					((Panel) guiView.findViewById(R.id.topPanel)).touchListener
-							.onTouch(view, downEvent);
-				}
+//				if (downEvent == null)
+//					return false;
+//				if ((event.getY() - downEvent.getY()) < 50)
+//					return false;
+//				else {
+//					scrolling = true;
+//					((Panel) guiView.findViewById(R.id.topPanel)).touchListener
+//							.onTouch(view, downEvent);
+//				}
 			}
-			((Panel) guiView.findViewById(R.id.topPanel)).touchListener
-					.onTouch(view, event);
+//			((Panel) guiView.findViewById(R.id.topPanel)).touchListener
+//					.onTouch(view, event);
 		}
 
 		// to allow quickControl's to process onClick, onLongClick
@@ -5616,188 +5616,188 @@ public class AlmalenceGUI extends GUI implements
 			return false;
 		}
 
-		boolean isMenuOpened = false;
-		if (quickControlsChangeVisible || modeSelectorVisible
-				|| settingsControlsVisible || isSecondaryMenusVisible())
-			isMenuOpened = true;
-
-		if (quickControlsChangeVisible
-				&& view.getParent() != (View) MainScreen.getInstance()
-						.findViewById(R.id.paramsLayout))
-			closeQuickControlsSettings();
-
-		if (modeSelectorVisible)
-			hideModeList();
-
-		hideSecondaryMenus();
-		unselectPrimaryTopMenuButtons(-1);
-
-		if (settingsControlsVisible)
-			return true;
-		else if (!isMenuOpened)
-			// call onTouch of active vf and capture plugins
-			PluginManager.getInstance().onTouch(view, event);
-
-		RelativeLayout pluginLayout = (RelativeLayout) guiView
-				.findViewById(R.id.pluginsLayout);
-		RelativeLayout fullscreenLayout = (RelativeLayout) guiView
-				.findViewById(R.id.fullscreenLayout);
-		LinearLayout paramsLayout = (LinearLayout) guiView
-				.findViewById(R.id.paramsLayout);
-		LinearLayout infoLayout = (LinearLayout) guiView
-				.findViewById(R.id.infoLayout);
+//		boolean isMenuOpened = false;
+//		if (quickControlsChangeVisible || modeSelectorVisible
+//				|| settingsControlsVisible || isSecondaryMenusVisible())
+//			isMenuOpened = true;
+//
+//		if (quickControlsChangeVisible
+//				&& view.getParent() != (View) MainScreen.getInstance()
+//						.findViewById(R.id.paramsLayout))
+//			closeQuickControlsSettings();
+//
+//		if (modeSelectorVisible)
+//			hideModeList();
+//
+//		hideSecondaryMenus();
+//		unselectPrimaryTopMenuButtons(-1);
+//
+//		if (settingsControlsVisible)
+//			return true;
+//		else if (!isMenuOpened)
+//			// call onTouch of active vf and capture plugins
+//			PluginManager.getInstance().onTouch(view, event);
+//
+//		RelativeLayout pluginLayout = (RelativeLayout) guiView
+//				.findViewById(R.id.pluginsLayout);
+//		RelativeLayout fullscreenLayout = (RelativeLayout) guiView
+//				.findViewById(R.id.fullscreenLayout);
+//		LinearLayout paramsLayout = (LinearLayout) guiView
+//				.findViewById(R.id.paramsLayout);
+//		LinearLayout infoLayout = (LinearLayout) guiView
+//				.findViewById(R.id.infoLayout);
 		// OnTouch listener to show info and sliding grids
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN: {
-			X = event.getX();
-			Xoffset = X;
-			Xprev = X;
-
-			pluginLayout.clearAnimation();
-			fullscreenLayout.clearAnimation();
-			paramsLayout.clearAnimation();
-			infoLayout.clearAnimation();
-
-			topMenuButtonPressed(findTopMenuButtonIndex(view));
-
-			return true;
+//			X = event.getX();
+//			Xoffset = X;
+//			Xprev = X;
+//
+//			pluginLayout.clearAnimation();
+//			fullscreenLayout.clearAnimation();
+//			paramsLayout.clearAnimation();
+//			infoLayout.clearAnimation();
+//
+//			topMenuButtonPressed(findTopMenuButtonIndex(view));
+//
+//			return true;
 		}
 		case MotionEvent.ACTION_UP: {
-			float difX = event.getX();
-			if ((X > difX) && (X - difX > 100)) {
-				sliderLeftEvent();
-				return true;
-			} else if (X < difX && (difX - X > 100)) {
-				sliderRightEvent();
-				return true;
-			}
-
-			pluginLayout.clearAnimation();
-			fullscreenLayout.clearAnimation();
-			paramsLayout.clearAnimation();
-			infoLayout.clearAnimation();
-
-			topMenuButtonPressed(-1);
-
+//			float difX = event.getX();
+//			if ((X > difX) && (X - difX > 100)) {
+//				sliderLeftEvent();
+//				return true;
+//			} else if (X < difX && (difX - X > 100)) {
+//				sliderRightEvent();
+//				return true;
+//			}
+//
+//			pluginLayout.clearAnimation();
+//			fullscreenLayout.clearAnimation();
+//			paramsLayout.clearAnimation();
+//			infoLayout.clearAnimation();
+//
+//			topMenuButtonPressed(-1);
+//
 			break;
 		}
 		case MotionEvent.ACTION_MOVE: {
-			int pluginzoneWidth = guiView.findViewById(R.id.pluginsLayout)
-					.getWidth();
-			int infozoneWidth = guiView.findViewById(R.id.infoLayout)
-					.getWidth();
-			int screenWidth = pluginzoneWidth + infozoneWidth;
-
-			float difX = event.getX();
-
-			Animation in_animation;
-			Animation out_animation;
-			Animation reverseout_animation;
-			boolean toLeft;
-			if (difX > Xprev) {
-				out_animation = new TranslateAnimation(Xprev - Xoffset, difX
-						- Xoffset, 0, 0);
-				out_animation.setDuration(10);
-				out_animation.setInterpolator(new LinearInterpolator());
-				out_animation.setFillAfter(true);
-
-				in_animation = new TranslateAnimation(Xprev - Xoffset
-						- screenWidth, difX - Xoffset - screenWidth, 0, 0);
-				in_animation.setDuration(10);
-				in_animation.setInterpolator(new LinearInterpolator());
-				in_animation.setFillAfter(true);
-
-				reverseout_animation = new TranslateAnimation(difX
-						+ (screenWidth - Xoffset), Xprev
-						+ (screenWidth - Xoffset), 0, 0);
-				reverseout_animation.setDuration(10);
-				reverseout_animation.setInterpolator(new LinearInterpolator());
-				reverseout_animation.setFillAfter(true);
-
-				toLeft = false;
-
-				XtoRightInvisible = difX - Xoffset;
-				XtoRightVisible = difX - Xoffset - screenWidth;
-			} else {
-				out_animation = new TranslateAnimation(difX - Xoffset, Xprev
-						- Xoffset, 0, 0);
-				out_animation.setDuration(10);
-				out_animation.setInterpolator(new LinearInterpolator());
-				out_animation.setFillAfter(true);
-
-				in_animation = new TranslateAnimation(screenWidth
-						+ (Xprev - Xoffset), screenWidth + (difX - Xoffset), 0,
-						0);
-				in_animation.setDuration(10);
-				in_animation.setInterpolator(new LinearInterpolator());
-				in_animation.setFillAfter(true);
-
-				reverseout_animation = new TranslateAnimation(Xprev - Xoffset
-						- screenWidth, difX - Xoffset - screenWidth, 0, 0);
-				reverseout_animation.setDuration(10);
-				reverseout_animation.setInterpolator(new LinearInterpolator());
-				reverseout_animation.setFillAfter(true);
-
-				toLeft = true;
-
-				XtoLeftInvisible = Xprev - Xoffset;
-				XtoLeftVisible = screenWidth + (difX - Xoffset);
-			}
-
-			switch (infoSet) {
-			case INFO_ALL: {
-				pluginLayout.startAnimation(out_animation);
-				fullscreenLayout.startAnimation(out_animation);
-				infoLayout.startAnimation(out_animation);
-				if ((difX < X) || !isAnyViewOnViewfinder())
-					paramsLayout.startAnimation(out_animation);
-			}
-				break;
-			case INFO_NO: {
-				if ((toLeft && difX < X) || (!toLeft && difX > X))
-					fullscreenLayout.startAnimation(in_animation);
-				else
-					paramsLayout.startAnimation(reverseout_animation);
-				if (!toLeft && isAnyViewOnViewfinder()) {
-					pluginLayout.startAnimation(in_animation);
-					fullscreenLayout.startAnimation(in_animation);
-					infoLayout.startAnimation(in_animation);
-				} else if (toLeft && difX > X && isAnyViewOnViewfinder()) {
-					pluginLayout.startAnimation(reverseout_animation);
-					paramsLayout.startAnimation(reverseout_animation);
-					infoLayout.startAnimation(reverseout_animation);
-				}
-			}
-				break;
-			case INFO_GRID: {
-				if (difX > X)// to INFO_NO
-					fullscreenLayout.startAnimation(out_animation);
-				else
-				// to INFO_PARAMS
-				{
-					fullscreenLayout.startAnimation(out_animation);
-					paramsLayout.startAnimation(in_animation);
-				}
-			}
-				break;
-			case INFO_PARAMS: {
-				fullscreenLayout.startAnimation(in_animation);
-				if (difX > X)
-					paramsLayout.startAnimation(out_animation);
-				if (toLeft) {
-					pluginLayout.startAnimation(in_animation);
-					infoLayout.startAnimation(in_animation);
-				} else if (difX < X) {
-					pluginLayout.startAnimation(reverseout_animation);
-					infoLayout.startAnimation(reverseout_animation);
-				}
-			}
-				break;
-			default:
-				break;
-			}
-
-			Xprev = Math.round(difX);
+//			int pluginzoneWidth = guiView.findViewById(R.id.pluginsLayout)
+//					.getWidth();
+//			int infozoneWidth = guiView.findViewById(R.id.infoLayout)
+//					.getWidth();
+//			int screenWidth = pluginzoneWidth + infozoneWidth;
+//
+//			float difX = event.getX();
+//
+//			Animation in_animation;
+//			Animation out_animation;
+//			Animation reverseout_animation;
+//			boolean toLeft;
+//			if (difX > Xprev) {
+//				out_animation = new TranslateAnimation(Xprev - Xoffset, difX
+//						- Xoffset, 0, 0);
+//				out_animation.setDuration(10);
+//				out_animation.setInterpolator(new LinearInterpolator());
+//				out_animation.setFillAfter(true);
+//
+//				in_animation = new TranslateAnimation(Xprev - Xoffset
+//						- screenWidth, difX - Xoffset - screenWidth, 0, 0);
+//				in_animation.setDuration(10);
+//				in_animation.setInterpolator(new LinearInterpolator());
+//				in_animation.setFillAfter(true);
+//
+//				reverseout_animation = new TranslateAnimation(difX
+//						+ (screenWidth - Xoffset), Xprev
+//						+ (screenWidth - Xoffset), 0, 0);
+//				reverseout_animation.setDuration(10);
+//				reverseout_animation.setInterpolator(new LinearInterpolator());
+//				reverseout_animation.setFillAfter(true);
+//
+//				toLeft = false;
+//
+//				XtoRightInvisible = difX - Xoffset;
+//				XtoRightVisible = difX - Xoffset - screenWidth;
+//			} else {
+//				out_animation = new TranslateAnimation(difX - Xoffset, Xprev
+//						- Xoffset, 0, 0);
+//				out_animation.setDuration(10);
+//				out_animation.setInterpolator(new LinearInterpolator());
+//				out_animation.setFillAfter(true);
+//
+//				in_animation = new TranslateAnimation(screenWidth
+//						+ (Xprev - Xoffset), screenWidth + (difX - Xoffset), 0,
+//						0);
+//				in_animation.setDuration(10);
+//				in_animation.setInterpolator(new LinearInterpolator());
+//				in_animation.setFillAfter(true);
+//
+//				reverseout_animation = new TranslateAnimation(Xprev - Xoffset
+//						- screenWidth, difX - Xoffset - screenWidth, 0, 0);
+//				reverseout_animation.setDuration(10);
+//				reverseout_animation.setInterpolator(new LinearInterpolator());
+//				reverseout_animation.setFillAfter(true);
+//
+//				toLeft = true;
+//
+//				XtoLeftInvisible = Xprev - Xoffset;
+//				XtoLeftVisible = screenWidth + (difX - Xoffset);
+//			}
+//
+//			switch (infoSet) {
+//			case INFO_ALL: {
+//				pluginLayout.startAnimation(out_animation);
+//				fullscreenLayout.startAnimation(out_animation);
+//				infoLayout.startAnimation(out_animation);
+//				if ((difX < X) || !isAnyViewOnViewfinder())
+//					paramsLayout.startAnimation(out_animation);
+//			}
+//				break;
+//			case INFO_NO: {
+//				if ((toLeft && difX < X) || (!toLeft && difX > X))
+//					fullscreenLayout.startAnimation(in_animation);
+//				else
+//					paramsLayout.startAnimation(reverseout_animation);
+//				if (!toLeft && isAnyViewOnViewfinder()) {
+//					pluginLayout.startAnimation(in_animation);
+//					fullscreenLayout.startAnimation(in_animation);
+//					infoLayout.startAnimation(in_animation);
+//				} else if (toLeft && difX > X && isAnyViewOnViewfinder()) {
+//					pluginLayout.startAnimation(reverseout_animation);
+//					paramsLayout.startAnimation(reverseout_animation);
+//					infoLayout.startAnimation(reverseout_animation);
+//				}
+//			}
+//				break;
+//			case INFO_GRID: {
+//				if (difX > X)// to INFO_NO
+//					fullscreenLayout.startAnimation(out_animation);
+//				else
+//				// to INFO_PARAMS
+//				{
+//					fullscreenLayout.startAnimation(out_animation);
+//					paramsLayout.startAnimation(in_animation);
+//				}
+//			}
+//				break;
+//			case INFO_PARAMS: {
+//				fullscreenLayout.startAnimation(in_animation);
+//				if (difX > X)
+//					paramsLayout.startAnimation(out_animation);
+//				if (toLeft) {
+//					pluginLayout.startAnimation(in_animation);
+//					infoLayout.startAnimation(in_animation);
+//				} else if (difX < X) {
+//					pluginLayout.startAnimation(reverseout_animation);
+//					infoLayout.startAnimation(reverseout_animation);
+//				}
+//			}
+//				break;
+//			default:
+//				break;
+//			}
+//
+//			Xprev = Math.round(difX);
 
 		}
 			break;
@@ -6007,10 +6007,10 @@ public class AlmalenceGUI extends GUI implements
 			if (quickControlsChangeVisible) {
 				closeQuickControlsSettings();
 				res++;
-				guiView.findViewById(R.id.topPanel).setVisibility(View.VISIBLE);
+//				guiView.findViewById(R.id.topPanel).setVisibility(View.VISIBLE);
 			} else if (settingsControlsVisible) {
-				((Panel) guiView.findViewById(R.id.topPanel)).setOpen(false,
-						true);
+//				((Panel) guiView.findViewById(R.id.topPanel)).setOpen(false,
+//						true);
 				res++;
 			} else if (modeSelectorVisible) {
 				hideModeList();
@@ -6019,7 +6019,7 @@ public class AlmalenceGUI extends GUI implements
 				unselectPrimaryTopMenuButtons(-1);
 				hideSecondaryMenus();
 				res++;
-				guiView.findViewById(R.id.topPanel).setVisibility(View.VISIBLE);
+//				guiView.findViewById(R.id.topPanel).setVisibility(View.VISIBLE);
 				quickControlsVisible = false;
 			}
 
@@ -6041,8 +6041,8 @@ public class AlmalenceGUI extends GUI implements
 				if (quickControlsChangeVisible)
 					closeQuickControlsSettings();
 				if (settingsControlsVisible) {
-					((Panel) guiView.findViewById(R.id.topPanel)).setOpen(
-							false, true);
+//					((Panel) guiView.findViewById(R.id.topPanel)).setOpen(
+//							false, true);
 					return false;
 				}
 				if (modeSelectorVisible) {

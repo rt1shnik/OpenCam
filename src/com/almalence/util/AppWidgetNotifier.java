@@ -115,74 +115,74 @@ public class AppWidgetNotifier
 
 	private static void showNotifierDialog(final Activity mContext, final SharedPreferences prefs)
 	{
-		final float density = mContext.getResources().getDisplayMetrics().density;
-
-		LinearLayout ll = new LinearLayout(mContext);
-		ll.setOrientation(LinearLayout.VERTICAL);
-		ll.setPadding((int) (10 * density), (int) (10 * density), (int) (10 * density), (int) (10 * density));
-
-		ImageView img = new ImageView(mContext);
-		img.setImageResource(R.drawable.widget_adv);
-		ll.addView(img);
-
-		TextView tv = new TextView(mContext);
-		tv.setText(MainScreen.getAppResources().getString(R.string.widgetAdvText));
-		tv.setWidth((int) (250 * density));
-		tv.setPadding((int) (4 * density), 0, (int) (4 * density), (int) (24 * density));
-		ll.addView(tv);
-
-		Button b1 = new Button(mContext);
-		b1.setText(MainScreen.getAppResources().getString(R.string.widgetInstallText));
-		ll.addView(b1);
-
-		Button b3 = new Button(mContext);
-		b3.setText(MainScreen.getAppResources().getString(R.string.widgetNoText));
-		ll.addView(b3);
-
-		final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-		builder.setView(ll);
-		final AlertDialog dialog = builder.create();
-		dialog.setOnCancelListener(new OnCancelListener()
-		{
-			@Override
-			public void onCancel(DialogInterface dialog)
-			{
-				mContext.finish();
-			}
-		});
-
-		b1.setOnClickListener(new OnClickListener()
-		{
-			public void onClick(View v)
-			{
-				MainScreen.callStoreInstall(mContext, "com.almalence.opencamwidget");
-
-				if (prefs != null)
-				{
-					prefs.edit().putBoolean("dontshowagainwidgetnotifier", true).commit();
-
+//		final float density = mContext.getResources().getDisplayMetrics().density;
+//
+//		LinearLayout ll = new LinearLayout(mContext);
+//		ll.setOrientation(LinearLayout.VERTICAL);
+//		ll.setPadding((int) (10 * density), (int) (10 * density), (int) (10 * density), (int) (10 * density));
+//
+//		ImageView img = new ImageView(mContext);
+//		img.setImageResource(R.drawable.widget_adv);
+//		ll.addView(img);
+//
+//		TextView tv = new TextView(mContext);
+//		tv.setText(MainScreen.getAppResources().getString(R.string.widgetAdvText));
+//		tv.setWidth((int) (250 * density));
+//		tv.setPadding((int) (4 * density), 0, (int) (4 * density), (int) (24 * density));
+//		ll.addView(tv);
+//
+//		Button b1 = new Button(mContext);
+//		b1.setText(MainScreen.getAppResources().getString(R.string.widgetInstallText));
+//		ll.addView(b1);
+//
+//		Button b3 = new Button(mContext);
+//		b3.setText(MainScreen.getAppResources().getString(R.string.widgetNoText));
+//		ll.addView(b3);
+//
+//		final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+//		builder.setView(ll);
+//		final AlertDialog dialog = builder.create();
+//		dialog.setOnCancelListener(new OnCancelListener()
+//		{
+//			@Override
+//			public void onCancel(DialogInterface dialog)
+//			{
+//				mContext.finish();
+//			}
+//		});
+//
+//		b1.setOnClickListener(new OnClickListener()
+//		{
+//			public void onClick(View v)
+//			{
+//				MainScreen.callStoreInstall(mContext, "com.almalence.opencamwidget");
+//
+//				if (prefs != null)
+//				{
+//					prefs.edit().putBoolean("dontshowagainwidgetnotifier", true).commit();
+//
+//					mContext.finish();
+//				}
+//
+//				dialog.dismiss();
+//			}
+//		});
+//
+//		b3.setOnClickListener(new OnClickListener()
+//		{
+//			public void onClick(View v)
+//			{
+//				if (prefs != null)
+//				{
+//					prefs.edit().putBoolean("dontshowagainwidgetnotifier", true).commit();
+//
 					mContext.finish();
-				}
-
-				dialog.dismiss();
-			}
-		});
-
-		b3.setOnClickListener(new OnClickListener()
-		{
-			public void onClick(View v)
-			{
-				if (prefs != null)
-				{
-					prefs.edit().putBoolean("dontshowagainwidgetnotifier", true).commit();
-
-					mContext.finish();
-				}
-
-				dialog.dismiss();
-			}
-		});
-
-		dialog.show();
+//				}
+//
+//				dialog.dismiss();
+//			}
+//		});
+//
+//		dialog.show();
 	}
 }
