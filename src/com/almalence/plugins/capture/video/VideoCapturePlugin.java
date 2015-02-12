@@ -225,10 +225,10 @@ public class VideoCapturePlugin extends PluginCapture
 
 		this.createModeSwitcher();
 
-		if (VERSION.SDK_INT < VERSION_CODES.JELLY_BEAN_MR2)
-		{
+//		if (VERSION.SDK_INT < VERSION_CODES.JELLY_BEAN_MR2)
+//		{
 			this.modeSwitcher.setVisibility(View.GONE);
-		}
+//		}
 	}
 
 	private void createModeSwitcher()
@@ -329,8 +329,9 @@ public class VideoCapturePlugin extends PluginCapture
 			}
 		});
 
-		if (PluginManager.getInstance().getProcessingCounter() == 0)
+		if (PluginManager.getInstance().getProcessingCounter() == 0){
 			modeSwitcher.setEnabled(true);
+		}
 	}
 
 	@Override

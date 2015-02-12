@@ -976,6 +976,7 @@ public class AlmalenceGUI extends GUI implements
 	@Override
 	public void onDestroy() {
 		// Not used
+		getClass();
 	}
 
 	@Override
@@ -1512,244 +1513,244 @@ public class AlmalenceGUI extends GUI implements
 			mEVSupported = false;
 
 		// Create Scene mode button and adding supported scene modes
-		int[] supported_scene = CameraController.getSupportedSceneModes();
-		if (supported_scene != null && supported_scene.length > 0
-				&& activeScene != null) {
-			for (int scene_name : supported_scene) {
-				if (sceneModeButtons.containsKey(scene_name)) {
-					if (scene_name != CameraParameters.SCENE_MODE_NIGHT)
-						activeScene.add(sceneModeButtons.get(Integer
-								.valueOf(scene_name)));
-					activeSceneNames.add(Integer.valueOf(scene_name));
-				}
-			}
+//		int[] supported_scene = CameraController.getSupportedSceneModes();
+//		if (supported_scene != null && supported_scene.length > 0
+//				&& activeScene != null) {
+//			for (int scene_name : supported_scene) {
+//				if (sceneModeButtons.containsKey(scene_name)) {
+//					if (scene_name != CameraParameters.SCENE_MODE_NIGHT)
+//						activeScene.add(sceneModeButtons.get(Integer
+//								.valueOf(scene_name)));
+//					activeSceneNames.add(Integer.valueOf(scene_name));
+//				}
+//			}
+//
+//			if (!activeSceneNames.isEmpty()) {
+//				mSceneModeSupported = true;
+//				scenemodeAdapter.Elements = activeScene;
+//				GridView gridview = (GridView) guiView
+//						.findViewById(R.id.scenemodeGrid);
+//				gridview.setAdapter(scenemodeAdapter);
+//
+//				int initValue = preferences.getInt(MainScreen.sSceneModePref,
+//						MainScreen.sDefaultValue);
+//				if (!activeSceneNames.contains(initValue)) {
+//					if (CameraController.isFrontCamera())
+//						initValue = activeSceneNames.get(0);
+//					else
+//						initValue = CameraParameters.SCENE_MODE_AUTO;
+//				}
 
-			if (!activeSceneNames.isEmpty()) {
-				mSceneModeSupported = true;
-				scenemodeAdapter.Elements = activeScene;
-				GridView gridview = (GridView) guiView
-						.findViewById(R.id.scenemodeGrid);
-				gridview.setAdapter(scenemodeAdapter);
+//				setButtonSelected(sceneModeButtons, initValue);
+//				setCameraParameterValue(MODE_SCENE, initValue);
 
-				int initValue = preferences.getInt(MainScreen.sSceneModePref,
-						MainScreen.sDefaultValue);
-				if (!activeSceneNames.contains(initValue)) {
-					if (CameraController.isFrontCamera())
-						initValue = activeSceneNames.get(0);
-					else
-						initValue = CameraParameters.SCENE_MODE_AUTO;
-				}
-
-				setButtonSelected(sceneModeButtons, initValue);
-				setCameraParameterValue(MODE_SCENE, initValue);
-
-				if (ICONS_SCENE != null && ICONS_SCENE.containsKey(initValue)) {
-					RotateImageView but = (RotateImageView) topMenuButtons
-							.get(MODE_SCENE);
-					int icon_id = ICONS_SCENE.get(initValue);
-					but.setImageResource(icon_id);
-				}
-
-				CameraController.setCameraSceneMode(mSceneMode);
-			} else {
-				mSceneModeSupported = false;
-				mSceneMode = -1;
-			}
-		} else {
-			mSceneModeSupported = false;
-			mSceneMode = -1;
-		}
+//				if (ICONS_SCENE != null && ICONS_SCENE.containsKey(initValue)) {
+//					RotateImageView but = (RotateImageView) topMenuButtons
+//							.get(MODE_SCENE);
+//					int icon_id = ICONS_SCENE.get(initValue);
+//					but.setImageResource(icon_id);
+//				}
+//
+//				CameraController.setCameraSceneMode(mSceneMode);
+//			} else {
+//				mSceneModeSupported = false;
+//				mSceneMode = -1;
+//			}
+//		} else {
+//			mSceneModeSupported = false;
+//			mSceneMode = -1;
+//		}
 
 		// Create White Balance mode button and adding supported white balances
-		int[] supported_wb = CameraController.getSupportedWhiteBalance();
-		if (supported_wb != null && supported_wb.length > 0 && activeWB != null) {
-			for (int wb_name : supported_wb) {
-				if (wbModeButtons.containsKey(wb_name)) {
-					activeWB.add(wbModeButtons.get(Integer.valueOf(wb_name)));
-					activeWBNames.add(Integer.valueOf(wb_name));
-				}
-			}
-
-			if (!activeWBNames.isEmpty()) {
-				mWBSupported = true;
-
-				wbmodeAdapter.Elements = activeWB;
-				GridView gridview = (GridView) guiView
-						.findViewById(R.id.wbGrid);
-				gridview.setAdapter(wbmodeAdapter);
-
-				int initValue = preferences.getInt(MainScreen.sWBModePref,
-						MainScreen.sDefaultValue);
-				if (!activeWBNames.contains(initValue)) {
-					if (CameraController.isFrontCamera())
-						initValue = activeWBNames.get(0);
-					else
-						initValue = MainScreen.sDefaultValue;
-				}
-				setButtonSelected(wbModeButtons, initValue);
-				setCameraParameterValue(MODE_WB, initValue);
-
-				if (ICONS_WB != null && ICONS_WB.containsKey(initValue)) {
-					RotateImageView but = (RotateImageView) topMenuButtons
-							.get(MODE_WB);
-					int icon_id = ICONS_WB.get(initValue);
-					but.setImageResource(icon_id);
-				}
-
-				CameraController.setCameraWhiteBalance(mWB);
-			} else {
-				mWBSupported = false;
-				mWB = -1;
-			}
-		} else {
-			mWBSupported = false;
-			mWB = -1;
-		}
+//		int[] supported_wb = CameraController.getSupportedWhiteBalance();
+//		if (supported_wb != null && supported_wb.length > 0 && activeWB != null) {
+//			for (int wb_name : supported_wb) {
+//				if (wbModeButtons.containsKey(wb_name)) {
+//					activeWB.add(wbModeButtons.get(Integer.valueOf(wb_name)));
+//					activeWBNames.add(Integer.valueOf(wb_name));
+//				}
+//			}
+//
+//			if (!activeWBNames.isEmpty()) {
+//				mWBSupported = true;
+//
+//				wbmodeAdapter.Elements = activeWB;
+//				GridView gridview = (GridView) guiView
+//						.findViewById(R.id.wbGrid);
+//				gridview.setAdapter(wbmodeAdapter);
+//
+//				int initValue = preferences.getInt(MainScreen.sWBModePref,
+//						MainScreen.sDefaultValue);
+//				if (!activeWBNames.contains(initValue)) {
+//					if (CameraController.isFrontCamera())
+//						initValue = activeWBNames.get(0);
+//					else
+//						initValue = MainScreen.sDefaultValue;
+//				}
+//				setButtonSelected(wbModeButtons, initValue);
+//				setCameraParameterValue(MODE_WB, initValue);
+//
+//				if (ICONS_WB != null && ICONS_WB.containsKey(initValue)) {
+//					RotateImageView but = (RotateImageView) topMenuButtons
+//							.get(MODE_WB);
+//					int icon_id = ICONS_WB.get(initValue);
+//					but.setImageResource(icon_id);
+//				}
+//
+//				CameraController.setCameraWhiteBalance(mWB);
+//			} else {
+//				mWBSupported = false;
+//				mWB = -1;
+//			}
+//		} else {
+//			mWBSupported = false;
+//			mWB = -1;
+//		}
 
 		// Create Focus mode button and adding supported focus modes
-		final int[] supported_focus = CameraController.getSupportedFocusModes();
-		if (supported_focus != null && supported_focus.length > 0
-				&& activeFocus != null) {
-			for (int focus_name : supported_focus) {
-				if (focusModeButtons.containsKey(focus_name)) {
-					activeFocus.add(focusModeButtons.get(Integer
-							.valueOf(focus_name)));
-					activeFocusNames.add(Integer.valueOf(focus_name));
-				}
-			}
-
-			if (!activeFocusNames.isEmpty()) {
-				mFocusModeSupported = true;
-				defaultQuickControl3 = String.valueOf(MODE_CAM);
-
-				if (CameraController.isModeAvailable(supported_focus,
-						CameraParameters.AF_MODE_AUTO)
-						|| CameraController.isModeAvailable(supported_focus,
-								CameraParameters.AF_MODE_MACRO)) {
-					LayoutInflater inflator = MainScreen.getInstance()
-							.getLayoutInflater();
-					View paramMode = inflator.inflate(
-							R.layout.gui_almalence_quick_control_grid_element,
-							null, false);
-
-					String aflock_name = MainScreen.getAppResources()
-							.getString(R.string.focusAFLock);
-					((ImageView) paramMode.findViewById(R.id.imageView))
-							.setImageResource(R.drawable.gui_almalence_settings_focus_aflock);
-					((TextView) paramMode.findViewById(R.id.textView))
-							.setText(aflock_name);
-
-					paramMode.setOnClickListener(new OnClickListener() {
-
-						@Override
-						public void onClick(View v) {
-							try {
-								RotateImageView but = (RotateImageView) topMenuButtons
-										.get(MODE_FOCUS);
-								but.setImageResource(R.drawable.gui_almalence_settings_focus_aflock);
-							} catch (Exception e) {
-								e.printStackTrace();
-								Log.d("set AF-L failed",
-										"icons_focus.get exception: "
-												+ e.getMessage());
-							}
-
-							mFocusMode = FOCUS_AF_LOCK;
-
-							int afMode = -1;
-							if (CameraController.isModeAvailable(
-									supported_focus,
-									CameraParameters.AF_MODE_AUTO))
-								afMode = CameraParameters.AF_MODE_AUTO;
-							else if (CameraController.isModeAvailable(
-									supported_focus,
-									CameraParameters.AF_MODE_MACRO))
-								afMode = CameraParameters.AF_MODE_MACRO;
-							else
-								afMode = supported_focus[0];
-
-							CameraController.setCameraFocusMode(afMode);
-							MainScreen.setAutoFocusLock(true);
-
-							preferences
-									.edit()
-									.putInt(CameraController.isFrontCamera() ? MainScreen.sRearFocusModePref
-											: MainScreen.sFrontFocusModePref,
-											afMode).commit();
-
-							PluginManager.getInstance().sendMessage(
-									PluginManager.MSG_BROADCAST,
-									PluginManager.MSG_FOCUS_CHANGED);
-
-							initSettingsMenu();
-							hideSecondaryMenus();
-							unselectPrimaryTopMenuButtons(-1);
-
-//							guiView.findViewById(R.id.topPanel).setVisibility(
-//									View.VISIBLE);
-							quickControlsVisible = false;
-						}
-					});
-
-					focusModeButtons.put(FOCUS_AF_LOCK, paramMode);
-					activeFocus.add(focusModeButtons.get(FOCUS_AF_LOCK));
-					activeFocusNames.add(FOCUS_AF_LOCK);
-				}
-
-				focusmodeAdapter.Elements = activeFocus;
-				GridView gridview = (GridView) guiView
-						.findViewById(R.id.focusmodeGrid);
-				gridview.setAdapter(focusmodeAdapter);
-
-				int initValue = preferences.getInt(CameraController
-						.isFrontCamera() ? MainScreen.sRearFocusModePref
-						: MainScreen.sFrontFocusModePref,
-						MainScreen.sDefaultFocusValue);
-				if (!activeFocusNames.contains(initValue)) {
-					if (activeFocusNames.contains(MainScreen.sDefaultValue))
-						initValue = MainScreen.sDefaultValue;
-					else
-						initValue = activeFocusNames.get(0);
-				}
-
-				setButtonSelected(focusModeButtons, initValue);
-				setCameraParameterValue(MODE_FOCUS, initValue);
-
-				if (ICONS_FOCUS != null && ICONS_FOCUS.containsKey(initValue)) {
-					RotateImageView but = (RotateImageView) topMenuButtons
-							.get(MODE_FOCUS);
-					try {
-						int icon_id = ICONS_FOCUS.get(initValue);
-						but.setImageResource(icon_id);
-					} catch (Exception e) {
-						e.printStackTrace();
-						Log.e("onCameraCreate", "icons_focus.get exception: "
-								+ e.getMessage());
-					}
-				}
-
-				if (mFocusMode == FOCUS_AF_LOCK) {
-					int afMode = -1;
-					if (CameraController.isModeAvailable(supported_focus,
-							CameraParameters.AF_MODE_AUTO))
-						afMode = CameraParameters.AF_MODE_AUTO;
-					else if (CameraController.isModeAvailable(supported_focus,
-							CameraParameters.AF_MODE_MACRO))
-						afMode = CameraParameters.AF_MODE_MACRO;
-					else
-						afMode = supported_focus[0];
-
-					CameraController.setCameraFocusMode(afMode);
-				} else
-					CameraController.setCameraFocusMode(mFocusMode);
-			} else {
-				mFocusModeSupported = false;
-				mFocusMode = -1;
-			}
-		} else {
-			mFocusMode = -1;
-			mFocusModeSupported = false;
-		}
+//		final int[] supported_focus = CameraController.getSupportedFocusModes();
+//		if (supported_focus != null && supported_focus.length > 0
+//				&& activeFocus != null) {
+//			for (int focus_name : supported_focus) {
+//				if (focusModeButtons.containsKey(focus_name)) {
+//					activeFocus.add(focusModeButtons.get(Integer
+//							.valueOf(focus_name)));
+//					activeFocusNames.add(Integer.valueOf(focus_name));
+//				}
+//			}
+//
+//			if (!activeFocusNames.isEmpty()) {
+//				mFocusModeSupported = true;
+//				defaultQuickControl3 = String.valueOf(MODE_CAM);
+//
+//				if (CameraController.isModeAvailable(supported_focus,
+//						CameraParameters.AF_MODE_AUTO)
+//						|| CameraController.isModeAvailable(supported_focus,
+//								CameraParameters.AF_MODE_MACRO)) {
+//					LayoutInflater inflator = MainScreen.getInstance()
+//							.getLayoutInflater();
+//					View paramMode = inflator.inflate(
+//							R.layout.gui_almalence_quick_control_grid_element,
+//							null, false);
+//
+//					String aflock_name = MainScreen.getAppResources()
+//							.getString(R.string.focusAFLock);
+//					((ImageView) paramMode.findViewById(R.id.imageView))
+//							.setImageResource(R.drawable.gui_almalence_settings_focus_aflock);
+//					((TextView) paramMode.findViewById(R.id.textView))
+//							.setText(aflock_name);
+//
+//					paramMode.setOnClickListener(new OnClickListener() {
+//
+//						@Override
+//						public void onClick(View v) {
+//							try {
+//								RotateImageView but = (RotateImageView) topMenuButtons
+//										.get(MODE_FOCUS);
+//								but.setImageResource(R.drawable.gui_almalence_settings_focus_aflock);
+//							} catch (Exception e) {
+//								e.printStackTrace();
+//								Log.d("set AF-L failed",
+//										"icons_focus.get exception: "
+//												+ e.getMessage());
+//							}
+//
+//							mFocusMode = FOCUS_AF_LOCK;
+//
+//							int afMode = -1;
+//							if (CameraController.isModeAvailable(
+//									supported_focus,
+//									CameraParameters.AF_MODE_AUTO))
+//								afMode = CameraParameters.AF_MODE_AUTO;
+//							else if (CameraController.isModeAvailable(
+//									supported_focus,
+//									CameraParameters.AF_MODE_MACRO))
+//								afMode = CameraParameters.AF_MODE_MACRO;
+//							else
+//								afMode = supported_focus[0];
+//
+//							CameraController.setCameraFocusMode(afMode);
+//							MainScreen.setAutoFocusLock(true);
+//
+//							preferences
+//									.edit()
+//									.putInt(CameraController.isFrontCamera() ? MainScreen.sRearFocusModePref
+//											: MainScreen.sFrontFocusModePref,
+//											afMode).commit();
+//
+//							PluginManager.getInstance().sendMessage(
+//									PluginManager.MSG_BROADCAST,
+//									PluginManager.MSG_FOCUS_CHANGED);
+//
+//							initSettingsMenu();
+//							hideSecondaryMenus();
+//							unselectPrimaryTopMenuButtons(-1);
+//
+////							guiView.findViewById(R.id.topPanel).setVisibility(
+////									View.VISIBLE);
+//							quickControlsVisible = false;
+//						}
+//					});
+//
+//					focusModeButtons.put(FOCUS_AF_LOCK, paramMode);
+//					activeFocus.add(focusModeButtons.get(FOCUS_AF_LOCK));
+//					activeFocusNames.add(FOCUS_AF_LOCK);
+//				}
+//
+//				focusmodeAdapter.Elements = activeFocus;
+//				GridView gridview = (GridView) guiView
+//						.findViewById(R.id.focusmodeGrid);
+//				gridview.setAdapter(focusmodeAdapter);
+//
+//				int initValue = preferences.getInt(CameraController
+//						.isFrontCamera() ? MainScreen.sRearFocusModePref
+//						: MainScreen.sFrontFocusModePref,
+//						MainScreen.sDefaultFocusValue);
+//				if (!activeFocusNames.contains(initValue)) {
+//					if (activeFocusNames.contains(MainScreen.sDefaultValue))
+//						initValue = MainScreen.sDefaultValue;
+//					else
+//						initValue = activeFocusNames.get(0);
+//				}
+//
+//				setButtonSelected(focusModeButtons, initValue);
+//				setCameraParameterValue(MODE_FOCUS, initValue);
+//
+//				if (ICONS_FOCUS != null && ICONS_FOCUS.containsKey(initValue)) {
+//					RotateImageView but = (RotateImageView) topMenuButtons
+//							.get(MODE_FOCUS);
+//					try {
+//						int icon_id = ICONS_FOCUS.get(initValue);
+//						but.setImageResource(icon_id);
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//						Log.e("onCameraCreate", "icons_focus.get exception: "
+//								+ e.getMessage());
+//					}
+//				}
+//
+//				if (mFocusMode == FOCUS_AF_LOCK) {
+//					int afMode = -1;
+//					if (CameraController.isModeAvailable(supported_focus,
+//							CameraParameters.AF_MODE_AUTO))
+//						afMode = CameraParameters.AF_MODE_AUTO;
+//					else if (CameraController.isModeAvailable(supported_focus,
+//							CameraParameters.AF_MODE_MACRO))
+//						afMode = CameraParameters.AF_MODE_MACRO;
+//					else
+//						afMode = supported_focus[0];
+//
+//					CameraController.setCameraFocusMode(afMode);
+//				} else
+//					CameraController.setCameraFocusMode(mFocusMode);
+//			} else {
+//				mFocusModeSupported = false;
+//				mFocusMode = -1;
+//			}
+//		} else {
+//			mFocusMode = -1;
+//			mFocusModeSupported = false;
+//		}
 
 		// Create Flash mode button and adding supported flash modes
 		int[] supported_flash = CameraController.getSupportedFlashModes();
@@ -1769,7 +1770,12 @@ public class AlmalenceGUI extends GUI implements
 
 			if (!activeFlashNames.isEmpty()) {
 				mFlashModeSupported = true;
-				defaultQuickControl2 = String.valueOf(MODE_FLASH);
+//				if(MainScreen.mCamChanged){
+//					defaultQuickControl2 = String.valueOf(MODE_CAM);
+//				}else{
+					defaultQuickControl2 = String.valueOf(MODE_FLASH);	
+//				}
+				
 
 				flashmodeAdapter.Elements = activeFlash;
 				GridView gridview = (GridView) guiView
@@ -1805,111 +1811,111 @@ public class AlmalenceGUI extends GUI implements
 		}
 
 		// Create ISO button and adding supported ISOs
-		int[] supported_iso = CameraController.getSupportedISO();
-		if ((supported_iso != null && supported_iso.length > 0 && activeISO != null)
-				|| (CameraController.isISOSupported() && activeISO != null)) {
-			if (supported_iso != null && supported_iso.length != 0)
-				for (int iso_name : supported_iso) {
-					if (isoButtons.containsKey(iso_name)) {
-						activeISO
-								.add(isoButtons.get(Integer.valueOf(iso_name)));
-						activeISONames.add(Integer.valueOf(iso_name));
-					}
-				}
-			else {
-				for (String iso_name : CameraController.getIsoDefaultList()) {
-					activeISO.add(isoButtons.get(CameraController.getIsoKey()
-							.get(iso_name)));
-					activeISONames.add(CameraController.getIsoKey().get(
-							iso_name));
-				}
-			}
-
-			if (!activeISONames.isEmpty()) {
-				mISOSupported = true;
-
-				isoAdapter.Elements = activeISO;
-				GridView gridview = (GridView) guiView
-						.findViewById(R.id.isoGrid);
-				gridview.setAdapter(isoAdapter);
-
-				int initValue = preferences.getInt(MainScreen.sISOPref,
-						MainScreen.sDefaultValue);
-				if (!activeISONames.contains(initValue)) {
-					if (CameraController.isFrontCamera())
-						initValue = activeISONames.get(0);
-					else
-						initValue = MainScreen.sDefaultValue;
-
-					preferences.edit().putInt(MainScreen.sISOPref, initValue)
-							.commit();
-				}
-				setButtonSelected(isoButtons, initValue);
-				setCameraParameterValue(MODE_ISO, initValue);
-
-				if (ICONS_ISO != null && ICONS_ISO.containsKey(initValue)) {
-					RotateImageView but = (RotateImageView) topMenuButtons
-							.get(MODE_ISO);
-					int icon_id = ICONS_ISO.get(initValue);
-					but.setImageResource(icon_id);
-				}
-				CameraController.setCameraISO(mISO);
-			} else {
-				mISOSupported = false;
-				mISO = -1;
-			}
-		} else {
-			mISOSupported = false;
-			mISO = -1;
-		}
-
-		int iMeteringAreasSupported = CameraController.getMaxNumMeteringAreas();
-		if (iMeteringAreasSupported > 0) {
-			Collection<Integer> unsorted_keys = NAMES_METERING.keySet();
-			List<Integer> keys = Util.asSortedList(unsorted_keys);
-			Iterator<Integer> it = keys.iterator();
-			while (it.hasNext()) {
-				int metering_name = it.next();
-				if (meteringModeButtons.containsKey(metering_name)) {
-					activeMetering.add(meteringModeButtons.get(metering_name));
-					activeMeteringNames.add(metering_name);
-				}
-			}
-
-			if (!activeMeteringNames.isEmpty()) {
-				this.mMeteringAreasSupported = true;
-
-				meteringmodeAdapter.Elements = activeMetering;
-				GridView gridview = (GridView) guiView
-						.findViewById(R.id.meteringmodeGrid);
-				gridview.setAdapter(meteringmodeAdapter);
-
-				int initValue = preferences.getInt(
-						MainScreen.sMeteringModePref,
-						MainScreen.sDefaultMeteringValue);
-				if (!activeMeteringNames.contains(initValue))
-					initValue = activeMeteringNames.get(0);
-
-				setButtonSelected(meteringModeButtons, initValue);
-				setCameraParameterValue(MODE_MET, initValue);
-
-				if (ICONS_METERING != null
-						&& ICONS_METERING.containsKey(initValue)) {
-					RotateImageView but = (RotateImageView) topMenuButtons
-							.get(MODE_MET);
-					int icon_id = ICONS_METERING.get(initValue);
-					but.setImageResource(icon_id);
-				}
-
-				MainScreen.getInstance().setCameraMeteringMode(mMeteringMode);
-			} else {
-				mMeteringAreasSupported = false;
-				mMeteringMode = -1;
-			}
-		} else {
-			this.mMeteringAreasSupported = false;
-			this.mMeteringMode = -1;
-		}
+//		int[] supported_iso = CameraController.getSupportedISO();
+//		if ((supported_iso != null && supported_iso.length > 0 && activeISO != null)
+//				|| (CameraController.isISOSupported() && activeISO != null)) {
+//			if (supported_iso != null && supported_iso.length != 0)
+//				for (int iso_name : supported_iso) {
+//					if (isoButtons.containsKey(iso_name)) {
+//						activeISO
+//								.add(isoButtons.get(Integer.valueOf(iso_name)));
+//						activeISONames.add(Integer.valueOf(iso_name));
+//					}
+//				}
+//			else {
+//				for (String iso_name : CameraController.getIsoDefaultList()) {
+//					activeISO.add(isoButtons.get(CameraController.getIsoKey()
+//							.get(iso_name)));
+//					activeISONames.add(CameraController.getIsoKey().get(
+//							iso_name));
+//				}
+//			}
+//
+//			if (!activeISONames.isEmpty()) {
+//				mISOSupported = true;
+//
+//				isoAdapter.Elements = activeISO;
+//				GridView gridview = (GridView) guiView
+//						.findViewById(R.id.isoGrid);
+//				gridview.setAdapter(isoAdapter);
+//
+//				int initValue = preferences.getInt(MainScreen.sISOPref,
+//						MainScreen.sDefaultValue);
+//				if (!activeISONames.contains(initValue)) {
+//					if (CameraController.isFrontCamera())
+//						initValue = activeISONames.get(0);
+//					else
+//						initValue = MainScreen.sDefaultValue;
+//
+//					preferences.edit().putInt(MainScreen.sISOPref, initValue)
+//							.commit();
+//				}
+//				setButtonSelected(isoButtons, initValue);
+//				setCameraParameterValue(MODE_ISO, initValue);
+//
+//				if (ICONS_ISO != null && ICONS_ISO.containsKey(initValue)) {
+//					RotateImageView but = (RotateImageView) topMenuButtons
+//							.get(MODE_ISO);
+//					int icon_id = ICONS_ISO.get(initValue);
+//					but.setImageResource(icon_id);
+//				}
+//				CameraController.setCameraISO(mISO);
+//			} else {
+//				mISOSupported = false;
+//				mISO = -1;
+//			}
+//		} else {
+//			mISOSupported = false;
+//			mISO = -1;
+//		}
+//
+//		int iMeteringAreasSupported = CameraController.getMaxNumMeteringAreas();
+//		if (iMeteringAreasSupported > 0) {
+//			Collection<Integer> unsorted_keys = NAMES_METERING.keySet();
+//			List<Integer> keys = Util.asSortedList(unsorted_keys);
+//			Iterator<Integer> it = keys.iterator();
+//			while (it.hasNext()) {
+//				int metering_name = it.next();
+//				if (meteringModeButtons.containsKey(metering_name)) {
+//					activeMetering.add(meteringModeButtons.get(metering_name));
+//					activeMeteringNames.add(metering_name);
+//				}
+//			}
+//
+//			if (!activeMeteringNames.isEmpty()) {
+//				this.mMeteringAreasSupported = true;
+//
+//				meteringmodeAdapter.Elements = activeMetering;
+//				GridView gridview = (GridView) guiView
+//						.findViewById(R.id.meteringmodeGrid);
+//				gridview.setAdapter(meteringmodeAdapter);
+//
+//				int initValue = preferences.getInt(
+//						MainScreen.sMeteringModePref,
+//						MainScreen.sDefaultMeteringValue);
+//				if (!activeMeteringNames.contains(initValue))
+//					initValue = activeMeteringNames.get(0);
+//
+//				setButtonSelected(meteringModeButtons, initValue);
+//				setCameraParameterValue(MODE_MET, initValue);
+//
+//				if (ICONS_METERING != null
+//						&& ICONS_METERING.containsKey(initValue)) {
+//					RotateImageView but = (RotateImageView) topMenuButtons
+//							.get(MODE_MET);
+//					int icon_id = ICONS_METERING.get(initValue);
+//					but.setImageResource(icon_id);
+//				}
+//
+//				MainScreen.getInstance().setCameraMeteringMode(mMeteringMode);
+//			} else {
+//				mMeteringAreasSupported = false;
+//				mMeteringMode = -1;
+//			}
+//		} else {
+//			this.mMeteringAreasSupported = false;
+//			this.mMeteringMode = -1;
+//		}
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
 			addCameraChangeButton();
@@ -1939,12 +1945,15 @@ public class AlmalenceGUI extends GUI implements
 		quickControl1 = isCameraParameterSupported(qc1) ? getQuickControlButton(
 				qc1, quickControl1) : getFreeQuickControlButton(qc1, qc2, qc3,
 				qc4, quickControl1);
+				if(!MainScreen.mCamChanged){
 		quickControl2 = isCameraParameterSupported(qc2) ? getQuickControlButton(
 				qc2, quickControl2) : getFreeQuickControlButton(qc1, qc2, qc3,
 				qc4, quickControl2);
-		quickControl3 = isCameraParameterSupported(qc3) ? getQuickControlButton(
-				qc3, quickControl3) : getFreeQuickControlButton(qc1, qc2, qc3,
-				qc4, quickControl3);
+				}
+//					quickControl3 = isCameraParameterSupported(qc3) ? getQuickControlButton(
+//							qc3, quickControl3) : getFreeQuickControlButton(qc1, qc2, qc3,
+//							qc4, quickControl3);
+				
 		quickControl4 = isCameraParameterSupported(qc4) ? getQuickControlButton(
 				qc4, quickControl4) : getFreeQuickControlButton(qc1, qc2, qc3,
 				qc4, quickControl4);
@@ -3267,6 +3276,9 @@ public class AlmalenceGUI extends GUI implements
 		if (restart) {
 			MainScreen.getInstance().pauseMain();
 			MainScreen.getInstance().resumeMain();
+			MainScreen.mCamChanged = !MainScreen.mCamChanged; 
+//			MainScreen.getInstance().recreate();
+			onCameraCreate();
 		}
 	}
 
@@ -3694,8 +3706,9 @@ public class AlmalenceGUI extends GUI implements
 
 		((LinearLayout) guiView.findViewById(R.id.paramsLayout))
 				.addView(quickControl1);
-		((LinearLayout) guiView.findViewById(R.id.paramsLayout))
-				.addView(quickControl2);
+			((LinearLayout) guiView.findViewById(R.id.paramsLayout))
+			.addView(quickControl2);
+		
 		((LinearLayout) guiView.findViewById(R.id.paramsLayout))
 				.addView(quickControl3);
 		((LinearLayout) guiView.findViewById(R.id.paramsLayout))

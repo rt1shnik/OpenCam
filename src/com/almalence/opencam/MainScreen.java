@@ -341,6 +341,7 @@ public class MainScreen extends Activity implements ApplicationInterface,
 	public static int mHeightSOSEnabled = 0;
 	private boolean isVideo;
 	private boolean isFront;
+	public static boolean mCamChanged = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -713,6 +714,7 @@ public class MainScreen extends Activity implements ApplicationInterface,
 			Toast.makeText(this, "Not from Launcher", Toast.LENGTH_LONG).show();
 		}
 		if(isFront){
+			mCamChanged = true;
 		bringFront();
 		}
 	}
@@ -741,7 +743,7 @@ private void bringFront() {
 	}
 
 private void undoFront() {
-
+mCamChanged=false;
 	if (PluginManager.getInstance().getProcessingCounter() != 0)
 		return;
 	SharedPreferences prefs = PreferenceManager
@@ -1589,9 +1591,9 @@ private void changeMode(boolean b){
 
 	public void resumeMain() {
 		onResume();
-		if(isFront){
-		bringFront();
-		}
+//		if(!mCamChanged){
+//		bringFront();
+//		}
 	}
 
 	@Override
