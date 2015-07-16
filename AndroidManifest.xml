@@ -33,12 +33,14 @@
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.WRITE_SETTINGS" />
+	<uses-permission android:name="android.permission.INTERNET"/>
 <!-- -+-  -->
 	<uses-permission android:name="com.android.vending.BILLING"/>
 	<uses-permission android:name="org.onepf.openiab.permission.BILLING"/>
 <!--  -+- -->    
 
-    <application android:icon="@drawable/icon" android:label="@string/app_name" android:hardwareAccelerated="true" android:largeHeap="true">
+    <application android:icon="@drawable/icon" android:label="@string/app_name" android:hardwareAccelerated="true" android:largeHeap="true"
+        android:name="com.almalence.CameraApplication">
     <!-- android:debuggable="true"> -->
 
 		<!-- +++
