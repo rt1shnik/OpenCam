@@ -130,7 +130,6 @@ import com.almalence.plugins.vf.grid.GridVFPlugin;
 import com.almalence.plugins.vf.gyro.GyroVFPlugin;
 import com.almalence.plugins.vf.histogram.HistogramVFPlugin;
 import com.almalence.plugins.vf.infoset.InfosetVFPlugin;
-import com.almalence.plugins.vf.zoom.ZoomVFPlugin;
 import com.almalence.util.MLocation;
 import com.almalence.util.exifreader.imaging.jpeg.JpegMetadataReader;
 import com.almalence.util.exifreader.imaging.jpeg.JpegProcessingException;
@@ -325,10 +324,6 @@ public class PluginManager implements PluginManagerInterface
 		GyroVFPlugin gyroVFPlugin = new GyroVFPlugin();
 		pluginList.put(gyroVFPlugin.getID(), gyroVFPlugin);
 		listVF.add(gyroVFPlugin);
-
-		ZoomVFPlugin zoomVFPlugin = new ZoomVFPlugin();
-		pluginList.put(zoomVFPlugin.getID(), zoomVFPlugin);
-		listVF.add(zoomVFPlugin);
 
 		GridVFPlugin gridVFPlugin = new GridVFPlugin();
 		pluginList.put(gridVFPlugin.getID(), gridVFPlugin);

@@ -28,7 +28,6 @@
 	    <vf 		id="com.almalence.plugins.histogramvf"/> 
 	    <vf 		id="com.almalence.plugins.barcodescannervf"/>   
 	    <vf 		id="com.almalence.plugins.gridvf"/>
-	    <vf 		id="com.almalence.plugins.zoomvf"/>
 	    <vf 		id="com.almalence.plugins.focusvf"/>
 	    <vf 		id="com.almalence.plugins.infosetvf"/>
 	    <vf 		id="com.almalence.plugins.aeawlockvf"/>
@@ -53,7 +52,6 @@
 	    <icon		id="gui_almalence_mode_selftimer"/>
 	    
 	    <vf 		id="com.almalence.plugins.gridvf"/>
-	    <vf 		id="com.almalence.plugins.zoomvf"/>
 	    <vf 		id="com.almalence.plugins.focusvf"/>
 	    <vf 		id="com.almalence.plugins.histogramvf"/>
 	    <vf 		id="com.almalence.plugins.barcodescannervf"/>
@@ -77,7 +75,6 @@
 	    <icon		id="gui_almalence_mode_burst"/>
 	    
 	    <vf 		id="com.almalence.plugins.gridvf"/>
-		<vf 		id="com.almalence.plugins.zoomvf"/>
 	    <vf 		id="com.almalence.plugins.histogramvf"/>
 	    <vf 		id="com.almalence.plugins.barcodescannervf"/>
 	    <vf 		id="com.almalence.plugins.focusvf"/>
@@ -104,7 +101,6 @@
 	    <icon		id="gui_almalence_mode_expobracketing"/>
 	    
 	    <vf 		id="com.almalence.plugins.gridvf"/>
-	    <vf 		id="com.almalence.plugins.zoomvf"/>
 	    <vf 		id="com.almalence.plugins.focusvf"/>
 	    <vf 		id="com.almalence.plugins.infosetvf"/>
 	    <vf 		id="com.almalence.plugins.aeawlockvf"/>
@@ -129,7 +125,6 @@
 	    <icon		id="gui_almalence_mode_hdr"/>
 	    
 	    <vf 		id="com.almalence.plugins.gridvf"/>
-	    <vf 		id="com.almalence.plugins.zoomvf"/>
 	    <vf 		id="com.almalence.plugins.focusvf"/>
 	    <vf 		id="com.almalence.plugins.infosetvf"/>
 	    <vf 		id="com.almalence.plugins.aeawlockvf"/>
@@ -155,7 +150,6 @@
 	    <iconHAL	id="gui_almalence_mode_super"/>
 	    
 	    <vf 		id="com.almalence.plugins.gridvf"/>
-		<vf 		id="com.almalence.plugins.zoomvf"/>
 		<vf 		id="com.almalence.plugins.focusvf"/>
 		<vf 		id="com.almalence.plugins.infosetvf"/>
 		<vf 		id="com.almalence.plugins.aeawlockvf"/>
@@ -178,7 +172,6 @@
 	
 	    <icon		id="gui_almalence_mode_video"/>
 	    
-	    <vf 		id="com.almalence.plugins.zoomvf"/>   
 	    <vf 		id="com.almalence.plugins.gridvf"/>
 	    <vf 		id="com.almalence.plugins.infosetvf"/>
 	    <vf 		id="com.almalence.plugins.focusvf"/>
@@ -203,8 +196,7 @@
 	
 	    <icon		id="gui_almalence_mode_backintime"/>
 	    
-	    <vf 		id="com.almalence.plugins.gridvf"/>
-	    <vf 		id="com.almalence.plugins.zoomvf"/>   
+	    <vf 		id="com.almalence.plugins.gridvf"/> 
 	    <vf 		id="com.almalence.plugins.histogramvf"/>
 	    <vf 		id="com.almalence.plugins.barcodescannervf"/>
 	    <vf 		id="com.almalence.plugins.focusvf"/>
@@ -231,7 +223,6 @@
 	    <icon		id="gui_almalence_mode_moving"/>
 	    
 	    <vf 		id="com.almalence.plugins.gridvf"/>
-	    <vf 		id="com.almalence.plugins.zoomvf"/>   
 	    <vf 		id="com.almalence.plugins.histogramvf"/>
 	    <vf 		id="com.almalence.plugins.focusvf"/>
 	    <vf 		id="com.almalence.plugins.infosetvf"/>
@@ -304,7 +295,6 @@
 	    <icon		id="gui_almalence_mode_bestshot"/>
 	    
 	    <vf 		id="com.almalence.plugins.gridvf"/>
-		<vf 		id="com.almalence.plugins.zoomvf"/>
 	    <vf 		id="com.almalence.plugins.histogramvf"/>
 	    <vf 		id="com.almalence.plugins.focusvf"/>
 	    <vf 		id="com.almalence.plugins.infosetvf"/>
