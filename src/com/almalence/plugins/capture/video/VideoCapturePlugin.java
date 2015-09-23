@@ -1259,7 +1259,6 @@ public class VideoCapturePlugin extends PluginCapture
 
 		View mainButtons = (View) MainScreen.getInstance().guiManager.getMainView().findViewById(R.id.mainButtons);
 		mainButtons.setVisibility(View.VISIBLE);
-		mainButtons.findViewById(R.id.buttonSelectMode).setVisibility(View.VISIBLE);
 
 		if (this.modeDRO())
 		{
@@ -1387,17 +1386,6 @@ public class VideoCapturePlugin extends PluginCapture
 		
 		if (shutterOff)
 			return;
-
-		if (!swChecked)
-		{
-			// RotateImageView additionalButton = (RotateImageView)
-			// MainScreen.getInstance().guiManager.getMainView().findViewById(R.id.buttonShutterAdditional);
-			RotateImageView buttonSelectMode = (RotateImageView) MainScreen.getInstance().guiManager.getMainView()
-					.findViewById(R.id.buttonSelectMode);
-
-			// additionalButton.setVisibility(View.VISIBLE);
-			buttonSelectMode.setVisibility(View.GONE);
-		}
 
 		modeSwitcher.setVisibility(View.GONE);
 		if (this.modeDRO())

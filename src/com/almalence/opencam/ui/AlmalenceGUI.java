@@ -179,7 +179,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 	private Map<View, String>					buttonModeViewAssoc;
 
 	private Thumbnail							mThumbnail;
-	private RotateImageView						thumbnailView;
 
 	private RotateImageView						shutterButton;
 
@@ -994,11 +993,7 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 					((RotateImageView) topMenuPluginButtons.get(key)).setOrientation(AlmalenceGUI.mDeviceOrientation);
 				}
 
-				((RotateImageView) guiView.findViewById(R.id.buttonGallery))
-						.setOrientation(AlmalenceGUI.mDeviceOrientation);
 				((RotateImageView) guiView.findViewById(R.id.buttonShutter))
-						.setOrientation(AlmalenceGUI.mDeviceOrientation);
-				((RotateImageView) guiView.findViewById(R.id.buttonSelectMode))
 						.setOrientation(AlmalenceGUI.mDeviceOrientation);
 
 				final int degree = AlmalenceGUI.mDeviceOrientation >= 0 ? AlmalenceGUI.mDeviceOrientation % 360
@@ -1043,7 +1038,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 			bm = Bitmap.createScaledBitmap(bm,
 					(int) (MainScreen.getMainContext().getResources().getDimension(R.dimen.paramsLayoutHeight)),
 					(int) (MainScreen.getMainContext().getResources().getDimension(R.dimen.paramsLayoutHeight)), false);
-			((RotateImageView) guiView.findViewById(R.id.buttonSelectMode)).setImageBitmap(bm);
 		} catch (Exception e)
 		{
 			e.printStackTrace();
@@ -1068,25 +1062,13 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 			hideModeList();
 
 		lockControls = false;
-		guiView.findViewById(R.id.buttonGallery).setEnabled(true);
 		guiView.findViewById(R.id.buttonShutter).setEnabled(true);
-		guiView.findViewById(R.id.buttonSelectMode).setEnabled(true);
 		PluginManager.getInstance().sendMessage(PluginManager.MSG_BROADCAST, PluginManager.MSG_CONTROL_UNLOCKED);
 	}
 
 	@Override
 	public void onResume()
 	{
-		MainScreen.getInstance().runOnUiThread(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				AlmalenceGUI.this.updateThumbnailButton();
-			}
-		});
-		
-		
 		setShutterIcon(ShutterButton.DEFAULT);
 
 		lockControls = false;
@@ -1185,8 +1167,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 		// Create top menu buttons for plugins (each plugin may have only one
 		// top menu button)
 		createPluginTopMenuButtons();
-
-		thumbnailView = (RotateImageView) guiView.findViewById(R.id.buttonGallery);
 
 		((RelativeLayout) MainScreen.getInstance().findViewById(R.id.mainLayout1)).setOnTouchListener(MainScreen
 				.getInstance());
@@ -1313,15 +1293,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 			prefs.edit().putInt(MainScreen.sDefaultInfoSetPref, infoSet).commit();
 		}
 		setInfo(false, 0, 0, false);
-
-		MainScreen.getInstance().runOnUiThread(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				AlmalenceGUI.this.updateThumbnailButton();
-			}
-		});
 
 		final View blockingLayout = guiView.findViewById(R.id.blockingLayout);
 		final View postProcessingLayout = guiView.findViewById(R.id.postprocessingLayout);
@@ -3485,7 +3456,7 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 		// 3. if change quick controls visible - allow only OK button
 
 		if (quickControlsChangeVisible
-				|| (modeSelectorVisible && (R.id.buttonSelectMode != id)))
+				|| (modeSelectorVisible ))
 		{
 			// if change control visible and
 			if (quickControlsChangeVisible)
@@ -3509,16 +3480,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 		switch (id)
 		{
 		// BOTTOM BUTTONS - Modes, Shutter
-		case R.id.buttonSelectMode:
-			if (quickControlsChangeVisible)
-				break;
-
-			if (!modeSelectorVisible)
-				showModeList();
-			else
-				hideModeList();
-			break;
-
 		case R.id.buttonShutter:
 			Vibrator vibration = (Vibrator) MainScreen.getMainContext().getSystemService(Context.VIBRATOR_SERVICE);
 			vibration.vibrate(300);
@@ -3537,13 +3498,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 			}
 
 			shutterButtonPressed();
-			break;
-
-		case R.id.buttonGallery:
-			if (quickControlsChangeVisible)
-				break;
-
-			openGallery(false);
 			break;
 
 		// TOP MENU BUTTONS - Scene mode, white balance, focus mode, flash mode,
@@ -4591,7 +4545,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 		bm = Bitmap.createScaledBitmap(bm,
 				(int) (MainScreen.getMainContext().getResources().getDimension(R.dimen.mainButtonHeightSelect)),
 				(int) (MainScreen.getMainContext().getResources().getDimension(R.dimen.mainButtonHeightSelect)), false);
-		((RotateImageView) guiView.findViewById(R.id.buttonSelectMode)).setImageBitmap(bm);
 
 		int rid = MainScreen.getAppResources().getIdentifier(tmpActiveMode.howtoText, "string",
 				MainScreen.getInstance().getPackageName());
@@ -5538,7 +5491,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 		RotateImageView mainButton = (RotateImageView) guiView.findViewById(R.id.buttonShutter);
 		// RotateImageView additionalButton = (RotateImageView)
 		// guiView.findViewById(R.id.buttonShutterAdditional);
-		RotateImageView buttonSelectMode = (RotateImageView) guiView.findViewById(R.id.buttonSelectMode);
 		LinearLayout buttonShutterContainer = (LinearLayout) guiView.findViewById(R.id.buttonShutterContainer);
 
 		// additionalButton.setVisibility(View.VISIBLE);
@@ -5766,20 +5718,11 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 	@Override
 	public void onExportFinished()
 	{
-		// stop animation
-		if (processingAnim != null)
-		{
-			processingAnim.clearAnimation();
-			processingAnim.setVisibility(View.GONE);
-		}
 		RelativeLayout rl = (RelativeLayout) guiView.findViewById(R.id.blockingLayout);
 		if (rl.getVisibility() == View.VISIBLE)
 		{
 			rl.setVisibility(View.GONE);
 		}
-
-		updateThumbnailButton();
-		thumbnailView.invalidate();
 
 		if (0 != PluginManager.getInstance().getProcessingCounter())
 		{
@@ -5801,9 +5744,7 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 	@Override
 	public void onPostProcessingStarted()
 	{
-		guiView.findViewById(R.id.buttonGallery).setEnabled(false);
 		guiView.findViewById(R.id.buttonShutter).setEnabled(false);
-		guiView.findViewById(R.id.buttonSelectMode).setEnabled(false);
 		guiView.findViewById(R.id.postprocessingLayout).setVisibility(View.VISIBLE);
 		guiView.findViewById(R.id.postprocessingLayout).bringToFront();
 		List<Plugin> processingPlugins = PluginManager.getInstance().getActivePlugins(PluginType.Processing);
@@ -5834,127 +5775,11 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 		}
 
 		guiView.findViewById(R.id.postprocessingLayout).setVisibility(View.GONE);
-		guiView.findViewById(R.id.buttonGallery).setEnabled(true);
 		guiView.findViewById(R.id.buttonShutter).setEnabled(true);
-		guiView.findViewById(R.id.buttonSelectMode).setEnabled(true);
-
-		updateThumbnailButton();
-		thumbnailView.invalidate();
 	}
-
-	private UpdateThumbnailButtonTask	t	= null;
-
-	public void updateThumbnailButton()
-	{
-
-		t = new UpdateThumbnailButtonTask(MainScreen.getInstance());
-		t.execute();
-
-		new CountDownTimer(1000, 1000)
-		{
-			public void onTick(long millisUntilFinished)
-			{
-				// Not used
-			}
-
-			public void onFinish()
-			{
-				try
-				{
-					if (t != null && t.getStatus() != AsyncTask.Status.FINISHED)
-					{
-						t.cancel(true);
-					}
-				} catch (Exception e)
-				{
-					Log.e("AlmalenceGUI", "Can't stop thumbnail processing");
-				}
-			}
-		}.start();
-	}
-
-	private class UpdateThumbnailButtonTask extends AsyncTask<Void, Void, Void>
-	{
-		public UpdateThumbnailButtonTask(Context context)
-		{
-		}
-
-		@Override
-		protected void onPreExecute()
-		{
-			// do nothing.
-		}
-
-		@Override
-		protected Void doInBackground(Void... params)
-		{
-			mThumbnail = Thumbnail.getLastThumbnail(MainScreen.getInstance().getContentResolver());
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void v)
-		{
-			if (mThumbnail != null)
-			{
-				final Bitmap bitmap = mThumbnail.getBitmap();
-
-				if (bitmap != null)
-				{
-					if (bitmap.getHeight() > 0 && bitmap.getWidth() > 0)
-					{
-						System.gc();
-
-						try
-						{
-							Bitmap bm = Thumbnail.getRoundedCornerBitmap(bitmap, (int) (MainScreen.getMainContext()
-									.getResources().getDimension(R.dimen.mainButtonHeight) * 1.2), (int) (MainScreen
-									.getMainContext().getResources().getDimension(R.dimen.mainButtonHeight) / 1.1));
-
-							thumbnailView.setImageBitmap(bm);
-						} catch (Exception e)
-						{
-							Log.v("AlmalenceGUI", "Can't set thumbnail");
-						}
-					}
-				}
-			} else
-			{
-				try
-				{
-					Bitmap bitmap = Bitmap.createBitmap(96, 96, Config.ARGB_8888);
-					Canvas canvas = new Canvas(bitmap);
-					canvas.drawColor(Color.BLACK);
-					Bitmap bm = Thumbnail.getRoundedCornerBitmap(bitmap, (int) (MainScreen.getMainContext()
-							.getResources().getDimension(R.dimen.mainButtonHeight) * 1.2), (int) (MainScreen
-							.getMainContext().getResources().getDimension(R.dimen.mainButtonHeight) / 1.1));
-					thumbnailView.setImageBitmap(bm);
-				} catch (Exception e)
-				{
-					Log.v("AlmalenceGUI", "Can't set thumbnail");
-				}
-			}
-		}
-	}
-
-	private ImageView	processingAnim;
 
 	public void startProcessingAnimation()
 	{
-		if (processingAnim != null && processingAnim.getVisibility() == View.VISIBLE)
-			return;
-
-		processingAnim = ((ImageView) guiView.findViewById(R.id.buttonGallery2));
-		processingAnim.setVisibility(View.VISIBLE);
-
-		int height = (int) MainScreen.getAppResources().getDimension(R.dimen.paramsLayoutHeightScanner);
-		int width = (int) MainScreen.getAppResources().getDimension(R.dimen.paramsLayoutHeightScanner);
-		Animation rotation = new RotateAnimation(0, 360, width / 2, height / 2);
-		rotation.setDuration(800);
-		rotation.setInterpolator(new LinearInterpolator());
-		rotation.setRepeatCount(1000);
-
-		processingAnim.startAnimation(rotation);
 	}
 
 	public void processingBlockUI()
@@ -5965,9 +5790,7 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 			rl.setVisibility(View.VISIBLE);
 			rl.bringToFront();
 
-			guiView.findViewById(R.id.buttonGallery).setEnabled(false);
 			guiView.findViewById(R.id.buttonShutter).setEnabled(false);
-			guiView.findViewById(R.id.buttonSelectMode).setEnabled(false);
 		}
 	}
 

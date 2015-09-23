@@ -72,47 +72,6 @@
 	    android:background="@drawable/blacktransparentlayerbottom"
 	    android:gravity="bottom"	    
 	    android:layout_alignParentBottom="true">
-
-    <!-- android:src="@drawable/gui_almalence_gallery" -->
-          	<RelativeLayout android:id="@+id/gallery_control"
-            android:layout_weight="1"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/paramsLayoutHeight"
-			android:gravity="center">
-				<LinearLayout android:layout_height="@dimen/paramsLayoutHeight"			    
-		 	 	    android:layout_width="match_parent"
-		 	 	    android:orientation="vertical"
-		 	 	    android:layout_centerInParent="true"
-		 	 	    android:gravity="center">
-	            <com.almalence.ui.RotateImageView
-					android:id="@+id/buttonGallery"								
-					android:layout_gravity="center_horizontal"
-					android:src="@drawable/gui_almalence_gallery"									
-					android:background="@android:color/transparent"				
-					android:layout_height="@dimen/paramsLayoutHeight"
-					android:layout_width="@dimen/paramsLayoutHeight"	
-					android:scaleType="fitXY"
-			   		android:onClick="onButtonClick">
-				</com.almalence.ui.RotateImageView>
-				</LinearLayout>
-				<LinearLayout android:layout_height="@dimen/paramsLayoutHeight"
-		 	 	    android:layout_width="match_parent"
-		 	 	    android:orientation="vertical"
-		 	 	    android:layout_centerInParent="true"
-		 	 	    android:gravity="center">
-				<ImageView
-					android:id="@+id/buttonGallery2"
-					android:src="@drawable/almalence_gui_processing_scanner"
-					android:layout_gravity="center_horizontal"
-					android:scaleType="centerCrop"
-					android:background="@android:color/transparent"
-					android:layout_height="@dimen/paramsLayoutHeightScanner"
-					android:layout_width="@dimen/paramsLayoutHeightScanner"
-			   		android:onClick="onButtonClick"
-			   		android:visibility="gone">
-				</ImageView>
-				</LinearLayout>
-			</RelativeLayout>
 		
           	<LinearLayout 
           	    android:layout_height="@dimen/shutterHeight"
@@ -144,23 +103,6 @@
 				   		android:layout_gravity="bottom"
 				   		android:onClick="onButtonClick"/>
 	 	 	   </LinearLayout>	 	
-		 	</LinearLayout> 	
-		 	
-	 	 	<LinearLayout android:layout_height="@dimen/paramsLayoutHeight"
-	 	 	    android:layout_width="match_parent"
-	 	 	    android:orientation="vertical"
-	 	 	    android:gravity="center"	    			 	 	    
-				android:layout_weight="1">
-	 	 	<com.almalence.ui.RotateImageView
-				android:id="@+id/buttonSelectMode"
-				android:src="@drawable/button_selectmode"
-				android:layout_gravity="center_horizontal"
-				android:background="@android:color/transparent"
-				android:layout_height="@dimen/paramsLayoutHeight"
-				android:layout_width="@dimen/paramsLayoutHeight"	
-				android:scaleType="fitXY"							
-		   		android:onClick="onButtonClick">
-		 	</com.almalence.ui.RotateImageView>
 		 	</LinearLayout>
  	</LinearLayout>
       
