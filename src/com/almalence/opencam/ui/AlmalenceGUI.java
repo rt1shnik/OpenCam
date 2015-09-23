@@ -811,6 +811,8 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 	// indicates if it's first launch - to show hint layer.
 	private boolean								isFirstLaunch				= true;
 
+	private long lastPhotoTime;
+
 	private static int							iScreenType					= MainScreen.getAppResources().getInteger(
 																					R.integer.screen_type);
 
@@ -3476,23 +3478,29 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 		{
 		// BOTTOM BUTTONS - Modes, Shutter
 		case R.id.buttonShutter:
-			Vibrator vibration = (Vibrator) MainScreen.getMainContext().getSystemService(Context.VIBRATOR_SERVICE);
-			vibration.vibrate(300);
 			
-			if (quickControlsChangeVisible)
-			{
-				break;
-			}
+			if (System.currentTimeMillis() - lastPhotoTime > 1500) {
 
-			if (quickControlsVisible)
-			{
-				hideSecondaryMenus();
-				unselectPrimaryTopMenuButtons(-1);
-				quickControlsVisible = false;
-				break;
-			}
+				Vibrator vibration = (Vibrator) MainScreen.getMainContext().getSystemService(Context.VIBRATOR_SERVICE);
+				vibration.vibrate(300);
 
-			shutterButtonPressed();
+				if (quickControlsChangeVisible) {
+					break;
+				}
+
+				if (quickControlsVisible) {
+					hideSecondaryMenus();
+					unselectPrimaryTopMenuButtons(-1);
+					quickControlsVisible = false;
+					break;
+				}
+
+				shutterButtonPressed();
+				((RotateImageView)button).setEnabled(false);
+
+				lastPhotoTime = System.currentTimeMillis();
+
+			}
 			break;
 
 		// TOP MENU BUTTONS - Scene mode, white balance, focus mode, flash mode,
