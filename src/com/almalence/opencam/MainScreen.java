@@ -249,6 +249,8 @@ public class MainScreen extends Activity implements ApplicationInterface, View.O
 
 	private int							currentMeteringMode				= -1;
 
+	private boolean isFront;
+
 	public static String				sTimestampDate;
 	public static String				sTimestampAbbreviation;
 	public static String				sTimestampTime;
@@ -518,6 +520,11 @@ public class MainScreen extends Activity implements ApplicationInterface, View.O
 			PluginManager.getInstance().setupDefaultMode(mode);
 		}else{
 			PluginManager.getInstance().setupDefaultMode();
+			
+			isFront = intent.getBooleanExtra("front",false);
+			if(isFront){
+				bringFront();
+			}
 		}
 		
 		// init gui manager
@@ -556,6 +563,41 @@ public class MainScreen extends Activity implements ApplicationInterface, View.O
 		{
 			MainScreen.setForceFilename(null);
 		}
+	}
+	
+	
+	private void bringFront() {
+
+		if (PluginManager.getInstance().getProcessingCounter() != 0)
+			return;
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainScreen.getMainContext());
+		boolean isFrontCamera = prefs.getBoolean(
+				MainScreen.getMainContext().getResources().getString(R.string.Preference_UseFrontCameraValue), false);
+		if (!isFrontCamera) {
+			prefs.edit()
+					.putBoolean(
+							MainScreen.getMainContext().getResources()
+									.getString(R.string.Preference_UseFrontCameraValue), true).commit();
+			return;
+		}
+		return;
+	}
+
+	private void undoFront() {
+
+		if (PluginManager.getInstance().getProcessingCounter() != 0)
+			return;
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainScreen.getMainContext());
+		boolean isFrontCamera = prefs.getBoolean(
+				MainScreen.getMainContext().getResources().getString(R.string.Preference_UseFrontCameraValue), false);
+		if (isFrontCamera) {
+			prefs.edit()
+					.putBoolean(
+							MainScreen.getMainContext().getResources()
+									.getString(R.string.Preference_UseFrontCameraValue), false).commit();
+			return;
+		}
+		return;
 	}
 
 	/*
@@ -1295,6 +1337,8 @@ public class MainScreen extends Activity implements ApplicationInterface, View.O
 			shutterPlayer.release();
 			shutterPlayer = null;
 		}
+		
+		undoFront();
 	}
 
 	public void pauseMain()
@@ -1315,6 +1359,10 @@ public class MainScreen extends Activity implements ApplicationInterface, View.O
 	public void resumeMain()
 	{
 		onResume();
+		
+		if (isFront) {
+			bringFront();
+		}
 	}
 
 	@Override
