@@ -14,14 +14,13 @@
       android:versionCode="79"
       android:versionName="3.27">
 <!--  -+- -->
-
     <supports-screens       
                   android:smallScreens="true" 
                   android:normalScreens="true" 
                   android:largeScreens="true" 
                   android:xlargeScreens="true"
                   />
-    
+    <uses-permission android:name="android.permission.VIBRATE" />
 	<uses-permission android:name="android.permission.CAMERA" />
  	<uses-feature android:name="android.hardware.camera" android:required="false" />
 	<uses-feature android:name="android.hardware.camera.front" android:required="false"/>

@@ -57,6 +57,7 @@ import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.ParcelFileDescriptor;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -92,7 +93,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.almalence.googsharing.Thumbnail;
-
 import com.almalence.ui.Panel;
 import com.almalence.ui.Panel.OnPanelListener;
 import com.almalence.ui.RotateImageView;
@@ -4043,6 +4043,9 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 			break;
 
 		case R.id.buttonShutter:
+			Vibrator vibration = (Vibrator) MainScreen.getMainContext().getSystemService(Context.VIBRATOR_SERVICE);
+			vibration.vibrate(300);
+			
 			if (quickControlsChangeVisible || settingsControlsVisible)
 			{
 				break;
