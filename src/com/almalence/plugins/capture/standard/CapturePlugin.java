@@ -53,11 +53,7 @@ import com.almalence.ui.Switch.Switch;
 
 public class CapturePlugin extends PluginCapture
 {
-	private static String		ModePreference;													// 0=DRO
-																									// On
-																									// 1=DRO
-																									// Off
-	private Switch				modeSwitcher;
+	private static String		ModePreference;													
 	public static final String	CAMERA_IMAGE_BUCKET_NAME	= Environment.getExternalStorageDirectory().toString()
 																	+ "/DCIM/Camera/tmp_raw_img";
 
@@ -96,50 +92,9 @@ public class CapturePlugin extends PluginCapture
 	public void onCreate()
 	{
 		LayoutInflater inflator = MainScreen.getInstance().getLayoutInflater();
-		modeSwitcher = (Switch) inflator.inflate(R.layout.plugin_capture_standard_modeswitcher, null, false);
 
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainScreen.getMainContext());
 		ModePreference = prefs.getString("modeStandardPref", "1");
-		modeSwitcher.setTextOn("DRO On");
-		modeSwitcher.setTextOff("DRO Off");
-		modeSwitcher.setChecked(ModePreference.compareTo("0") == 0 ? true : false);
-		modeSwitcher.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-		{
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isDro)
-			{
-
-				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainScreen.getMainContext());
-
-				if (isDro)
-				{
-					singleModeEV = prefs.getInt(MainScreen.sEvPref, 0);
-					//Log.d("Capture", "onCheckedChanged. isDro = true singleModeEV = " + singleModeEV);
-
-					ModePreference = "0";
-					MainScreen.setCaptureFormat(CameraController.YUV);
-				} else
-				{
-					ModePreference = "1";
-					MainScreen.setCaptureFormat(CameraController.JPEG);
-
-//					Log.d("Capture", "onCheckedChanged. isDro = false singleModeEV = " + singleModeEV);
-				}
-
-				// UpdateEv(isDro, isDro? singleModeEV :
-				// (singleModeEV+droEvDiff));
-				UpdateEv(isDro, singleModeEV);
-
-				SharedPreferences.Editor editor = prefs.edit();
-				editor.putString("modeStandardPref", ModePreference);
-				editor.commit();
-
-				MainScreen.getInstance().relaunchCamera();
-			}
-		});
-
-		if (PluginManager.getInstance().getProcessingCounter() == 0)
-			modeSwitcher.setEnabled(true);
 	}
 
 	@Override
@@ -193,28 +148,16 @@ public class CapturePlugin extends PluginCapture
 	@Override
 	public void onGUICreate()
 	{
-		MainScreen.getGUIManager().removeViews(modeSwitcher, R.id.specialPluginsLayout3);
-
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
 				LayoutParams.WRAP_CONTENT);
 
 		params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
 		params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-
-		((RelativeLayout) MainScreen.getInstance().findViewById(R.id.specialPluginsLayout3)).addView(this.modeSwitcher,
-				params);
-
-		this.modeSwitcher.setLayoutParams(params);
+		
 		// this.modeSwitcher.requestLayout();
 		//
 		// ((RelativeLayout)
 		// MainScreen.getInstance().findViewById(R.id.specialPluginsLayout3)).requestLayout();
-	}
-
-	@Override
-	public void onStop()
-	{
-		MainScreen.getGUIManager().removeViews(modeSwitcher, R.id.specialPluginsLayout3);
 	}
 
 	@Override

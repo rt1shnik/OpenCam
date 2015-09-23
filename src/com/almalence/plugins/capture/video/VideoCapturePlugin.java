@@ -203,8 +203,6 @@ public class VideoCapturePlugin extends PluginCapture
 																											// Off
 	private boolean								camera2Preference;
 
-	private com.almalence.ui.Switch.Switch		modeSwitcher;
-
 	private DROVideoEngine						droEngine						= new DROVideoEngine();
 
 	public VideoCapturePlugin()
@@ -224,113 +222,14 @@ public class VideoCapturePlugin extends PluginCapture
 		mRecordingTimeView.setText("00:00");
 
 		this.createModeSwitcher();
-
-		if (VERSION.SDK_INT < VERSION_CODES.JELLY_BEAN_MR2)
-		{
-			this.modeSwitcher.setVisibility(View.GONE);
-		}
 	}
 
 	private void createModeSwitcher()
 	{
 		LayoutInflater inflator = MainScreen.getInstance().getLayoutInflater();
-		modeSwitcher = (com.almalence.ui.Switch.Switch) inflator.inflate(R.layout.plugin_capture_standard_modeswitcher,
-				null, false);
 
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainScreen.getMainContext());
 		ModePreference = prefs.getString("modeVideoDROPref", "1");
-		modeSwitcher.setTextOn(MainScreen.getInstance().getString(R.string.Pref_Video_DRO_ON));
-		modeSwitcher.setTextOff(MainScreen.getInstance().getString(R.string.Pref_Video_DRO_OFF));
-		modeSwitcher.setChecked(ModePreference.compareTo("0") == 0 ? true : false);
-		modeSwitcher.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-		{
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-			{
-				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainScreen.getMainContext());
-
-				if (isChecked)
-				{
-					ModePreference = "0";
-				} else
-				{
-					ModePreference = "1";
-				}
-
-				SharedPreferences.Editor editor = prefs.edit();
-				editor.putString("modeVideoDROPref", ModePreference);
-				editor.commit();
-
-				if (modeDRO())
-				{
-					final int ImageSizeIdxPreference = Integer.parseInt(prefs.getString(CameraController
-							.getCameraIndex() == 0 ? MainScreen.sImageSizeVideoBackPref : MainScreen.sImageSizeVideoFrontPref, "2"));
-					if (ImageSizeIdxPreference == 2)
-					{
-						quickControlIconID = R.drawable.gui_almalence_video_720;
-						editor.putString(CameraController.getCameraIndex() == 0 ? MainScreen.sImageSizeVideoBackPref
-								: MainScreen.sImageSizeVideoFrontPref, "3");
-						editor.commit();
-						VideoCapturePlugin.this.refreshQuickControl();
-					}
-				}
-
-				try
-				{
-					CameraController.stopCameraPreview();
-					Camera.Parameters cp = CameraController.getCameraParameters();
-					if (cp != null)
-					{
-						setCameraPreviewSize();
-						CameraController.Size sz = new CameraController.Size(
-								MainScreen.getPreviewWidth(), MainScreen.getPreviewHeight());
-						MainScreen.getGUIManager().setupViewfinderPreviewSize(sz);
-					}
-					if (VideoCapturePlugin.this.modeDRO())
-					{
-						takePictureButton.setVisibility(View.GONE);
-						timeLapseButton.setVisibility(View.GONE);
-						MainScreen.getInstance().showOpenGLLayer(2);
-						MainScreen.getInstance().glSetRenderingMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
-					} else
-					{
-						if (displayTakePicture)
-							takePictureButton.setVisibility(View.VISIBLE);
-						timeLapseButton.setVisibility(View.VISIBLE);
-
-						droEngine.onPause();
-
-						Camera camera = CameraController.getCamera();
-						if (camera != null)
-							try
-							{
-								camera.setDisplayOrientation(90);
-							} catch (RuntimeException e)
-							{
-								e.printStackTrace();
-							}
-
-						if (camera != null)
-							try
-							{
-								camera.setPreviewDisplay(MainScreen.getPreviewSurfaceHolder());
-							} catch (IOException e)
-							{
-								e.printStackTrace();
-							}
-						CameraController.startCameraPreview();
-						MainScreen.getInstance().hideOpenGLLayer();
-					}
-				} catch (final Exception e)
-				{
-					Log.e(TAG, Util.toString(e.getStackTrace(), '\n'));
-					e.printStackTrace();
-				}
-			}
-		});
-
-		if (PluginManager.getInstance().getProcessingCounter() == 0)
-			modeSwitcher.setEnabled(true);
 	}
 
 	@Override
@@ -429,7 +328,7 @@ public class VideoCapturePlugin extends PluginCapture
 		{
 			View view = specialView.get(j);
 			int view_id = view.getId();
-			if (view_id == this.mRecordingTimeView.getId() || view_id == this.modeSwitcher.getId())
+			if (view_id == this.mRecordingTimeView.getId())
 			{
 				if (view.getParent() != null)
 					((ViewGroup) view.getParent()).removeView(view);
@@ -444,13 +343,7 @@ public class VideoCapturePlugin extends PluginCapture
 
 			params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
 			params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-
-			((RelativeLayout) MainScreen.getInstance().findViewById(R.id.specialPluginsLayout3))
-					.removeView(this.modeSwitcher);
-			((RelativeLayout) MainScreen.getInstance().findViewById(R.id.specialPluginsLayout3)).addView(
-					this.modeSwitcher, params);
-
-			this.modeSwitcher.setLayoutParams(params);
+			
 			// this.modeSwitcher.requestLayout();
 		}
 
@@ -930,12 +823,6 @@ public class VideoCapturePlugin extends PluginCapture
 	}
 
 	@Override
-	public void onStop()
-	{
-		MainScreen.getGUIManager().removeViews(modeSwitcher, R.id.specialPluginsLayout3);
-	}
-
-	@Override
 	public void onCameraParametersSetup()
 	{
 		this.qualityQCIFSupported = false;
@@ -1250,9 +1137,6 @@ public class VideoCapturePlugin extends PluginCapture
 		if (shutterOff)
 			return;
 
-		if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN_MR2)
-			modeSwitcher.setVisibility(View.VISIBLE);
-
 		View mainButtonsVideo = (View) MainScreen.getInstance().guiManager.getMainView().findViewById(
 				R.id.mainButtonsVideo);
 		mainButtonsVideo.setVisibility(View.GONE);
@@ -1387,7 +1271,6 @@ public class VideoCapturePlugin extends PluginCapture
 		if (shutterOff)
 			return;
 
-		modeSwitcher.setVisibility(View.GONE);
 		if (this.modeDRO())
 		{
 			shutterOff = true;
