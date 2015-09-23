@@ -1512,7 +1512,7 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 			mWBLockSupported = true;
 
 		// Create Exposure compensation button and slider with supported values
-		if (CameraController.isExposureCompensationSupported())
+		if (true)
 		{
 			mEVSupported = true;
 			defaultQuickControl1 = String.valueOf(MODE_EV);
@@ -1997,7 +1997,9 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 
 		try
 		{
+			if(isCameraParameterSupported(String.valueOf(MODE_FLASH))){
 			((LinearLayout) guiView.findViewById(R.id.paramsLayout)).addView(quickControl2);
+			}
 		} catch (Exception e)
 		{
 			e.printStackTrace();
