@@ -390,6 +390,7 @@ public class VideoCapturePlugin extends PluginCapture
 			}
 		}
 		takePictureButton = (RotateImageView) buttonsLayout.findViewById(R.id.buttonCaptureImage);
+		takePictureButton.setVisibility(View.GONE);
 
 		timeLapseButton.setOnClickListener(new OnClickListener()
 		{
