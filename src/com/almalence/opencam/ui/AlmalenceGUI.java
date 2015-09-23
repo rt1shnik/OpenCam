@@ -1166,6 +1166,7 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 
 		shutterButton = ((RotateImageView) guiView.findViewById(R.id.buttonShutter));
 		shutterButton.setOnLongClickListener(this);
+		shutterButton.setVisibility(View.GONE);
 	}
 
 	// -+- -->
@@ -2025,6 +2026,8 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 		{
 			PluginManager.getInstance().sendMessage(PluginManager.MSG_BROADCAST, PluginManager.MSG_EV_CHANGED);
 		}
+		
+		shutterButton.setVisibility(View.VISIBLE);
 
 	}
 
