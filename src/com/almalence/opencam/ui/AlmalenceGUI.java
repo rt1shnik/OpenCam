@@ -59,6 +59,7 @@ import android.os.Handler;
 import android.os.ParcelFileDescriptor;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.SimpleCursorAdapter.ViewBinder;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -182,7 +183,7 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 
 	private RotateImageView						shutterButton;
 
-	private static final Integer				ICON_EV						= R.drawable.gui_almalence_settings_exposure;
+	private static final Integer				ICON_EV						= R.drawable.header_back_button_new_color;
 	private static final Integer				ICON_CAM					= R.drawable.gui_almalence_settings_changecamera;
 	private static final Integer				ICON_SETTINGS				= R.drawable.gui_almalence_settings_more_settings;
 
@@ -727,7 +728,7 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 																				}
 																			};
 
-	// Defining for top menu buttons (camera parameters settings)
+	// Defining for top menu buttons (camera parameters settings)									
 	private static final int					MODE_EV						= R.id.evButton;
 	private static final int					MODE_SCENE					= R.id.sceneButton;
 	private static final int					MODE_WB						= R.id.wbButton;
@@ -1127,24 +1128,14 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 		// Get application preferences object
 		preferences = PreferenceManager.getDefaultSharedPreferences(MainScreen.getMainContext());
 
-		guiView.findViewById(R.id.evButton).setOnTouchListener(MainScreen.getInstance());
-		guiView.findViewById(R.id.sceneButton).setOnTouchListener(MainScreen.getInstance());
-		guiView.findViewById(R.id.wbButton).setOnTouchListener(MainScreen.getInstance());
-		guiView.findViewById(R.id.focusButton).setOnTouchListener(MainScreen.getInstance());
-		guiView.findViewById(R.id.flashButton).setOnTouchListener(MainScreen.getInstance());
-		guiView.findViewById(R.id.isoButton).setOnTouchListener(MainScreen.getInstance());
-		guiView.findViewById(R.id.meteringButton).setOnTouchListener(MainScreen.getInstance());
-		guiView.findViewById(R.id.camerachangeButton).setOnTouchListener(MainScreen.getInstance());
-
-		// Long clicks are needed to open quick controls customization layout
-		guiView.findViewById(R.id.evButton).setOnLongClickListener(this);
-		guiView.findViewById(R.id.sceneButton).setOnLongClickListener(this);
-		guiView.findViewById(R.id.wbButton).setOnLongClickListener(this);
-		guiView.findViewById(R.id.focusButton).setOnLongClickListener(this);
-		guiView.findViewById(R.id.flashButton).setOnLongClickListener(this);
-		guiView.findViewById(R.id.isoButton).setOnLongClickListener(this);
-		guiView.findViewById(R.id.meteringButton).setOnLongClickListener(this);
-		guiView.findViewById(R.id.camerachangeButton).setOnLongClickListener(this);
+//		guiView.findViewById(R.id.evButton).setOnTouchListener(MainScreen.getInstance());
+//		guiView.findViewById(R.id.sceneButton).setOnTouchListener(MainScreen.getInstance());
+//		guiView.findViewById(R.id.wbButton).setOnTouchListener(MainScreen.getInstance());
+//		guiView.findViewById(R.id.focusButton).setOnTouchListener(MainScreen.getInstance());
+//		guiView.findViewById(R.id.flashButton).setOnTouchListener(MainScreen.getInstance());
+//		guiView.findViewById(R.id.isoButton).setOnTouchListener(MainScreen.getInstance());
+//		guiView.findViewById(R.id.meteringButton).setOnTouchListener(MainScreen.getInstance());
+//		guiView.findViewById(R.id.camerachangeButton).setOnTouchListener(MainScreen.getInstance());
 
 		// Get all top menu buttons
 		topMenuButtons.put(MODE_EV, guiView.findViewById(R.id.evButton));
@@ -1464,7 +1455,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 		LayoutInflater inflator = MainScreen.getInstance().getLayoutInflater();
 		quickControl = inflator.inflate(R.layout.gui_almalence_invisible_button,
 				(ViewGroup) guiView.findViewById(R.id.paramsLayout), false);
-		quickControl.setOnLongClickListener(this);
 		quickControl.setOnClickListener(this);
 	}
 
@@ -2013,14 +2003,14 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 			Log.e("AlmalenceGUI", "addView exception: " + e.getMessage());
 		}
 
-		try
-		{
-			((LinearLayout) guiView.findViewById(R.id.paramsLayout)).addView(quickControl3);
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-			Log.e("AlmalenceGUI", "addView exception: " + e.getMessage());
-		}
+//		try
+//		{
+//			((LinearLayout) guiView.findViewById(R.id.paramsLayout)).addView(quickControl3);
+//		} catch (Exception e)
+//		{
+//			e.printStackTrace();
+//			Log.e("AlmalenceGUI", "addView exception: " + e.getMessage());
+//		}
 
 		try
 		{
@@ -3318,7 +3308,7 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 
 		((LinearLayout) guiView.findViewById(R.id.paramsLayout)).addView(quickControl1);
 		((LinearLayout) guiView.findViewById(R.id.paramsLayout)).addView(quickControl2);
-		((LinearLayout) guiView.findViewById(R.id.paramsLayout)).addView(quickControl3);
+//		((LinearLayout) guiView.findViewById(R.id.paramsLayout)).addView(quickControl3);
 		((LinearLayout) guiView.findViewById(R.id.paramsLayout)).addView(quickControl4);
 	}
 
@@ -3504,29 +3494,30 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 		// settings
 		case R.id.evButton:
 			{
-				if (changeQuickControlIfVisible(button))
-					break;
-
-				if (!isEVEnabled)
-				{
-					showToast(null, Toast.LENGTH_SHORT, Gravity.CENTER,
-							MainScreen.getAppResources().getString(R.string.settings_not_available), true, false);
-					break;
-				}
-
-				LinearLayout layout = (LinearLayout) guiView.findViewById(R.id.evLayout);
-				if (layout.getVisibility() == View.GONE)
-				{
-					unselectPrimaryTopMenuButtons(MODE_EV);
-					hideSecondaryMenus();
-					showParams(MODE_EV);
-					quickControlsVisible = true;
-				} else
-				{
-					quickControlsVisible = false;
-					unselectPrimaryTopMenuButtons(-1);
-					hideSecondaryMenus();
-				}
+				MainScreen.getInstance().finish();
+//				if (changeQuickControlIfVisible(button))
+//					break;
+//
+//				if (!isEVEnabled)
+//				{
+//					showToast(null, Toast.LENGTH_SHORT, Gravity.CENTER,
+//							MainScreen.getAppResources().getString(R.string.settings_not_available), true, false);
+//					break;
+//				}
+//
+//				LinearLayout layout = (LinearLayout) guiView.findViewById(R.id.evLayout);
+//				if (layout.getVisibility() == View.GONE)
+//				{
+//					unselectPrimaryTopMenuButtons(MODE_EV);
+//					hideSecondaryMenus();
+//					showParams(MODE_EV);
+//					quickControlsVisible = true;
+//				} else
+//				{
+//					quickControlsVisible = false;
+//					unselectPrimaryTopMenuButtons(-1);
+//					hideSecondaryMenus();
+//				}
 			}
 			break;
 		case R.id.sceneButton:
