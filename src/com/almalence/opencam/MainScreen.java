@@ -249,7 +249,7 @@ public class MainScreen extends Activity implements ApplicationInterface, View.O
 
 	private int							currentMeteringMode				= -1;
 
-	private boolean isFront;
+	private boolean isFront = false;
 
 	public static String				sTimestampDate;
 	public static String				sTimestampAbbreviation;
@@ -515,16 +515,19 @@ public class MainScreen extends Activity implements ApplicationInterface, View.O
 
 		Intent intent = this.getIntent();
 		String extraName = "video_mode";
-		if (intent.hasExtra(extraName)) {
+		boolean isVideoMode = intent.getBooleanExtra(extraName, false);
+		if (isVideoMode) {
 			Mode mode = ConfigParser.getInstance().getMode("video");
 			PluginManager.getInstance().setupDefaultMode(mode);
 		}else{
 			PluginManager.getInstance().setupDefaultMode();
-			
-			isFront = intent.getBooleanExtra("front",false);
-			if(isFront){
-				bringFront();
-			}
+		}
+		
+		isFront = intent.getBooleanExtra("front",false);
+		if(isFront){
+			bringFront();
+		}else{
+			undoFront();
 		}
 		
 		// init gui manager
@@ -1337,8 +1340,6 @@ public class MainScreen extends Activity implements ApplicationInterface, View.O
 			shutterPlayer.release();
 			shutterPlayer = null;
 		}
-		
-		undoFront();
 	}
 
 	public void pauseMain()
@@ -1359,10 +1360,6 @@ public class MainScreen extends Activity implements ApplicationInterface, View.O
 	public void resumeMain()
 	{
 		onResume();
-		
-		if (isFront) {
-			bringFront();
-		}
 	}
 
 	@Override
