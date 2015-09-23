@@ -396,8 +396,6 @@ public class MainScreen extends Activity implements ApplicationInterface, View.O
 		sExpoPreviewModePref = getResources().getString(R.string.Preference_ExpoBracketingPreviewModePref);
 
 		sDefaultModeName = getResources().getString(R.string.Preference_DefaultModeName);
-
-		Intent intent = this.getIntent();
 		
 		mainContext = this.getBaseContext();
 		messageHandler = new Handler(this);
@@ -513,7 +511,15 @@ public class MainScreen extends Activity implements ApplicationInterface, View.O
 		screenTimer.start();
 		isScreenTimerRunning = true;
 
-		PluginManager.getInstance().setupDefaultMode();
+		Intent intent = this.getIntent();
+		String extraName = "video_mode";
+		if (intent.hasExtra(extraName)) {
+			Mode mode = ConfigParser.getInstance().getMode("video");
+			PluginManager.getInstance().setupDefaultMode(mode);
+		}else{
+			PluginManager.getInstance().setupDefaultMode();
+		}
+		
 		// init gui manager
 		guiManager = new AlmalenceGUI();
 		guiManager.createInitialGUI();

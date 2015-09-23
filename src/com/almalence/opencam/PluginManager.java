@@ -425,11 +425,13 @@ public class PluginManager implements PluginManagerInterface
 		rawCaptureResults = new Hashtable<String, CaptureResult>();
 	}
 
-	public void setupDefaultMode()
+	public void setupDefaultMode(Mode mode)
 	{
 		// select default mode - selection from preferences if exists. or from
 		// config if first start
-		Mode mode = getMode();
+		if(mode == null){
+			mode = getMode();
+		}
 
 		// when old mode removed for example
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainScreen.getMainContext());
@@ -454,6 +456,10 @@ public class PluginManager implements PluginManagerInterface
 			activeFilter.add(mode.Filter.get(i));
 		activeFilter.clear();
 		activeExport = mode.Export;
+	}
+	
+	public void setupDefaultMode(){
+		setupDefaultMode(null);
 	}
 
 	public String getActiveModeID()
