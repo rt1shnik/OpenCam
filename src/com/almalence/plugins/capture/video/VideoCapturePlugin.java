@@ -375,6 +375,8 @@ public class VideoCapturePlugin extends PluginCapture
 		buttonsLayout.setVisibility(View.VISIBLE);
 
 		timeLapseButton = (RotateImageView) buttonsLayout.findViewById(R.id.buttonTimeLapse);
+		timeLapseButton.setVisibility(View.GONE);
+		
 		pauseVideoButton = (RotateImageView) MainScreen.getInstance().findViewById(R.id.buttonVideoPause);
 		stopVideoButton = (RotateImageView) MainScreen.getInstance().findViewById(R.id.buttonVideoStop);
 		Camera camera = CameraController.getCamera();
