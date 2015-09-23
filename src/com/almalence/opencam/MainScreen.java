@@ -113,7 +113,6 @@ import com.almalence.opencam.cameracontroller.CameraController;
 import com.almalence.opencam.ui.AlmalenceGUI;
 import com.almalence.opencam.ui.GLLayer;
 import com.almalence.opencam.ui.GUI;
-import com.almalence.util.AppRater;
 
 //-+- -->
 /* <!-- +++
@@ -486,10 +485,6 @@ public class MainScreen extends Activity implements ApplicationInterface, View.O
 
 		/**** Billing *****/
 
-		// application rating helper
-		AppRater.app_launched(this);
-		// -+- -->
-
 		AppWidgetNotifier.app_launched(this);
 
 		try
@@ -621,19 +616,6 @@ public class MainScreen extends Activity implements ApplicationInterface, View.O
 		{
 			MainScreen.setForceFilename(null);
 		}
-
-		// <!-- -+-
-		if (goShopping)
-		{
-			if (MainScreen.thiz.titleUnlockAll == null || MainScreen.thiz.titleUnlockAll.endsWith("check for sale"))
-			{
-				Toast.makeText(MainScreen.getMainContext(),
-						"Error connecting to Google Play. Check internet connection.", Toast.LENGTH_LONG).show();
-				return;
-			}
-			guiManager.showStore();
-		}
-		// -+- -->
 	}
 
 	/*
@@ -1965,10 +1947,6 @@ public class MainScreen extends Activity implements ApplicationInterface, View.O
 		// <!-- -+-
 		if (keyCode == KeyEvent.KEYCODE_BACK)
 		{
-			if (AppRater.showRateDialogIfNeeded(this))
-			{
-				return true;
-			}
 			if (AppWidgetNotifier.showNotifierDialogIfNeeded(this))
 			{
 				return true;
@@ -2238,14 +2216,13 @@ public class MainScreen extends Activity implements ApplicationInterface, View.O
 	/*******************************************************/
 	/************************ Billing ************************/
 
-	private boolean		showStore					= false;
 	// <!-- -+-
 	OpenIabHelper		mHelper;
 
 	private boolean		bOnSale						= false;
 	private boolean		couponSale					= false;
 
-	private boolean		unlockAllPurchased			= false;
+	private boolean		unlockAllPurchased			= true;
 	private boolean		hdrPurchased				= false;
 	private boolean		panoramaPurchased			= false;
 	private boolean		objectRemovalBurstPurchased	= false;
@@ -2328,16 +2305,6 @@ public class MainScreen extends Activity implements ApplicationInterface, View.O
 		// "100000103369/000001018393");
 		// OpenIabHelper.mapSku(SKU_SALE2, OpenIabHelper.NAME_SAMSUNG,
 		// "100000103369/000001018394");
-	}
-
-	public void setShowStore(boolean show)
-	{
-		showStore = show;
-	}
-
-	public boolean isShowStore()
-	{
-		return showStore;
 	}
 
 	public void activateCouponSale()
@@ -2803,7 +2770,6 @@ public class MainScreen extends Activity implements ApplicationInterface, View.O
 																							IabResult result,
 																							Purchase purchase)
 																					{
-																						showStore = true;
 																						purchaseFinished(result,
 																								purchase);
 																					}
@@ -2900,25 +2866,11 @@ public class MainScreen extends Activity implements ApplicationInterface, View.O
 		}
 	}
 
-	public void launchPurchase(int requestID)
-	{
-		try
-		{
-			guiManager.showStore();
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-			Toast.makeText(this, "Error during purchase " + e.getMessage(), Toast.LENGTH_LONG).show();
-		}
-	}
-
 	IabHelper.OnIabPurchaseFinishedListener	mPurchaseFinishedListener	= new IabHelper.OnIabPurchaseFinishedListener()
 																		{
 																			public void onIabPurchaseFinished(
 																					IabResult result, Purchase purchase)
 																			{
-
-																				guiManager.showStore();
 																				purchaseFinished(result, purchase);
 																			}
 																		};
@@ -2942,74 +2894,6 @@ public class MainScreen extends Activity implements ApplicationInterface, View.O
 	}
 
 	public boolean	showPromoRedeemed	= false;
-
-	// enter promo code to get smth
-	public void enterPromo()
-	{
-		final float density = getResources().getDisplayMetrics().density;
-
-		LinearLayout ll = new LinearLayout(this);
-		ll.setOrientation(LinearLayout.VERTICAL);
-		ll.setPadding((int) (10 * density), (int) (10 * density), (int) (10 * density), (int) (10 * density));
-
-		// rating bar
-		final EditText editText = new EditText(this);
-		editText.setHint(R.string.Pref_Upgrde_PromoCode_Text);
-		editText.setHintTextColor(Color.WHITE);
-
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
-				LayoutParams.WRAP_CONTENT);
-		params.gravity = Gravity.CENTER_HORIZONTAL;
-		params.setMargins(0, 20, 0, 30);
-		editText.setLayoutParams(params);
-		ll.addView(editText);
-
-		Button b3 = new Button(this);
-		b3.setText(getResources().getString(R.string.Pref_Upgrde_PromoCode_DoneText));
-		ll.addView(b3);
-
-		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setView(ll);
-		final AlertDialog dialog = builder.create();
-
-		b3.setOnClickListener(new OnClickListener()
-		{
-			public void onClick(View v)
-			{
-				String[] sep = MainScreen.getInstance().summary_SKU_PROMO.split(";");
-				String promo = editText.getText().toString();
-				boolean matchPromo = false;
-
-				for (int i = 0; i < sep.length; i++)
-				{
-					if (promo.equalsIgnoreCase(sep[i]))
-						matchPromo = true;
-				}
-
-				// if (promo.equalsIgnoreCase("appoftheday") ||
-				// promo.equalsIgnoreCase("stelapps"))
-				if (matchPromo)
-				{
-					SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainScreen.getMainContext());
-					unlockAllPurchased = true;
-
-					Editor prefsEditor = prefs.edit();
-					prefsEditor.putBoolean("unlock_all_forever", true);
-					prefsEditor.commit();
-					dialog.dismiss();
-					guiManager.hideStore();
-					showPromoRedeemed = true;
-					guiManager.showStore();
-				} else
-				{
-					editText.setText("");
-					editText.setHint(R.string.Pref_Upgrde_PromoCode_IncorrectText);
-				}
-			}
-		});
-
-		dialog.show();
-	}
 
 	// next methods used to store number of free launches.
 	// using files to store this info
@@ -3129,24 +3013,6 @@ public class MainScreen extends Activity implements ApplicationInterface, View.O
 		int id = MainScreen.getAppResources().getIdentifier(mode.modeName, "string", MainScreen.thiz.getPackageName());
 		String modename = MainScreen.getAppResources().getString(id);
 
-		if (0 == launchesLeft)// no more launches left
-		{
-			String left = String.format(getResources().getString(R.string.trial_finished), modename);
-			Toast toast = Toast.makeText(this, left, Toast.LENGTH_LONG);
-			toast.setGravity(Gravity.CENTER, 0, 0);
-			toast.show();
-
-			// show appstore for this mode
-			launchPurchase(100);
-			return false;
-		} else if ((10 == launchesLeft) || (20 == launchesLeft) || (5 >= launchesLeft))
-		{
-			// show appstore button and say that it cost money
-			String left = String.format(getResources().getString(R.string.trial_left), modename, launchesLeft);
-			Toast toast = Toast.makeText(this, left, Toast.LENGTH_LONG);
-			toast.setGravity(Gravity.CENTER, 0, 0);
-			toast.show();
-		}
 		return true;
 	}
 
@@ -3246,24 +3112,6 @@ public class MainScreen extends Activity implements ApplicationInterface, View.O
 
 	/************************ Billing ************************/
 	/*******************************************************/
-
-	// <!-- -+-
-
-	// Application rater code
-	public static void callStoreFree(Activity act)
-	{
-		try
-		{
-			Intent intent = new Intent(Intent.ACTION_VIEW);
-			intent.setData(Uri.parse("market://details?id=com.almalence.opencam"));
-			act.startActivity(intent);
-		} catch (ActivityNotFoundException e)
-		{
-			return;
-		}
-	}
-
-	// -+- -->
 
 	// installing packages from play store
 	public static void callStoreInstall(Activity act, String id)

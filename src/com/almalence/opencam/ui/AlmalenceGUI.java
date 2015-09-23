@@ -176,10 +176,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 	private boolean								modeSelectorVisible			= false;
 	// If quick settings layout is showing now
 
-	// <!-- -+-
-	private AlmalenceStore						store;
-	// -+- -->
-
 	private SelfTimerAndPhotoTimeLapse			selfTimer;
 
 	// Assoc list for storing association between mode button and mode ID
@@ -972,8 +968,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 							"Error connecting to Google Play. Check internet connection.", Toast.LENGTH_LONG).show();
 					return;
 				}
-				// start store
-				showStore();
 			}
 		});
 		// -+- -->
@@ -1037,10 +1031,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 
 				((TextView) guiView.findViewById(R.id.blockingText)).setRotation(-AlmalenceGUI.mDeviceOrientation);
 
-				// <!-- -+-
-				store.setOrientation();
-				// -+- -->
-
 				AlmalenceGUI.mPreviousDeviceOrientation = AlmalenceGUI.mDeviceOrientation;
 
 				PluginManager.getInstance().onOrientationChanged(getDisplayOrientation());
@@ -1102,32 +1092,11 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 		if (settingsControlsVisible)
 			((Panel) guiView.findViewById(R.id.topPanel)).setOpen(false, true);
 
-		// <!-- -+-
-		if (((RelativeLayout) guiView.findViewById(R.id.viewPagerLayoutMain)).getVisibility() == View.VISIBLE)
-			hideStore();
-		// -+- -->
-
 		lockControls = false;
 		guiView.findViewById(R.id.buttonGallery).setEnabled(true);
 		guiView.findViewById(R.id.buttonShutter).setEnabled(true);
 		guiView.findViewById(R.id.buttonSelectMode).setEnabled(true);
 		PluginManager.getInstance().sendMessage(PluginManager.MSG_BROADCAST, PluginManager.MSG_CONTROL_UNLOCKED);
-	}
-
-	@Override
-	public void showStore()
-	{
-		// <!-- -+-
-		store.showStore();
-		// -+- -->
-	}
-
-	@Override
-	public void hideStore()
-	{
-		// <!-- -+-
-		store.hideStore();
-		// -+- -->
 	}
 
 	@Override
@@ -1181,10 +1150,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 			guiView.findViewById(R.id.hintLayout).setVisibility(View.GONE);
 		else
 			guiView.findViewById(R.id.hintLayout).setVisibility(View.VISIBLE);
-
-		// <!-- -+-
-		manageUnlockControl();
-		// -+- -->
 
 		// Create select mode button with appropriate icon
 		createMergedSelectModeButton();
@@ -1261,35 +1226,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 
 		shutterButton = ((RotateImageView) guiView.findViewById(R.id.buttonShutter));
 		shutterButton.setOnLongClickListener(this);
-
-		// <!-- -+-
-		store = new AlmalenceStore(guiView);
-		manageUnlockControl();
-		// -+- -->
-	}
-
-	// <!-- -+-
-	private void manageUnlockControl()
-	{
-		// manage unlock control
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainScreen.getMainContext());
-		if (prefs.getBoolean("unlock_all_forever", false))
-			store.HideUnlockControl();
-		else
-		{
-			String modeID = PluginManager.getInstance().getActiveMode().modeID;
-			visibilityUnlockControl(UNLOCK_MODE_PREFERENCES.get(modeID));
-		}
-	}
-
-	private void visibilityUnlockControl(String prefName)
-	{
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainScreen.getMainContext());
-
-		if (prefs.getBoolean(prefName, false))
-			store.HideUnlockControl();
-		else
-			store.ShowUnlockControl();
 	}
 
 	// -+- -->
@@ -1437,14 +1373,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 
 		View help = guiView.findViewById(R.id.mode_help);
 		help.bringToFront();
-
-		// <!-- -+-
-		if (MainScreen.getInstance().isShowStore())
-		{
-			showStore();
-			MainScreen.getInstance().setShowStore(false);
-		}
-		// -+- -->
 	}
 
 	@Override
@@ -6213,7 +6141,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 			// <!-- -+-
 			if (((RelativeLayout) guiView.findViewById(R.id.viewPagerLayoutMain)).getVisibility() == View.VISIBLE)
 			{
-				hideStore();
 				res++;
 			}
 			// -+- -->

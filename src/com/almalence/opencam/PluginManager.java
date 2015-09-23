@@ -1209,7 +1209,6 @@ public class PluginManager implements PluginManagerInterface
 			// <!-- -+-
 			pf.getActivity().finish();
 			Preferences.closePrefs();
-			MainScreen.getInstance().setShowStore(true);
 			// -+- -->
 		}
 	}

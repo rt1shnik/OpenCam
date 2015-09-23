@@ -364,7 +364,6 @@ public class BarcodeScannerVFPlugin extends PluginViewfinder
 		if (barcode.getData().equals("abc.almalence.com/qrpromo") && !MainScreen.getInstance().isUnlockedAll())
 		{
 			MainScreen.getInstance().activateCouponSale();
-			MainScreen.getGUIManager().showStore();
 			return;
 		}
 		// -+- -->
