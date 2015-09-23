@@ -3496,7 +3496,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 				}
 
 				shutterButtonPressed();
-				((RotateImageView)button).setEnabled(false);
 
 				lastPhotoTime = System.currentTimeMillis();
 
