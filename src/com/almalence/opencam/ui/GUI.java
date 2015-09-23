@@ -292,9 +292,6 @@ public abstract class GUI
 		int displayRotationCurrent = orientation == 0 || orientation == 180 ? orientation : (orientation + 180) % 360;
 		return displayRotationCurrent;
 	} // used to operate with plugin's views
-
-	// mode help procedure
-	abstract public void showHelp(String modeName, String text, int imageID, String Prefs);
 	
 	public void openGallery(boolean isOpenExternal)
 	{}

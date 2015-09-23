@@ -135,11 +135,6 @@ public class CapturePlugin extends PluginCapture
 				editor.commit();
 
 				MainScreen.getInstance().relaunchCamera();
-
-				if (ModePreference.compareTo("0") == 0)
-					MainScreen.getGUIManager().showHelp(MainScreen.getInstance().getString(R.string.Dro_Help_Header),
-							MainScreen.getAppResources().getString(R.string.Dro_Help),
-							R.drawable.plugin_help_dro, "droShowHelp");
 			}
 		});
 
@@ -214,11 +209,6 @@ public class CapturePlugin extends PluginCapture
 		//
 		// ((RelativeLayout)
 		// MainScreen.getInstance().findViewById(R.id.specialPluginsLayout3)).requestLayout();
-
-		if (ModePreference.compareTo("0") == 0)
-			MainScreen.getGUIManager().showHelp("Dro help",
-					MainScreen.getAppResources().getString(R.string.Dro_Help), R.drawable.plugin_help_dro,
-					"droShowHelp");
 	}
 
 	@Override

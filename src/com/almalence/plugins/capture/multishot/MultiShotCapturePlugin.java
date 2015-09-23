@@ -79,14 +79,6 @@ public class MultiShotCapturePlugin extends PluginCapture
 		MainScreen.setCaptureFormat(CameraController.YUV);
 	}
 
-	@Override
-	public void onGUICreate()
-	{
-		MainScreen.getGUIManager().showHelp(MainScreen.getInstance().getString(R.string.MultiShot_Help_Header),
-				MainScreen.getAppResources().getString(R.string.MultiShot_Help),
-				R.drawable.plugin_help_multishot, "multiShotShowHelp");
-	}
-
 	public boolean delayedCaptureSupported()
 	{
 		return true;

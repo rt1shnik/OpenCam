@@ -782,17 +782,6 @@ public class PluginManager implements PluginManagerInterface
 
 	public void onShutterClick()
 	{
-		// <!-- -+-
-		// check if plugin payed
-		if (null != pluginList.get(activeCapture) && !((PluginCapture) pluginList.get(activeCapture)).getInCapture())
-		{
-			if (!MainScreen.getInstance().checkLaunches(getActiveMode()))
-			{
-				MainScreen.getGUIManager().lockControls = false;
-				return;
-			}
-		}
-		// -+- -->
 		if (!shutterRelease)
 			return;
 
@@ -861,17 +850,6 @@ public class PluginManager implements PluginManagerInterface
 
 	public void onFocusButtonClick()
 	{
-		// <!-- -+-
-		// check if plugin payed
-		if (null != pluginList.get(activeCapture) && !((PluginCapture) pluginList.get(activeCapture)).getInCapture())
-		{
-			if (!MainScreen.getInstance().checkLaunches(getActiveMode()))
-			{
-				MainScreen.getGUIManager().lockControls = false;
-				return;
-			}
-		}
-		// -+- -->
 		for (int i = 0; i < activeVF.size(); i++)
 			pluginList.get(activeVF.get(i)).onFocusButtonClick();
 		if (null != pluginList.get(activeCapture))
@@ -1536,11 +1514,6 @@ public class PluginManager implements PluginManagerInterface
 			task.execute();
 			MainScreen.getInstance().muteShutter(false);
 
-			// <!-- -+-
-			// if mode free
-			controlPremiumContent();
-			// -+- -->
-
 			if (!PluginManager.getInstance().getActiveModeID().equals("video"))
 			{
 				MainScreen.getGUIManager().lockControls = false;
@@ -1709,17 +1682,6 @@ public class PluginManager implements PluginManagerInterface
 
 		return true;
 	}
-
-	// <!-- -+-
-	public void controlPremiumContent()
-	{
-		Mode mode = getActiveMode();
-		if (mode.SKU != null)
-			if (!mode.SKU.isEmpty())
-				MainScreen.getInstance().decrementLeftLaunches(mode.modeID);
-	}
-
-	// -+- -->
 
 	/******************************************************************************************************
 	 * Work with hash table

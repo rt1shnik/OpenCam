@@ -545,10 +545,6 @@ public class PanoramaAugmentedCapturePlugin extends PluginCapture // implements
 
 		this.clearViews();
 
-		MainScreen.getGUIManager().showHelp(MainScreen.getInstance().getString(R.string.Panorama_Help_Header),
-				MainScreen.getAppResources().getString(R.string.Panorama_Help),
-				R.drawable.plugin_help_panorama, "panoramaShowHelp");
-
 		MainScreen.getGUIManager().removeViews(this.modeSwitcher, R.id.specialPluginsLayout3);
 		final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
 				LayoutParams.WRAP_CONTENT);

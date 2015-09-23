@@ -952,26 +952,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 		// Create orientation listener
 		initOrientationListener();
 
-		// <!-- -+-
-		RotateImageView unlock = ((RotateImageView) guiView.findViewById(R.id.Unlock));
-		unlock.setOnClickListener(new OnClickListener()
-		{
-			public void onClick(View v)
-			{
-				if (guiView.findViewById(R.id.postprocessingLayout).getVisibility() == View.VISIBLE)
-					return;
-
-				if (MainScreen.getInstance().titleUnlockAll == null
-						|| MainScreen.getInstance().titleUnlockAll.endsWith("check for sale"))
-				{
-					Toast.makeText(MainScreen.getMainContext(),
-							"Error connecting to Google Play. Check internet connection.", Toast.LENGTH_LONG).show();
-					return;
-				}
-			}
-		});
-		// -+- -->
-
 		// added immersive full-screen mode support
 		// guiView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY|View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 	}
@@ -1144,12 +1124,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 			prefsEditor.commit();
 			isFirstLaunch = true;
 		}
-
-		// show/hide hints
-		if (!isFirstLaunch)
-			guiView.findViewById(R.id.hintLayout).setVisibility(View.GONE);
-		else
-			guiView.findViewById(R.id.hintLayout).setVisibility(View.VISIBLE);
 
 		// Create select mode button with appropriate icon
 		createMergedSelectModeButton();
@@ -1361,7 +1335,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 		final View mainButtons = guiView.findViewById(R.id.mainButtons);
 		final View qcLayout = guiView.findViewById(R.id.qcLayout);
 		final View buttonsLayout = guiView.findViewById(R.id.buttonsLayout);
-		final View hintLayout = guiView.findViewById(R.id.hintLayout);
 
 		mainButtons.bringToFront();
 		qcLayout.bringToFront();
@@ -1369,10 +1342,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 		topPanel.bringToFront();
 		blockingLayout.bringToFront();
 		postProcessingLayout.bringToFront();
-		hintLayout.bringToFront();
-
-		View help = guiView.findViewById(R.id.mode_help);
-		help.bringToFront();
 	}
 
 	@Override
@@ -3915,13 +3884,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 	@Override
 	public void onButtonClick(View button)
 	{
-		// hide hint screen
-		if (guiView.findViewById(R.id.hintLayout).getVisibility() == View.VISIBLE)
-			guiView.findViewById(R.id.hintLayout).setVisibility(View.INVISIBLE);
-
-		if (guiView.findViewById(R.id.mode_help).getVisibility() == View.VISIBLE)
-			guiView.findViewById(R.id.mode_help).setVisibility(View.INVISIBLE);
-
 		int id = button.getId();
 		if (lockControls && R.id.buttonShutter != id)
 			return;
@@ -5019,11 +4981,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 			}
 		}
 
-		// <!-- -+-
-		if (!MainScreen.getInstance().checkLaunches(tmpActiveMode))
-			return false;
-		// -+- -->
-
 		new CountDownTimer(100, 100)
 		{
 			public void onTick(long millisUntilFinished)
@@ -5646,20 +5603,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 	@Override
 	public boolean onTouch(View view, MotionEvent event)
 	{
-		// hide hint screen
-		if (guiView.findViewById(R.id.hintLayout).getVisibility() == View.VISIBLE)
-		{
-			if (event.getAction() == MotionEvent.ACTION_UP)
-				guiView.findViewById(R.id.hintLayout).setVisibility(View.INVISIBLE);
-			return true;
-		}
-
-		if (guiView.findViewById(R.id.mode_help).getVisibility() == View.VISIBLE)
-		{
-			guiView.findViewById(R.id.mode_help).setVisibility(View.INVISIBLE);
-			return true;
-		}
-
 		if (view == (LinearLayout) guiView.findViewById(R.id.evLayout)
 				|| (lockControls && !PluginManager.getInstance().getActiveModeID().equals("video")))
 			return true;
@@ -6103,16 +6046,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 
 	public boolean onKeyDown(boolean isFromMain, int keyCode, KeyEvent event)
 	{
-		// hide hint screen
-		if (guiView.findViewById(R.id.hintLayout).getVisibility() == View.VISIBLE)
-			guiView.findViewById(R.id.hintLayout).setVisibility(View.INVISIBLE);
-
-		if (guiView.findViewById(R.id.mode_help).getVisibility() == View.VISIBLE)
-		{
-			guiView.findViewById(R.id.mode_help).setVisibility(View.INVISIBLE);
-			return true;
-		}
-
 		int res = 0;
 		if (keyCode == KeyEvent.KEYCODE_BACK)
 		{
@@ -6613,61 +6546,6 @@ public class AlmalenceGUI extends GUI implements SeekBar.OnSeekBarChangeListener
 	public void setFocusParameters()
 	{
 		// Not used
-	}
-
-	// mode help procedure
-	@Override
-	public void showHelp(String modeName, String text, int imageID, String preferences)
-	{
-		final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainScreen.getMainContext());
-		boolean needToShow = prefs.getBoolean(preferences, true);
-
-		// check show help settings
-		MainScreen.setShowHelp(prefs.getBoolean("showHelpPrefCommon", true));
-		if (!needToShow || !MainScreen.isShowHelp())
-			return;
-
-		if (guiView.findViewById(R.id.postprocessingLayout).getVisibility() == View.VISIBLE)
-			return;
-
-		final String preference = preferences;
-
-		final View help = guiView.findViewById(R.id.mode_help);
-		ImageView helpImage = (ImageView) guiView.findViewById(R.id.helpImage);
-		helpImage.setImageResource(imageID);
-		TextView helpText = (TextView) guiView.findViewById(R.id.helpText);
-		helpText.setText(text);
-
-		TextView helpTextModeName = (TextView) guiView.findViewById(R.id.helpTextModeName);
-		helpTextModeName.setText(modeName);
-
-		Button button = (Button) guiView.findViewById(R.id.buttonOk);
-		button.setOnClickListener(new OnClickListener()
-		{
-			public void onClick(View v)
-			{
-				help.setVisibility(View.GONE);
-			}
-		});
-
-		Button buttonDontShow = (Button) guiView.findViewById(R.id.buttonDontShow);
-		buttonDontShow.setOnClickListener(new OnClickListener()
-		{
-			public void onClick(View v)
-			{
-				help.setVisibility(View.GONE);
-
-				{
-					Editor prefsEditor = prefs.edit();
-
-					prefsEditor.putBoolean(preference, false);
-					prefsEditor.commit();
-				}
-			}
-		});
-
-		help.setVisibility(View.VISIBLE);
-		help.bringToFront();
 	}
 
 	public View getMainView()

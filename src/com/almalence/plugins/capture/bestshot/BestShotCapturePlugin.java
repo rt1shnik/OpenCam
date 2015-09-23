@@ -141,14 +141,6 @@ public class BestShotCapturePlugin extends PluginCapture
 //		editor.commit();
 //	}
 
-	@Override
-	public void onGUICreate()
-	{
-		MainScreen.getGUIManager().showHelp(MainScreen.getInstance().getString(R.string.Bestshot_Help_Header),
-				MainScreen.getAppResources().getString(R.string.Bestshot_Help),
-				R.drawable.plugin_help_bestshot, "bestShotShowHelp");
-	}
-
 	public boolean delayedCaptureSupported()
 	{
 		return true;
