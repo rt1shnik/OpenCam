@@ -708,13 +708,6 @@ public class PluginManager implements PluginManagerInterface
 			pluginList.get(activeExport).onPause();
 	}
 
-	public void menuButtonPressed()
-	{
-		onShowPreferences();
-		Intent settingsActivity = new Intent(MainScreen.getMainContext(), Preferences.class);
-		MainScreen.getInstance().startActivity(settingsActivity);
-	}
-
 	// Called before preferences activity started
 	public void onShowPreferences()
 	{

@@ -1847,12 +1847,6 @@ public class MainScreen extends Activity implements ApplicationInterface, View.O
 		if (!mApplicationStarted)
 			return true;
 
-		// menu button processing
-		if (keyCode == KeyEvent.KEYCODE_MENU)
-		{
-			menuButtonPressed();
-			return true;
-		}
 		// shutter/camera button processing
 		if (keyCode == KeyEvent.KEYCODE_CAMERA || keyCode == KeyEvent.KEYCODE_DPAD_CENTER)
 		{
@@ -1998,11 +1992,6 @@ public class MainScreen extends Activity implements ApplicationInterface, View.O
 		}
 
 		return true;
-	}
-
-	public void menuButtonPressed()
-	{
-		PluginManager.getInstance().menuButtonPressed();
 	}
 
 	public void disableCameraParameter(GUI.CameraParameter iParam, boolean bDisable, boolean bInitMenu)
